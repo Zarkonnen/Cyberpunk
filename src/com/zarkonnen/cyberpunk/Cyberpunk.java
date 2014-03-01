@@ -1,0 +1,49 @@
+package com.zarkonnen.cyberpunk;
+
+import com.zarkonnen.catengine.Condition;
+import com.zarkonnen.catengine.Draw;
+import com.zarkonnen.catengine.Fount;
+import com.zarkonnen.catengine.Frame;
+import com.zarkonnen.catengine.Game;
+import com.zarkonnen.catengine.Input;
+import com.zarkonnen.catengine.SlickEngine;
+import com.zarkonnen.catengine.util.Clr;
+import com.zarkonnen.catengine.util.ScreenMode;
+
+public class Cyberpunk implements Game {
+	public static final String ALPHABET = " qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-=+_!?<>,.;:\"'@£$%^&*()[]{}|\\~/±";
+	public static final Fount OCRA = new Fount("OCRA12", 11, 18, 7, 16, ALPHABET);
+	public static final Fount COURIER = new Fount("Courier12", 10, 15, 7, 15, ALPHABET);
+	
+	public static void main(String[] args) {
+		SlickEngine e = new SlickEngine("Cyberpunk", "/com/zarkonnen/cyberpunk/images/", "com/zarkonnen/cyberpunk/sounds/", 60);
+		e.setup(new Cyberpunk());
+		e.runUntil(Condition.ALWAYS);
+	}
+	
+	boolean modeSet = false;
+
+	@Override
+	public void input(Input in) {
+		if (!modeSet) {
+			ScreenMode best = null;
+			for (ScreenMode m : in.modes()) {
+				if (best == null || (m.width * m.height > best.width * best.height && m.fullscreen)) {
+					best = m;
+				}
+			}
+			if (best != null) {
+				in.setMode(best);
+			}
+			modeSet = true;
+		}
+	}
+
+	@Override
+	public void render(Frame f) {
+		ScreenMode sm = f.mode();
+		Draw d = new Draw(f);
+		d.rect(Clr.BLACK, 0, 0, sm.width, sm.height);
+		d.text("WELCOME TO CYBERPUNK", OCRA, 100, 100);
+	}
+}
