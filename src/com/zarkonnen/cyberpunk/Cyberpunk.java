@@ -21,7 +21,8 @@ public class Cyberpunk implements Game {
 		e.runUntil(Condition.ALWAYS);
 	}
 	
-	boolean modeSet = false;
+	private boolean modeSet = false;
+	private Screen currentScreen = new WorldScreen(new WorldMap(666, 20, 20, 10));
 
 	@Override
 	public void input(Input in) {
@@ -37,13 +38,13 @@ public class Cyberpunk implements Game {
 			}
 			modeSet = true;
 		}
+		currentScreen.input(in);
 	}
 
 	@Override
 	public void render(Frame f) {
 		ScreenMode sm = f.mode();
 		Draw d = new Draw(f);
-		d.rect(Clr.BLACK, 0, 0, sm.width, sm.height);
-		d.text("WELCOME TO CYBERPUNK", OCRA, 100, 100);
+		currentScreen.render(d, sm);
 	}
 }
