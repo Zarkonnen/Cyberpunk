@@ -4,6 +4,9 @@ package com.zarkonnen.cyberpunk;
 import com.zarkonnen.catengine.Draw;
 import com.zarkonnen.catengine.Input;
 import com.zarkonnen.catengine.util.ScreenMode;
+import com.zarkonnen.catengine.util.Utils.Pair;
+import java.util.List;
+import static com.zarkonnen.catengine.util.Utils.*;
 
 public class WorldScreen implements Screen {
 	public final GameState g;
@@ -13,6 +16,14 @@ public class WorldScreen implements Screen {
 	
 	public static final int GRID_SIZE = 100;
 	public static final int MS_PER_SCROLL = 200;
+	public static final List<Pair<String, Direction>> DIRECTION_KEYS = l(
+		p("LEFT", Direction.WEST),
+		p("RIGHT", Direction.EAST),
+		p("UP", Direction.NORTH),
+		p("DOWN", Direction.SOUTH),
+		p("COMMA", Direction.UP),
+		p("PERIOD", Direction.DOWN)
+	);
 
 	public WorldScreen(GameState g) {
 		this.g = g;
@@ -23,29 +34,11 @@ public class WorldScreen implements Screen {
 	public void input(Input in) {
 		msSinceScroll += in.msDelta();
 		if (msSinceScroll >= MS_PER_SCROLL) {
-			if (in.keyDown("LEFT")) {
-				g.player.moveBy(-1, 0, 0);
-				msSinceScroll = 0;
-			}
-			if (in.keyDown("RIGHT")) {
-				g.player.moveBy(1, 0, 0);
-				msSinceScroll = 0;
-			}
-			if (in.keyDown("UP")) {
-				g.player.moveBy(0, -1, 0);
-				msSinceScroll = 0;
-			}
-			if (in.keyDown("DOWN")) {
-				g.player.moveBy(0, 1, 0);
-				msSinceScroll = 0;
-			}
-			if (in.keyDown("COMMA")) {
-				g.player.moveBy(0, 0, -1);
-				msSinceScroll = 0;
-			}
-			if (in.keyDown("PERIOD")) {
-				g.player.moveBy(0, 0, 1);
-				msSinceScroll = 0;
+			for (Pair<String, Direction> dk : DIRECTION_KEYS) {
+				if (in.keyDown(dk.a)) {
+					g.player.moveBy(dk.b);
+					msSinceScroll = 0;
+				}
 			}
 		}
 		

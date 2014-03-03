@@ -9,8 +9,10 @@ public class Person implements Serializable {
 		return location;
 	}
 	
-	public void moveBy(int dx, int dy, int dz) {
-		moveTo(location.map.at(location.x + dx, location.y + dy, location.z + dz));
+	public void moveBy(Direction d) {
+		if (location.passable(d)) {
+			moveTo(location.in(d));
+		}
 	}
 	
 	public void moveTo(Tile location) {

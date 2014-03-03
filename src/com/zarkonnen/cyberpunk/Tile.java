@@ -26,4 +26,12 @@ public class Tile implements Serializable {
 		}
 		return l;
 	}
+	
+	public Tile in(Direction d) {
+		return map.at(x + d.dx, y + d.dy, z + d.dz);
+	}
+	
+	public boolean passable(Direction d) {
+		return type.passable.contains(d) && in(d).type.passable.contains(Direction.reverse(d));
+	}
 }
