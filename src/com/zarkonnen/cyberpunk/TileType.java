@@ -1,8 +1,9 @@
 package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.catengine.util.Clr;
+import java.io.Serializable;
 
-public enum TileType {
+public enum TileType implements Serializable {
 	NOTHING(
 		/* color */ Clr.BLACK
 	),

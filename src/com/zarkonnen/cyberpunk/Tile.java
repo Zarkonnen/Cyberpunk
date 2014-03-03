@@ -1,13 +1,29 @@
 package com.zarkonnen.cyberpunk;
 
-public class Tile {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Tile implements Serializable {
+	public final WorldMap map;
 	public final TileType type;
 	public final int x, y, z;
 
-	public Tile(TileType type, int x, int y, int z) {
+	public Tile(WorldMap map, TileType type, int x, int y, int z) {
+		this.map = map;
 		this.type = type;
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	public List<Person> people() {
+		ArrayList<Person> l = new ArrayList<Person>();
+		for (Person p : map.people()) {
+			if (p.location() == this) {
+				l.add(p);
+			}
+		}
+		return l;
 	}
 }

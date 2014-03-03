@@ -22,7 +22,7 @@ public class Cyberpunk implements Game {
 	}
 	
 	private boolean modeSet = false;
-	private Screen currentScreen = new WorldScreen(new WorldMap(666, 20, 20, 10));
+	private Screen currentScreen = new WorldScreen(new GameState(666, 20, 20, 10));
 
 	@Override
 	public void input(Input in) {
