@@ -1,6 +1,16 @@
 ### Simulation
 The idea is basically that there are Tiles and People, and they can have Interactions that modify them, and have certain preconditions. The NPCs then basically get a bunch of ranked rules that are all of the form of `IF condition THEN PATH TO tile_type` and `IF condition THEN PERFORM interaction`. The player gets to choose theirs, and we will attempt to slap a decent UI over them as much as possible.
 
+The question that arises is how to implement Interactions. The easiest is for each Interaction to be a class implementing something like:
+
+    public interface Interaction {
+      public boolean available(Person actor, Person target);
+      public String description(Person actor, Person target);
+      public String run(Person actor, Person target);
+    }
+
+Alternatively, the interaction could be more data-driven, but that is probably too complex for the scope.
+
 ### Gameplay
 Gameplay basically consists of:
 * scavenging electronic parts
