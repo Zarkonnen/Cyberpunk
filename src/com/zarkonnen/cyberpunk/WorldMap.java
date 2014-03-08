@@ -86,6 +86,7 @@ public final class WorldMap implements Serializable {
 					tt = TileType.STAIRWELL;
 				}
 				map[z][y][x] = new Tile(this, tt, x, y, z);
+				map[z][y][x].hiddenItems.add(new Tile.HiddenItem(r.nextInt(30), new Item(ItemType.RAM)));
 			}}
 		}
 		

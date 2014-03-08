@@ -5,6 +5,7 @@ import com.zarkonnen.catengine.Draw;
 import com.zarkonnen.catengine.Fount;
 import com.zarkonnen.catengine.Frame;
 import com.zarkonnen.catengine.Game;
+import com.zarkonnen.catengine.Hooks;
 import com.zarkonnen.catengine.Input;
 import com.zarkonnen.catengine.SlickEngine;
 import com.zarkonnen.catengine.util.Clr;
@@ -23,6 +24,8 @@ public class Cyberpunk implements Game {
 	
 	private boolean modeSet = false;
 	private Screen currentScreen = new WorldScreen(new GameState(666, 20, 20, 10));
+	
+	private Hooks hooks = null;
 
 	@Override
 	public void input(Input in) {
@@ -39,6 +42,9 @@ public class Cyberpunk implements Game {
 			modeSet = true;
 		}
 		currentScreen.input(in);
+		if (hooks != null) {
+			hooks.hit(in);
+		}
 	}
 
 	@Override
@@ -46,5 +52,6 @@ public class Cyberpunk implements Game {
 		ScreenMode sm = f.mode();
 		Draw d = new Draw(f);
 		currentScreen.render(d, sm);
+		hooks = d.getHooks();
 	}
 }

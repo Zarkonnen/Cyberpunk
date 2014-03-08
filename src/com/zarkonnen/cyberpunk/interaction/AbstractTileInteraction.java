@@ -40,7 +40,7 @@ public abstract class AbstractTileInteraction implements TileInteraction {
 	public String description() {
 		String dr = disabledReason();
 		if (dr != null) {
-			return "[999999]" + desc() + "\n" +  dr;
+			return desc() + "\n" +  dr;
 		} else {
 			return desc();
 		}

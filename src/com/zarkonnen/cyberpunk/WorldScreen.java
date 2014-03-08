@@ -7,12 +7,16 @@ import com.zarkonnen.catengine.util.ScreenMode;
 import com.zarkonnen.catengine.util.Utils.Pair;
 import java.util.List;
 import static com.zarkonnen.catengine.util.Utils.*;
+import com.zarkonnen.cyberpunk.interaction.TileInteraction;
+import java.util.ArrayList;
 
 public class WorldScreen implements Screen {
 	public final GameState g;
 	public final WorldMap m;
 	private int topLeftX, topLeftY, topLeftZ;
 	private int msSinceScroll;
+	public final ButtonList inventory = new ButtonList();
+	public final ButtonList interactions = new ButtonList();
 	
 	public static final int GRID_SIZE = 100;
 	public static final int MS_PER_SCROLL = 200;
@@ -28,6 +32,62 @@ public class WorldScreen implements Screen {
 	public WorldScreen(GameState g) {
 		this.g = g;
 		m = g.map;
+		inventory.model = new InventoryModel();
+		interactions.model = new InteractionModel();
+	}
+	
+	private class InventoryModel implements ButtonList.Model {
+		@Override
+		public List<Button> buttons() {
+			ArrayList<Button> l = new ArrayList<Button>();
+			for (final Item it : g.player.inventory) {
+				l.add(new Button() {
+					@Override
+					public String text() {
+						return it.getName();
+					}
+
+					@Override
+					public boolean enabled() {
+						return false;
+					}
+
+					@Override
+					public void run() {
+						
+					}
+				});
+			}
+			
+			return l;
+		}
+	}
+	
+	private class InteractionModel implements ButtonList.Model {
+		@Override
+		public List<Button> buttons() {
+			ArrayList<Button> l = new ArrayList<Button>();
+			for (final TileInteraction ti : g.player.location().getInteraction(g.player)) {
+				l.add(new Button() {
+					@Override
+					public String text() {
+						return ti.description();
+					}
+
+					@Override
+					public boolean enabled() {
+						return ti.enabled();
+					}
+
+					@Override
+					public void run() {
+						ti.run(); // qqDPS Text not displayed!
+					}
+				});
+			}
+			
+			return l;
+		}
 	}
 
 	@Override
@@ -49,6 +109,9 @@ public class WorldScreen implements Screen {
 		topLeftX = g.player.location().x - screenGridW / 2;
 		topLeftY = g.player.location().y - screenGridH / 2;
 		topLeftZ = g.player.location().z;
+		
+		inventory.input(in, 0, 0, 150, sm.height);
+		interactions.input(in, sm.width - 150, 0, 150, sm.height);
 	}
 
 	@Override
@@ -65,5 +128,8 @@ public class WorldScreen implements Screen {
 				}
 			}
 		}
+		
+		inventory.draw(d, 0, 0, 150, sm.height);
+		interactions.draw(d, sm.width - 150, 0, 150, sm.height);
 	}
 }
