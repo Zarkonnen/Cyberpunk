@@ -16,19 +16,18 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
-	,
 	AR_GOGGLES(
 		"AR Goggles", /* name */ 
 		"NuvaTron 900 Augmented Reality Goggles. What everyone is wearing these days.", /* description */ 
@@ -39,13 +38,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -56,18 +55,18 @@ public enum ItemType implements Serializable {
 		"Rows and rows of numbers. You don't care what they are, only what someone might pay you for them.", /* description */ 
 		2000, /* value */ 
 		false, /* key */ 
-		false, /* data */ 
+		true, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -83,13 +82,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -105,13 +104,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -127,13 +126,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		-30, /* drugExhaustionModifier */ 
-		0.5, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		-30, /* exhaustionModifier */ 
+		0.5, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		20, /* drugDuration */ 
 		200, /* drugAddictionDuration */ 
 		3, /* drugAdditionExhaustionBaseModifier */ 
@@ -149,13 +148,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		1, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		1, /* exhaustionLossModifier */ 
 		50, /* drugDuration */ 
 		500, /* drugAddictionDuration */ 
 		5, /* drugAdditionExhaustionBaseModifier */ 
@@ -171,13 +170,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		-20, /* drugExhaustionModifier */ 
-		1, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		-20, /* exhaustionModifier */ 
+		1, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		20, /* drugDuration */ 
 		500, /* drugAddictionDuration */ 
 		5, /* drugAdditionExhaustionBaseModifier */ 
@@ -193,13 +192,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0.3, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0.3, /* exhaustionLossModifier */ 
 		50, /* drugDuration */ 
 		1000, /* drugAddictionDuration */ 
 		5, /* drugAdditionExhaustionBaseModifier */ 
@@ -215,13 +214,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -237,13 +236,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -251,7 +250,7 @@ public enum ItemType implements Serializable {
 	),
 	ANGLE_GRINDER(
 		"Angle Grinder", /* name */ 
-		"Cuts through most things like butter. A bit noiser than a butter knife, though.", /* description */ 
+		"Cuts through most things like butter. A bit noisier than a butter knife, though.", /* description */ 
 		60, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
@@ -259,13 +258,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -281,13 +280,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -303,19 +302,19 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(BREAKING_AND_ENTERING, 60)))/* skillBonuses */ 
 	),
-	CRYPTOGRAPHIC_COPROCESSOR( // NB decryption ability
+	CRYPTOGRAPHIC_COPROCESSOR(
 		"Cryptographic Coprocessor", /* name */ 
 		"Being able to do cryptography in your head is pretty handy.", /* description */ 
 		1500, /* value */ 
@@ -325,19 +324,19 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		20, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(HACKING, 20)))/* skillBonuses */ 
 	),
-	QUANTUM_CORE( // NB decryption ability
+	QUANTUM_CORE(
 		"Quantum Core", /* name */ 
 		"Calculate everything at once. In your head. Try not to get dizzy.", /* description */ 
 		20000, /* value */ 
@@ -347,13 +346,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		90, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -369,13 +368,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		30, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -391,13 +390,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		90, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -413,13 +412,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -435,13 +434,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -457,13 +456,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -479,13 +478,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -501,13 +500,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -523,13 +522,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		10, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -545,13 +544,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		10, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -567,13 +566,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		20, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -589,13 +588,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		35, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -611,13 +610,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -633,13 +632,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -655,13 +654,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -677,13 +676,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -699,13 +698,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -721,64 +720,64 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(COUNTER_INTRUSION, 60)))/* skillBonuses */ 
 	),
 	AR_GOGGLE_VIRUS(
-		"AR goggle virus", /* name */ 
+		"AR Goggle Virus", /* name */ 
 		"Distract someone by screwing up their augmented view on the world.", /* description */ 
-		150, /* value */ 
+		800, /* value */ 
 		false, /* key */ 
 		true, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		50, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		50, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(RUNNING_AWAY, 50)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(p(RUNNING_AWAY, 40)))/* skillBonuses */ 
 	),
 	GUARD_DRONE(
-		"Guard drone", /* name */ 
-		"A weaonised defense drone.", /* description */ 
+		"Guard Drone", /* name */ 
+		"A weaponised defense drone.", /* description */ 
 		1000, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
-		100, /* drone */ 
+		60, /* drone */ 
 		0, /* bug */ 
-		90, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	REMOTE_WIRETAP(
-		"Remote wiretap", /* name */ 
+		"Remote Wiretap", /* name */ 
 		"Device to record remote data exchange and communication.", /* description */ 
 		300, /* value */ 
 		false, /* key */ 
@@ -786,14 +785,14 @@ public enum ItemType implements Serializable {
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
-		100, /* bug */ 
-		0, /* weapon */ 
+		60, /* bug */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -802,71 +801,71 @@ public enum ItemType implements Serializable {
 	WIRETAP(
 		"Wiretap", /* name */ 
 		"Device to record local data exchange and communication.", /* description */ 
-		150, /* value */ 
+		100, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
-		100, /* bug */ 
-		0, /* weapon */ 
+		25, /* bug */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	ENDURANCE_UPGRADE(
-		"Endurance upgrade", /* name */ 
+		"Endurance Upgrade", /* name */ 
 		"Bioactive mod that increases your endurance.", /* description */ 
-		300, /* value */ 
+		3000, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		true, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		-0.4, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	MEDICAL_HELPER_IMPLANT(
-		"Medical helper implant", /* name */ 
+		"Medical Helper Implant", /* name */ 
 		"An implant to support your surgical skills.", /* description */ 
-		450, /* value */ 
+		4500, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		true, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		1.5, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(GRINDING, 70)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(p(GRINDING, 50)))/* skillBonuses */ 
 	),
 	BLACKMAIL_MATERIAL(
-		"Blackmail material", /* name */ 
+		"Blackmail Material", /* name */ 
 		"Evidence that someone has been up to something they really shouldn't have.", /* description */ 
 		1500, /* value */ 
 		false, /* key */ 
@@ -875,35 +874,35 @@ public enum ItemType implements Serializable {
 		true, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	GRINDER_TOOLS(
-		"Grinder tools", /* name */ 
+		"Grinder Tools", /* name */ 
 		"Equipment for serious body modifications.", /* description */ 
-		200, /* value */ 
+		500, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
-		50, /* medicine */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -919,13 +918,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -941,20 +940,20 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	DESIGNER_CLOTHES(
-		"Designer clothes", /* name */ 
+		"Designer Clothes", /* name */ 
 		"Fashionable, ugly clothing.", /* description */ 
 		250, /* value */ 
 		false, /* key */ 
@@ -963,20 +962,20 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	GENETIC_CODE(
-		"Genetic code", /* name */ 
+		"Genetic Code", /* name */ 
 		"The valuable results of extensive research.", /* description */ 
 		1500, /* value */ 
 		false, /* key */ 
@@ -985,39 +984,39 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	OPTICAL_CAMO(
-		"Optical camo", /* name */ 
-		".", /* description */ 
-		300, /* value */ 
+		"Optical Camo", /* name */ 
+		"It's literally an invisibility cloak.", /* description */ 
+		5000, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(HIDING, 80)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(p(HIDING, 60)))/* skillBonuses */ 
 	),
 	BUG(
 		"Bug", /* name */ 
@@ -1028,14 +1027,14 @@ public enum ItemType implements Serializable {
 		false, /* implant */ 
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
-		100, /* bug */ 
-		0, /* weapon */ 
+		30, /* bug */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -1051,13 +1050,13 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
@@ -1065,7 +1064,7 @@ public enum ItemType implements Serializable {
 	),
 	SHARES(
 		"Shares", /* name */ 
-		".", /* description */ 
+		"Own a piece of the global corporocracy. Coprolithocracy? Not sure. Valuable, anyway,", /* description */ 
 		2000, /* value */ 
 		false, /* key */ 
 		true, /* data */ 
@@ -1073,20 +1072,20 @@ public enum ItemType implements Serializable {
 		false, /* blackmailMaterial */ 
 		0, /* drone */ 
 		0, /* bug */ 
-		0, /* weapon */ 
+		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
 		0, /* stun */ 
-		0, /* drugExhaustionModifier */ 
-		0, /* drugExhaustionGainModifier */ 
-		0, /* drugExhaustionLossModifier */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	);
 
-	private ItemType(String name, String description, int value, boolean key, boolean data, boolean implant, boolean blackmailMaterial, int drone, int bug, int weapon, int medicine, int food, int stun, int drugExhaustionModifier, double drugExhaustionGainModifier, double drugExhaustionLossModifier, int drugDuration, int drugAddictionDuration, int drugAdditionExhaustionBaseModifier, EnumMap<Skill, Integer> skillBonuses) {
+	private ItemType(String name, String description, int value, boolean key, boolean data, boolean implant, boolean blackmailMaterial, int drone, int bug, int decrypt, int medicine, int food, int stun, int exhaustionModifier, double exhaustionGainModifier, double exhaustionLossModifier, int drugDuration, int drugAddictionDuration, int drugAdditionExhaustionBaseModifier, EnumMap<Skill, Integer> skillBonuses) {
 		this.name = name;
 		this.description = description;
 		this.value = value;
@@ -1096,13 +1095,13 @@ public enum ItemType implements Serializable {
 		this.blackmailMaterial = blackmailMaterial;
 		this.drone = drone;
 		this.bug = bug;
-		this.weapon = weapon;
+		this.decrypt = decrypt;
 		this.medicine = medicine;
 		this.food = food;
 		this.stun = stun;
-		this.drugExhaustionModifier = drugExhaustionModifier;
-		this.drugExhaustionGainModifier = drugExhaustionGainModifier;
-		this.drugExhaustionLossModifier = drugExhaustionLossModifier;
+		this.exhaustionModifier = exhaustionModifier;
+		this.exhaustionGainModifier = exhaustionGainModifier;
+		this.exhaustionLossModifier = exhaustionLossModifier;
 		this.drugDuration = drugDuration;
 		this.drugAddictionDuration = drugAddictionDuration;
 		this.drugAdditionExhaustionBaseModifier = drugAdditionExhaustionBaseModifier;
@@ -1125,13 +1124,13 @@ public enum ItemType implements Serializable {
 	public final boolean blackmailMaterial;
 	public final int drone;
 	public final int bug;
-	public final int weapon;
+	public final int decrypt;
 	public final int medicine;
 	public final int food;
 	public final int stun;
-	public final int drugExhaustionModifier;
-	public final double drugExhaustionGainModifier;
-	public final double drugExhaustionLossModifier;
+	public final int exhaustionModifier;
+	public final double exhaustionGainModifier;
+	public final double exhaustionLossModifier;
 	public final int drugDuration;
 	public final int drugAddictionDuration;
 	public final int drugAdditionExhaustionBaseModifier;
