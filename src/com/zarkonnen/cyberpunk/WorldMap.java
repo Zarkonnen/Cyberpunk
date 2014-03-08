@@ -6,6 +6,48 @@ import java.util.List;
 import java.util.Random;
 
 public final class WorldMap implements Serializable {
+	public static final TileType[] TOWER_ROOMS = {
+		TileType.APARTMENT,
+		TileType.ART_GALLERY,
+		TileType.BACK_ROOM,
+		TileType.BAR,
+		TileType.BROTHEL,
+		TileType.CLINIC,
+		TileType.CLOTHES_SHOP,
+		TileType.DRUG_DEN,
+		TileType.DRUG_LAB,
+		TileType.GAMBLING_PARLOUR,
+		TileType.GANG_HIDEOUT,
+		TileType.GENETICS_LAB,
+		TileType.GUN_SHOP,
+		TileType.HARDWARE_SHOP,
+		TileType.JEWELLERY_SHOP,
+		TileType.MACHINE_ROOM,
+		TileType.MARKET,
+		TileType.OFFICE,
+		TileType.SERVER_ROOM,
+		TileType.STORE_ROOM,
+		TileType.SWEATSHOP
+	};
+	public static final TileType[] BARGES = {
+		TileType.SLUM_BARGE,
+		TileType.WAREHOUSE_BARGE
+	};
+	public static final TileType[] ROOFTOPS = {
+		TileType.ROOFTOP,
+		TileType.ROOFTOP_FARM,
+		TileType.ROOFTOP_SLUM,
+		TileType.MARKET,
+		TileType.BROTHEL,
+		TileType.SWEATSHOP
+	};
+	public static final TileType[] TOWER_ROOFTOPS = {
+		TileType.HELIPAD,
+		TileType.PENTHOUSE,
+		TileType.PENTHOUSE,
+		TileType.PENTHOUSE,
+		TileType.PENTHOUSE
+	};
 	private final Tile[][][] map;
 	private final LinkedList<Person> people = new LinkedList<Person>();
 	public final Random r;
@@ -29,6 +71,10 @@ public final class WorldMap implements Serializable {
 		return at(x, y, z).type == t;
 	}
 	
+	private TileType r(TileType[] ts) {
+		return ts[r.nextInt(ts.length)];
+	}
+	
 	public WorldMap(long seed, int xS, int yS, int zS) {
 		r = new Random(seed);
 		map = new Tile[zS][yS][xS];
@@ -42,9 +88,9 @@ public final class WorldMap implements Serializable {
 			int roll = r.nextInt(100);
 			TileType tt = TileType.WATER;
 			if (roll < 5) {
-				tt = TileType.BARGE;
+				tt = r(BARGES);
 			} else if (roll < 20) {
-				tt = TileType.ROOFTOP;
+				tt = r(ROOFTOPS);
 			}
 			map[ground][y][x] = new Tile(this, tt, x, y, ground);
 		}}
@@ -75,7 +121,7 @@ public final class WorldMap implements Serializable {
 		
 		for (int z = towerTop; z < zS; z++) {
 			for (int y = towerY; y < towerY + 5; y++) {for (int x = towerX; x < towerX + 5; x++) {
-				TileType tt = TileType.APARTMENT;
+				TileType tt = z == towerTop ? r(TOWER_ROOFTOPS) : r(TOWER_ROOMS);
 				if (y == towerY + 4) {
 					tt = TileType.V_FARM;
 				}

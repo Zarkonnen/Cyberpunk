@@ -141,8 +141,9 @@ public class WorldScreen implements Screen {
 				int mapX = screenX + topLeftX;
 				Tile t = m.at(mapX, mapY, mapZ);
 				d.rect(t.type.color, screenX * GRID_SIZE, screenY * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+				d.text(t.type.name(), Cyberpunk.OCRA, screenX * GRID_SIZE, screenY * GRID_SIZE);
 				if (g.player.location() == t) {
-					d.text("player", Cyberpunk.OCRA, screenX * GRID_SIZE, screenY * GRID_SIZE);
+					d.text("player", Cyberpunk.OCRA, screenX * GRID_SIZE, screenY * GRID_SIZE + 20);
 				}
 			}
 		}
