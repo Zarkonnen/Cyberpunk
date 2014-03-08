@@ -1,5 +1,7 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.interaction.Factories;
+import com.zarkonnen.cyberpunk.interaction.TileInteraction;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,22 @@ public class Tile implements Serializable {
 	public final WorldMap map;
 	public final TileType type;
 	public final int x, y, z;
+	public final ArrayList<Item> inventory = new ArrayList<Item>();
+	public final ArrayList<HiddenItem> hiddenItems = new ArrayList<HiddenItem>();
+	
+	public static class HiddenItem implements Serializable {
+		public final int hidingScore;
+		public final Item item;
+
+		public HiddenItem(int hidingScore, Item item) {
+			this.hidingScore = hidingScore;
+			this.item = item;
+		}
+	}
+	
+	public List<TileInteraction> getInteraction(Person p) {
+		return Factories.make(p, this);
+	}
 
 	public Tile(WorldMap map, TileType type, int x, int y, int z) {
 		this.map = map;

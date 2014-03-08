@@ -8,7 +8,12 @@ import java.util.Random;
 public final class WorldMap implements Serializable {
 	private final Tile[][][] map;
 	private final LinkedList<Person> people = new LinkedList<Person>();
+	public final Random r;
 	
+	public boolean test(int successChance) {
+		return r.nextInt(100) < successChance;
+	}
+		
 	public List<Person> people() {
 		return people;
 	}
@@ -25,7 +30,7 @@ public final class WorldMap implements Serializable {
 	}
 	
 	public WorldMap(long seed, int xS, int yS, int zS) {
-		Random r = new Random(seed);
+		r = new Random(seed);
 		map = new Tile[zS][yS][xS];
 		for (int z = 0; z < zS; z++) { for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			map[z][y][x] = new Tile(this, TileType.AIR, x, y, z);
