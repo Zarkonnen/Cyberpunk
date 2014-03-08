@@ -30,7 +30,7 @@ public class ButtonList {
 		h -= PADDING * 2;
 		int top = y;
 		int bottom = y + h;
-		button(d, "^", x, y, w, new Runnable() {
+		button(d, "^", null, x, y, w, new Runnable() {
 			@Override
 			public void run() {
 				scroll = scroll + 5;
@@ -48,7 +48,7 @@ public class ButtonList {
 			}
 		}
 		
-		button(d, "v", x, bottom - BUTTON_H, w, new Runnable() {
+		button(d, "v", null, x, bottom - BUTTON_H, w, new Runnable() {
 			@Override
 			public void run() {
 				scroll = Math.max(0, scroll - 5);

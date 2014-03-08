@@ -50,6 +50,11 @@ public class WorldScreen implements Screen {
 					public String text() {
 						return it.getName();
 					}
+					
+					@Override
+					public String tooltip() {
+						return it.getName();
+					}
 
 					@Override
 					public boolean enabled() {
@@ -76,6 +81,11 @@ public class WorldScreen implements Screen {
 					@Override
 					public String text() {
 						return ti.description();
+					}
+					
+					@Override
+					public String tooltip() {
+						return null;
 					}
 
 					@Override

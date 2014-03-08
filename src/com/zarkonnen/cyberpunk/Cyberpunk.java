@@ -9,6 +9,8 @@ import com.zarkonnen.catengine.Hooks;
 import com.zarkonnen.catengine.Input;
 import com.zarkonnen.catengine.SlickEngine;
 import com.zarkonnen.catengine.util.Clr;
+import com.zarkonnen.catengine.util.Pt;
+import com.zarkonnen.catengine.util.Rect;
 import com.zarkonnen.catengine.util.ScreenMode;
 
 public class Cyberpunk implements Game {
@@ -26,6 +28,8 @@ public class Cyberpunk implements Game {
 	private Screen currentScreen = new WorldScreen(new GameState(666, 20, 20, 10));
 	
 	private Hooks hooks = null;
+	private int msSinceCursorMoved = 0;
+	private Pt lastCursor = new Pt(0, 0);
 
 	@Override
 	public void input(Input in) {
@@ -45,6 +49,13 @@ public class Cyberpunk implements Game {
 		if (hooks != null) {
 			hooks.hit(in);
 		}
+		if (!lastCursor.equals(in.cursor())) {
+			msSinceCursorMoved = 0;
+			lastCursor = in.cursor();
+			DrawUtils.tooltip = null;
+		}
+		msSinceCursorMoved += in.msDelta();
+		DrawUtils.tooltipMs += in.msDelta();
 	}
 
 	@Override
@@ -53,5 +64,16 @@ public class Cyberpunk implements Game {
 		Draw d = new Draw(f);
 		currentScreen.render(d, sm);
 		hooks = d.getHooks();
+		if (msSinceCursorMoved >= 300 && DrawUtils.tooltipMs >= 300 && DrawUtils.tooltip != null) {
+			Rect r = d.textSize(DrawUtils.tooltip, OCRA, 0, 0, 300 - DrawUtils.PADDING * 2);
+			int x = (int) f.cursor().x + 20;
+			int y = (int) f.cursor().y;
+			int w = (int) r.width + DrawUtils.PADDING * 2;
+			int h = (int) r.height + DrawUtils.PADDING * 2;
+			x = Math.min(x, sm.width - w);
+			y = Math.min(y, sm.height - h);
+			d.rect(DrawUtils.TOOLTIP, x, y, w, h);
+			d.text(DrawUtils.TEXT_PREFIX + DrawUtils.tooltip, OCRA, x + DrawUtils.PADDING, y + DrawUtils.PADDING, 300 - DrawUtils.PADDING * 2);
+		}
 	}
 }

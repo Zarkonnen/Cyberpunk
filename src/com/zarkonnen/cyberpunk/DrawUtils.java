@@ -26,13 +26,18 @@ public final class DrawUtils {
 	public static final Clr DISABLED_BUTTON = Clr.fromHex(DISABLED_BUTTON_HEX);
 	public static final String HOVER_BUTTON_HEX = "b900ff";
 	public static final Clr HOVER_BUTTON = Clr.fromHex(HOVER_BUTTON_HEX);
+	public static final String TOOLTIP_HEX = "2e7114";
+	public static final Clr TOOLTIP = Clr.fromHex(TOOLTIP_HEX);
+
+	public static String tooltip;
+	public static int tooltipMs;
 	
 	
 	public static void button(Draw d, int x, int y, int w, Button b) {
-		button(d, b.text(), x, y, w, b, b.enabled(), false);
+		button(d, b.text(), b.tooltip(), x, y, w, b, b.enabled(), false);
 	}
 	
-	public static void button(Draw d, String text, int x, int y, int w, final Runnable onClick, boolean enabled, boolean repeat) {
+	public static void button(Draw d, String text, final String tooltipText, int x, int y, int w, final Runnable onClick, boolean enabled, boolean repeat) {
 		Clr c = Rect.contains(x, y, w, BUTTON_H, d.cursor()) ? HOVER_BUTTON : BUTTON;
 		if (!enabled) {
 			c = DISABLED_BUTTON;
@@ -47,5 +52,14 @@ public final class DrawUtils {
 				}
 			});
 		}
+		d.hook(x, y, w, BUTTON_H, new Hook(Hook.Type.HOVER) {
+			@Override
+			public void run(Input in, Pt p, Type type) {
+				if (tooltipText != null && !tooltipText.equals(tooltip)) {
+					tooltipMs = 0;
+				}
+				tooltip = tooltipText;
+			}
+		});
 	}
 }
