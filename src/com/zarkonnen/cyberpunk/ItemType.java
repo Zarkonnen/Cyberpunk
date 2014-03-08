@@ -27,6 +27,358 @@ public enum ItemType implements Serializable {
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	AR_GOGGLE_VIRUS(
+		"AR goggle virus", /* name */ 
+		"Distract someone by screwing up their augmented view on the world.", /* description */ 
+		150, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		50, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		50, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(RUNNING_AWAY, 50)))/* skillBonuses */ 
+	),
+	GUARD_DRONE(
+		"Guard drone", /* name */ 
+		"A weaonised defense drone.", /* description */ 
+		1000, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		100, /* drone */ 
+		0, /* bug */ 
+		90, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	REMOTE_WIRETAP(
+		"Remote wiretap", /* name */ 
+		"Device to record remote data exchange and communication.", /* description */ 
+		300, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		100, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	WIRETAP(
+		"Wiretap", /* name */ 
+		"Device to record local data exchange and communication.", /* description */ 
+		150, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		100, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	ENDURANCE_UPGRADE(
+		"Endurance upgrade", /* name */ 
+		"Bioactive mod that increases your endurance.", /* description */ 
+		300, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		true, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	MEDICAL_HELPER_IMPLANT(
+		"Medical helper implant", /* name */ 
+		"An implant to support your surgical skills.", /* description */ 
+		450, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		true, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(GRINDING, 70)))/* skillBonuses */ 
+	),
+	BLACKMAIL_MATERIAL(
+		"Blackmail material", /* name */ 
+		"Evidence that someone has been up to something they really shouldn't have.", /* description */ 
+		1500, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		true, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	GRINDER_TOOLS(
+		"Grinder tools", /* name */ 
+		"Equipment for serious body modifications.", /* description */ 
+		200, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		50, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(GRINDING, 60)))/* skillBonuses */ 
+	),
+	ART(
+		"Art", /* name */ 
+		"Is it art? Well, there are art collectors who'd kill for it.", /* description */ 
+		2000, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	JEWELLERY(
+		"Jewellery", /* name */ 
+		"Expensive adornments.", /* description */ 
+		700, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	DESIGNER_CLOTHES(
+		"Designer clothes", /* name */ 
+		"Fashionable, ugly clothing.", /* description */ 
+		250, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	GENETIC_CODE(
+		"Genetic code", /* name */ 
+		"The valuable results of extensive research.", /* description */ 
+		1500, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	OPTICAL_CAMO(
+		"Optical camo", /* name */ 
+		".", /* description */ 
+		300, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(HIDING, 80)))/* skillBonuses */ 
+	),
+	BUG(
+		"Bug", /* name */ 
+		"Device to capture nearby images and sounds.", /* description */ 
+		150, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		100, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	MIRRORSHADES(
+		"Mirrorshades", /* name */ 
+		"Cover your eyes like a real hacker.", /* description */ 
+		50, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(FORCE_OF_PERSONALITY, 20)))/* skillBonuses */ 
+	),
+	SHARES(
+		"Shares", /* name */ 
+		".", /* description */ 
+		2000, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* weapon */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* drugExhaustionModifier */ 
+		0, /* drugExhaustionGainModifier */ 
+		0, /* drugExhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	);
 
 	private ItemType(String name, String description, int value, boolean key, boolean data, boolean implant, boolean blackmailMaterial, int drone, int bug, int weapon, int medicine, int food, int stun, int drugExhaustionModifier, double drugExhaustionGainModifier, double drugExhaustionLossModifier, int drugDuration, int drugAddictionDuration, int drugAdditionExhaustionBaseModifier, EnumMap<Skill, Integer> skillBonuses) {
