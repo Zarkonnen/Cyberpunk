@@ -2,13 +2,17 @@
 package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.catengine.Draw;
+import com.zarkonnen.catengine.Hook;
+import com.zarkonnen.catengine.Hook.Type;
 import com.zarkonnen.catengine.Input;
+import com.zarkonnen.catengine.util.Pt;
 import com.zarkonnen.catengine.util.ScreenMode;
 import com.zarkonnen.catengine.util.Utils.Pair;
 import java.util.List;
 import static com.zarkonnen.catengine.util.Utils.*;
 import com.zarkonnen.cyberpunk.interaction.TileInteraction;
 import java.util.ArrayList;
+import static com.zarkonnen.cyberpunk.DrawUtils.*;
 
 public class WorldScreen implements Screen {
 	public final GameState g;
@@ -81,7 +85,7 @@ public class WorldScreen implements Screen {
 
 					@Override
 					public void run() {
-						ti.run(); // qqDPS Text not displayed!
+						g.player.message = ti.run();
 					}
 				});
 			}
@@ -112,6 +116,10 @@ public class WorldScreen implements Screen {
 		
 		inventory.input(in, 0, 0, 150, sm.height);
 		interactions.input(in, sm.width - 150, 0, 150, sm.height);
+		
+		if (g.player.message != null && in.keyPressed("SPACE")) {
+			g.player.message = null;
+		}
 	}
 
 	@Override
@@ -131,5 +139,15 @@ public class WorldScreen implements Screen {
 		
 		inventory.draw(d, 0, 0, 150, sm.height);
 		interactions.draw(d, sm.width - 150, 0, 150, sm.height);
+		
+		if (g.player.message != null) {
+			d.rect(BG, sm.width / 2 - 150, sm.height / 2 - 150, 300, 300, new Hook(Hook.Type.MOUSE_1_CLICKED) {
+				@Override
+				public void run(Input in, Pt p, Type type) {
+					g.player.message = null;
+				}
+			});
+			d.text(TEXT_PREFIX + g.player.message, Cyberpunk.OCRA, sm.width / 2 - 150 + PADDING, sm.height / 2 - 150 + PADDING, 300 - PADDING * 2);
+		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.EnumMap;
 
 public class Person implements Serializable {
 	private Tile location;
+	public String message;
 	
 	public final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
