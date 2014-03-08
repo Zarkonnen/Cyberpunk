@@ -50,10 +50,98 @@ public enum ItemType implements Serializable {
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(HACKING, 10)))/* skillBonuses */ 
 	),
+	FANCY_AR_GOGGLES(
+		"Expert AR Goggles", /* name */ 
+		"Clunky but powerful Katana XL augmented reality goggles.", /* description */ 
+		800, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(HACKING, 25), p(FORCE_OF_PERSONALITY, -15)))/* skillBonuses */ 
+	),
+	SHARP_SUIT(
+		"Sharp Suit", /* name */ 
+		"This outfit screams power and money.", /* description */ 
+		1200, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(FORCE_OF_PERSONALITY, 10)))/* skillBonuses */ 
+	),
 	VALUABLE_DATA(
 		"Valuable Data", /* name */ 
 		"Rows and rows of numbers. You don't care what they are, only what someone might pay you for them.", /* description */ 
 		2000, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(HACKING, 0)))/* skillBonuses */ 
+	),
+	BOOTLEG_ENTERTAINMENT(
+		"Bootleg Entertainment", /* name */ 
+		"This week's movies.", /* description */ 
+		5, /* value */ 
+		false, /* key */ 
+		true, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(HACKING, 0)))/* skillBonuses */ 
+	),
+	AMATEUR_SEX_VID(
+		"Amateur Sex Vid", /* name */ 
+		"Most people keep on their glasses to have sex. The resulting videos sometimes go... astray.", /* description */ 
+		15, /* value */ 
 		false, /* key */ 
 		true, /* data */ 
 		false, /* implant */ 
