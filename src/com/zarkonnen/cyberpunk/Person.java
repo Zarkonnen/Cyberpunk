@@ -25,6 +25,19 @@ public class Person implements Serializable, HasName {
 		}
 	}
 	
+	// qqDPS
+	public boolean willBuyForSelf(Item it) {
+		return true;
+	}
+	
+	public boolean willForWork(Item it) {
+		return true;
+	}
+	
+	public boolean willSell(Item it) {
+		return true;
+	}
+	
 	@Override
 	public String getName() {
 		return "some person"; // qqDPS

@@ -112,6 +112,15 @@ public class DoWork extends AbstractInteraction<Tile> {
 			actor().money += product.type.value / 8;
 			target().hiddenItems.add(new Tile.HiddenItem(r().nextInt(50), product));
 		}
+		if (target().type == TileType.BROTHEL) {
+			for (Person p : target().people()) {
+				if (p.workplace != target() && r().nextInt(5) == 0) {
+					Item tape = new Item(ItemType.BLACKMAIL_MATERIAL);
+					tape.blackmailFor = p;
+					target().hiddenItems.add(new Tile.HiddenItem(30 + r().nextInt(30), tape));
+				}
+			}
+		}
 		return "You produce a " + product.getName() + ".";
 	}
 	

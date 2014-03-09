@@ -25,6 +25,9 @@ public final class Factories {
 	static {
 		PERSON_I_FACTORIES.add(new BlackmailForMoney.F());
 		PERSON_I_FACTORIES.add(new BlackmailForItem.F());
+		PERSON_I_FACTORIES.add(new Buy.F());
+		PERSON_I_FACTORIES.add(new SellToPerson.F());
+		PERSON_I_FACTORIES.add(new SellToBusiness.F());
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {
