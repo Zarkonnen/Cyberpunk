@@ -49,6 +49,7 @@ public final class Factories {
 	public static final List<InteractionFactory<Item, ?>> ITEM_I_FACTORIES = new ArrayList<InteractionFactory<Item, ?>>();
 	static {
 		ITEM_I_FACTORIES.add(new RemoveImplant.F());
+		ITEM_I_FACTORIES.add(new ImplantImplant.F());
 		ITEM_I_FACTORIES.add(new Eat.F());
 		ITEM_I_FACTORIES.add(new FirstAid.F());
 	}
