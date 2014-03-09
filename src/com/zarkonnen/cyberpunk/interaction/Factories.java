@@ -68,4 +68,12 @@ public final class Factories {
 		}
 		return l;
 	}
+	
+	public static List<Interaction<Item>> make(Person actor, Item target) {
+		ArrayList<Interaction<Item>> l = new ArrayList<Interaction<Item>>();
+		for (InteractionFactory<Item, ?> f : ITEM_I_FACTORIES) {
+			l.addAll(f.make(actor, target));
+		}
+		return l;
+	}
 }

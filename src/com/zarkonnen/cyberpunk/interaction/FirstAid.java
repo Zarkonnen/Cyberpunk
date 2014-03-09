@@ -27,7 +27,7 @@ public class FirstAid extends AbstractInteraction<Item> implements ItemInteracti
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Patch yourself back together.";
 	}
 

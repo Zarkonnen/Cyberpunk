@@ -27,7 +27,7 @@ public class Gogglehack extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Hack into their AR system and look for valuable data.";
 	}
 

@@ -13,6 +13,7 @@ import static com.zarkonnen.catengine.util.Utils.*;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.util.ArrayList;
 import static com.zarkonnen.cyberpunk.DrawUtils.*;
+import com.zarkonnen.cyberpunk.interaction.Factories;
 
 public class WorldScreen implements Screen {
 	public final GameState g;
@@ -21,6 +22,7 @@ public class WorldScreen implements Screen {
 	private int msSinceScroll;
 	public final ButtonList inventory = new ButtonList();
 	public final ButtonList interactions = new ButtonList();
+	public static final int LIST_W = 250;
 	
 	public static final int GRID_SIZE = 100;
 	public static final int MS_PER_SCROLL = 200;
@@ -44,7 +46,69 @@ public class WorldScreen implements Screen {
 		@Override
 		public List<Button> buttons() {
 			ArrayList<Button> l = new ArrayList<Button>();
+			l.add(new Button() {
+				@Override
+				public String text() {
+					return "Health: " + g.player.health;
+				}
+
+				@Override
+				public String tooltip() { return null; }
+
+				@Override
+				public boolean enabled() { return false; }
+
+				@Override
+				public void run() {}
+			});
+			l.add(new Button() {
+				@Override
+				public String text() {
+					return "Reputation: " + g.player.reputation;
+				}
+
+				@Override
+				public String tooltip() { return null; }
+
+				@Override
+				public boolean enabled() { return false; }
+
+				@Override
+				public void run() {}
+			});
+			l.add(new Button() {
+				@Override
+				public String text() {
+					return "Hunger: " + g.player.hunger;
+				}
+
+				@Override
+				public String tooltip() { return null; }
+
+				@Override
+				public boolean enabled() { return false; }
+
+				@Override
+				public void run() {}
+			});
+			l.add(new Button() {
+				@Override
+				public String text() {
+					return "Exhaustion: " + g.player.getVisibleExhaustion();
+				}
+
+				@Override
+				public String tooltip() { return null; }
+
+				@Override
+				public boolean enabled() { return false; }
+
+				@Override
+				public void run() {}
+			});
 			for (final Item it : g.player.inventory) {
+				List<Interaction<Item>> is = Factories.make(g.player, it);
+				final Interaction<Item> interaction = is.isEmpty() ? null : is.get(0); // qqDPS
 				l.add(new Button() {
 					@Override
 					public String text() {
@@ -53,17 +117,23 @@ public class WorldScreen implements Screen {
 					
 					@Override
 					public String tooltip() {
-						return it.getName();
+						if (interaction == null) {
+							return it.getName();
+						} else {
+							return interaction.description();
+						}
 					}
 
 					@Override
 					public boolean enabled() {
-						return false;
+						return interaction != null && interaction.enabled();
 					}
 
 					@Override
 					public void run() {
-						
+						if (interaction != null) {
+							g.player.message = interaction.run();
+						}
 					}
 				});
 			}
@@ -124,8 +194,8 @@ public class WorldScreen implements Screen {
 		topLeftY = g.player.location().y - screenGridH / 2;
 		topLeftZ = g.player.location().z;
 		
-		inventory.input(in, 0, 0, 150, sm.height);
-		interactions.input(in, sm.width - 150, 0, 150, sm.height);
+		inventory.input(in, 0, 0, LIST_W, sm.height);
+		interactions.input(in, sm.width - LIST_W, 0, LIST_W, sm.height);
 		
 		if (g.player.message != null && in.keyPressed("SPACE")) {
 			g.player.message = null;
@@ -148,8 +218,8 @@ public class WorldScreen implements Screen {
 			}
 		}
 		
-		inventory.draw(d, 0, 0, 150, sm.height);
-		interactions.draw(d, sm.width - 150, 0, 150, sm.height);
+		inventory.draw(d, 0, 0, LIST_W, sm.height);
+		interactions.draw(d, sm.width - LIST_W, 0, LIST_W, sm.height);
 		
 		if (g.player.message != null) {
 			d.rect(BG, sm.width / 2 - 150, sm.height / 2 - 150, 300, 300, new Hook(Hook.Type.MOUSE_1_CLICKED) {

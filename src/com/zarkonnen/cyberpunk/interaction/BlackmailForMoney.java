@@ -25,7 +25,7 @@ public class BlackmailForMoney extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Swap incriminating evidence for money.";
 	}
 

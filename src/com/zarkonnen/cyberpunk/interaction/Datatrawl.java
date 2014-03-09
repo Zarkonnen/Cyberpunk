@@ -19,7 +19,7 @@ public class Datatrawl extends AbstractInteraction<Tile> {
 	}
 	
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Scan the local network for valuable data.";
 	}
 

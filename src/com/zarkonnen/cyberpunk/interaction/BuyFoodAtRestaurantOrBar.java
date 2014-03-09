@@ -29,7 +29,7 @@ public class BuyFoodAtRestaurantOrBar extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "If you don't look too closely, the food here is almost tasty.";
 	}
 

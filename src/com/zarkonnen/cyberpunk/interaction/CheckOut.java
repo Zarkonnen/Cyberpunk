@@ -23,7 +23,7 @@ public class CheckOut extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Give them an appraising look-over.";
 	}
 

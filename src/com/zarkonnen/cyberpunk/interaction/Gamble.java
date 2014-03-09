@@ -27,7 +27,7 @@ public class Gamble extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Wager some money on the spinning wheel. Maybe you get lucky.";
 	}
 

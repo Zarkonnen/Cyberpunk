@@ -32,7 +32,7 @@ public class Buy extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Engage in commerce!";
 	}
 

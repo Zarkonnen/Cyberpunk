@@ -15,7 +15,7 @@ public class SearchForGadgets extends AbstractInteraction<Tile> {
 		
 	@Override
 	public String getName() {
-		return "Search for gadgets.";
+		return "Search for Gadgets";
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class SearchForGadgets extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Sweep for bugs, wiretaps and drones -- leaving your own, of course.";
 	}
 

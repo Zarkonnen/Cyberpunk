@@ -41,7 +41,7 @@ public class SellToOutsideWorld extends AbstractInteraction<Tile> implements Ite
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Export to outside the map.";
 	}
 
