@@ -11,6 +11,8 @@ public final class Factories {
 	static {
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
+		TILE_I_FACTORIES.add(new BuyFoodAtRestaurantOrBar.F());
+		TILE_I_FACTORIES.add(new SearchForGadgets.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
