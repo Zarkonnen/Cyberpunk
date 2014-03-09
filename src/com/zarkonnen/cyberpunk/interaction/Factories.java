@@ -13,6 +13,7 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
 		TILE_I_FACTORIES.add(new BuyFoodAtRestaurantOrBar.F());
 		TILE_I_FACTORIES.add(new SearchForGadgets.F());
+		TILE_I_FACTORIES.add(new HarvestBug.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
