@@ -7,7 +7,7 @@ import java.util.List;
 
 public class VisitBrothel extends AbstractInteraction<Person> {
 	public static final int COST = 20;
-	public static final int EXHAUSTION_DECREASE = 15;
+	public static final int EXHAUSTION_DECREASE = 10;
 
 	public VisitBrothel(Person actor, Person target) {
 		super(actor, target);
@@ -33,7 +33,7 @@ public class VisitBrothel extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		actor().exhaustion = Math.max(actor().restedPoint(), actor().exhaustion - EXHAUSTION_DECREASE);
+		actor().removeExhaustion(EXHAUSTION_DECREASE);
 		return "You have A Good Time.";
 	}
 	

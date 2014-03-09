@@ -36,10 +36,10 @@ public class Rest extends AbstractInteraction<Tile> {
 	@Override
 	public String run() {
 		if (target() == actor().home) {
-			actor().exhaustion = Math.max(actor().restedPoint(), actor().exhaustion - HOME_REST_AMT);
+			actor().removeExhaustion(HOME_REST_AMT);
 			return "You make a clearing in the electronic junk and kip for a little while. It's nice to be home.";
 		} else {
-			actor().exhaustion = Math.max(actor().restedPoint(), actor().exhaustion - ELSEWHERE_REST_AMT);
+			actor().removeExhaustion(ELSEWHERE_REST_AMT);
 			return "You sit down and rest your eyes for a moment.";
 		}
 	}
