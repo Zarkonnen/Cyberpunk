@@ -2,20 +2,19 @@ package com.zarkonnen.cyberpunk.interaction;
 
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
-import com.zarkonnen.cyberpunk.Tile;
 import java.util.Random;
 
-public abstract class AbstractTileInteraction implements TileInteraction {
+public abstract class AbstractInteraction<T> implements Interaction<T> {
 	private final Person actor;
-	private final Tile target;
+	private final T target;
 
-	public AbstractTileInteraction(Person actor, Tile target) {
+	public AbstractInteraction(Person actor, T target) {
 		this.actor = actor;
 		this.target = target;
 	}
 	
 	public Random r() {
-		return target.map.r;
+		return actor.location().map.r;
 	}
 	
 	public boolean test(Skill sk, int vs) {
@@ -23,7 +22,7 @@ public abstract class AbstractTileInteraction implements TileInteraction {
 	}
 	
 	public boolean test(int successChance) {
-		return target.map.test(successChance);
+		return actor.location().map.test(successChance);
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public abstract class AbstractTileInteraction implements TileInteraction {
 	}
 
 	@Override
-	public Tile target() {
+	public T target() {
 		return target;
 	}
 

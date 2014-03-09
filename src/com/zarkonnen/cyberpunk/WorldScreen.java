@@ -10,7 +10,7 @@ import com.zarkonnen.catengine.util.ScreenMode;
 import com.zarkonnen.catengine.util.Utils.Pair;
 import java.util.List;
 import static com.zarkonnen.catengine.util.Utils.*;
-import com.zarkonnen.cyberpunk.interaction.TileInteraction;
+import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.util.ArrayList;
 import static com.zarkonnen.cyberpunk.DrawUtils.*;
 
@@ -76,7 +76,7 @@ public class WorldScreen implements Screen {
 		@Override
 		public List<Button> buttons() {
 			ArrayList<Button> l = new ArrayList<Button>();
-			for (final TileInteraction ti : g.player.location().getInteraction(g.player)) {
+			for (final Interaction ti : g.player.location().getInteractions(g.player)) {
 				l.add(new Button() {
 					@Override
 					public String text() {

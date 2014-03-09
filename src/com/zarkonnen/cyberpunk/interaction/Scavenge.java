@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Scavenge extends AbstractTileInteraction {
+public class Scavenge extends AbstractInteraction<Tile> {
 	public Scavenge(Person actor, Tile target) {
 		super(actor, target);
 	}
@@ -38,7 +38,7 @@ public class Scavenge extends AbstractTileInteraction {
 		return found.isEmpty() ? "You find nothing." : "You find: " + found + ".";
 	}
 	
-	public static class F implements TileInteractionFactory<Scavenge> {
+	public static class F implements InteractionFactory<Tile, Scavenge> {
 		@Override
 		public List<Scavenge> make(Person actor, Tile t) {
 			return Collections.singletonList(new Scavenge(actor, t));

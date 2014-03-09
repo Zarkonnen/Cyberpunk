@@ -1,7 +1,7 @@
 package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.cyberpunk.interaction.Factories;
-import com.zarkonnen.cyberpunk.interaction.TileInteraction;
+import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Tile implements Serializable {
 		}
 	}
 	
-	public List<TileInteraction> getInteraction(Person p) {
+	public List<Interaction<Tile>> getInteractions(Person p) {
 		return Factories.make(p, this);
 	}
 
