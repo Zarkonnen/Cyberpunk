@@ -1,5 +1,8 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.behave.InteractionBehavior;
+import com.zarkonnen.cyberpunk.interaction.Factories;
+import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -18,6 +21,7 @@ public class Person implements Serializable, HasName {
 	public static final int H_HUNGRY = 50; public static final double H_HUNGRY_MULT = 0.9;
 	public static final int H_VERY_HUNGRY = 75; public static final double H_VERY_HUNGRY_MULT = 0.8;
 	
+	public ArrayList<InteractionBehavior> behaviors = new ArrayList<InteractionBehavior>();
 	private Tile location;
 	public String message;
 	public int hunger = 0;
@@ -50,6 +54,38 @@ public class Person implements Serializable, HasName {
 		public Drug(Item drug) {
 			this.drug = drug;
 		}
+	}
+	
+	public void tick() {
+		bodyTick();
+		if (!isPlayer) {
+			ArrayList<Interaction> l = new ArrayList<Interaction>();
+			l.addAll(location.getInteractions(this));
+			for (Item item : allItems()) {
+				l.addAll(Factories.make(this, item));
+			}
+			lp: for (InteractionBehavior b : behaviors) {
+				for (Interaction i : l) {
+					if (b.enabled(i)) {
+						i.run();
+						break lp;
+					}
+				}
+			}
+		}
+	}
+	
+	public InteractionBehavior behave(Class type) {
+		InteractionBehavior b = InteractionBehavior.behave(type);
+		behaviors.add(b);
+		return b;
+	}
+	
+	public ArrayList<Item> allItems() {
+		ArrayList<Item> l = new ArrayList<Item>();
+		l.addAll(inventory);
+		l.addAll(implants);
+		return l;
 	}
 	
 	public boolean bodyTick() {

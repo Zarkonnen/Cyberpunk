@@ -51,6 +51,23 @@ public final class WorldMap implements Serializable {
 	private final Tile[][][] map;
 	private final LinkedList<Person> people = new LinkedList<Person>();
 	public final Random r;
+	public int time = 0;
+	public static final int DAY_LENGTH = 6 * 24;
+	
+	public int timeOfDay() {
+		return time % DAY_LENGTH;
+	}
+	
+	public int hour() {
+		return (time % DAY_LENGTH) / 6;
+	}
+	
+	public void tick() {
+		time++;
+		for (Person p : people) {
+			p.tick();
+		}
+	}
 	
 	public boolean test(int successChance) {
 		return r.nextInt(100) < successChance;
