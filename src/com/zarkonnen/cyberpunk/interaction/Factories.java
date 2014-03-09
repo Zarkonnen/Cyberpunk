@@ -23,6 +23,7 @@ public final class Factories {
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
 	static {
+		PERSON_I_FACTORIES.add(new VisitBrothel.F());
 		PERSON_I_FACTORIES.add(new BlackmailForMoney.F());
 		PERSON_I_FACTORIES.add(new BlackmailForItem.F());
 		PERSON_I_FACTORIES.add(new Buy.F());
