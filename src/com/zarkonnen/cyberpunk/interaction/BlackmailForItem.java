@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class BlackmailForItem extends AbstractInteraction<Person> {
+public class BlackmailForItem extends AbstractInteraction<Person> implements ItemInteraction {
 	public static final int BONUS = 30;
 
 	public BlackmailForItem(Person actor, Person target, Item item) {
@@ -49,6 +49,11 @@ public class BlackmailForItem extends AbstractInteraction<Person> {
 		} else {
 			return "You try to convince " + target().getName() + " that bad things will happen if you don't get that " + item.getName() + ", but they laugh you off.";
 		}
+	}
+
+	@Override
+	public Item getItem() {
+		return item;
 	}
 	
 	public static class F implements InteractionFactory<Person, BlackmailForItem> {

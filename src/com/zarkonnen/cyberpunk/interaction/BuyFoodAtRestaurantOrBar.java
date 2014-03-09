@@ -5,8 +5,8 @@ import com.zarkonnen.cyberpunk.Tile;
 import com.zarkonnen.cyberpunk.TileType;
 
 public class BuyFoodAtRestaurantOrBar extends AbstractInteraction<Tile> {
-	public static final int FOOD_COST = 0;
-	public static final int FOOD_AMOUNT = 0;
+	public static final int FOOD_COST = 10;
+	public static final int FOOD_AMOUNT = 20;
 
 	public BuyFoodAtRestaurantOrBar(Person actor, Tile target) {
 		super(actor, target);

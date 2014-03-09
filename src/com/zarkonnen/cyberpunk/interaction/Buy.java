@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Buy extends AbstractInteraction<Person> {
+public class Buy extends AbstractInteraction<Person> implements ItemInteraction {
 	public final Item item;
 
 	public Buy(Item item, Person actor, Person target) {
@@ -55,6 +55,11 @@ public class Buy extends AbstractInteraction<Person> {
 			}
 		}
 		return "You buy the " + item.getName() + ".";
+	}
+
+	@Override
+	public Item getItem() {
+		return item;
 	}
 	
 	public static class F implements InteractionFactory<Person, Buy> {

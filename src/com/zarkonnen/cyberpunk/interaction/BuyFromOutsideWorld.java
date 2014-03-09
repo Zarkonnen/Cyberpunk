@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-public class BuyFromOutsideWorld extends AbstractInteraction<Tile> {
+public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements ItemInteraction {
 	public static final EnumSet<ItemType> BUYABLES = EnumSet.of(
 		ItemType.ANGLE_GRINDER,
 		ItemType.ANTIVIRUS_SOFTWARE,
@@ -38,21 +38,21 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> {
 		ItemType.RAM
 	);
 	
-	public final ItemType good;
+	public final Item good;
 
 	public BuyFromOutsideWorld(Person actor, Tile target, ItemType good) {
 		super(actor, target);
-		this.good = good;
+		this.good = new Item(good);
 	}
 	
 	@Override
 	public String getName() {
-		return "Import " + good.name;
+		return "Import " + good.getName();
 	}
 
 	@Override
 	public String disabledReason() {
-		if (actor().money < good.value) {
+		if (actor().money < good.type.value) {
 			return "You can't afford it.";
 		}
 		return null;
@@ -65,9 +65,14 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
-		actor().inventory.add(new Item(good));
-		actor().money -= good.value;
-		return "You buy: " + good.name;
+		actor().inventory.add(good);
+		actor().money -= good.type.value;
+		return "You buy: " + good.getName();
+	}
+
+	@Override
+	public Item getItem() {
+		return good;
 	}
 	
 	public static class F implements InteractionFactory<Tile, BuyFromOutsideWorld> {
