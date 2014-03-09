@@ -21,6 +21,9 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new SearchForGadgets.F());
 		TILE_I_FACTORIES.add(new HarvestGadget.F());
 		TILE_I_FACTORIES.add(new DeployGadget.F());
+		TILE_I_FACTORIES.add(new Datatrawl.F());
+		TILE_I_FACTORIES.add(new ImplantImplantAtClinic.F());
+		TILE_I_FACTORIES.add(new RemoveImplantAtClinic.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();

@@ -8,19 +8,19 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Scavenge extends AbstractInteraction<Tile> {
-	public Scavenge(Person actor, Tile target) {
+public class Datatrawl extends AbstractInteraction<Tile> {
+	public Datatrawl(Person actor, Tile target) {
 		super(actor, target);
 	}
 
 	@Override
 	public String getName() {
-		return "Scavenge";
+		return "Datatrawl";
 	}
 	
 	@Override
 	public String description() {
-		return "Look around for anything of value.";
+		return "Scan the local network for valuable data.";
 	}
 
 	@Override
@@ -33,20 +33,19 @@ public class Scavenge extends AbstractInteraction<Tile> {
 		StringList found = new StringList();
 		for (Iterator<Tile.HiddenItem> it = target().hiddenItems.iterator(); it.hasNext();) {
 			Tile.HiddenItem hiddenItem = it.next();
-			if (actor().getSkill(Skill.SCAVENGING) > hiddenItem.hidingScore && !hiddenItem.item.type.data) {
+			if (actor().getSkill(Skill.HACKING) > hiddenItem.hidingScore && hiddenItem.item.type.data) {
 				actor().inventory.add(hiddenItem.item);
 				found.add(hiddenItem.item);
-				it.remove();
 			}
 		}
 		
 		return found.isEmpty() ? "You find nothing." : "You find: " + found + ".";
 	}
 	
-	public static class F implements InteractionFactory<Tile, Scavenge> {
+	public static class F implements InteractionFactory<Tile, Datatrawl> {
 		@Override
-		public List<Scavenge> make(Person actor, Tile t) {
-			return Collections.singletonList(new Scavenge(actor, t));
+		public List<Datatrawl> make(Person actor, Tile t) {
+			return Collections.singletonList(new Datatrawl(actor, t));
 		}
 	}
 }

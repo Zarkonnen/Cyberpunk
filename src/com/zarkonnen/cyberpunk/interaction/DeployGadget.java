@@ -33,7 +33,7 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 	public String run() {
 		actor().inventory.remove(gadget);
 		target().inventory.add(gadget);
-		return "";
+		return "You smoothly deploy the " + gadget.getName() + ".";
 	}
 
 	@Override
@@ -42,15 +42,15 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 	}
 	
 	public static class F implements InteractionFactory<Tile, DeployGadget> {
-
-	@Override
-	public List<DeployGadget> make(Person actor, Tile t) {
-		ArrayList<DeployGadget> l = new ArrayList<DeployGadget>();
-		for (Item it : actor.inventory) {
-			if (it.type.bug > 0 || it.type.drone > 0) {
-				l.add(new DeployGadget(actor, t, it));
+		@Override
+		public List<DeployGadget> make(Person actor, Tile t) {
+			ArrayList<DeployGadget> l = new ArrayList<DeployGadget>();
+			for (Item it : actor.inventory) {
+				if (it.type.bug > 0 || it.type.drone > 0) {
+					l.add(new DeployGadget(actor, t, it));
+				}
 			}
+			return l;
 		}
-		return l;		}
 	}
 }
