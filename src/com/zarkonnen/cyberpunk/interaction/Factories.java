@@ -1,5 +1,6 @@
 package com.zarkonnen.cyberpunk.interaction;
 
+import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Tile;
 import java.util.ArrayList;
@@ -41,6 +42,12 @@ public final class Factories {
 		PERSON_I_FACTORIES.add(new Datajack.F());
 		PERSON_I_FACTORIES.add(new HarvestImplants.F());
 		PERSON_I_FACTORIES.add(new Murder.F());
+	}
+	
+	public static final List<InteractionFactory<Item, ?>> ITEM_I_FACTORIES = new ArrayList<InteractionFactory<Item, ?>>();
+	static {
+		ITEM_I_FACTORIES.add(new RemoveImplant.F());
+		
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {
