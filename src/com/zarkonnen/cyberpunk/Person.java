@@ -33,7 +33,7 @@ public class Person implements Serializable, HasName {
 	}
 	
 	public boolean unconscious() {
-		return health <= 0 || stunned > 0;
+		return health <= 0 || stunned > 0 || exhaustion >= 100;
 	}
 	
 	// qqDPS
