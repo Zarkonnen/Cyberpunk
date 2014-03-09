@@ -28,8 +28,8 @@ public abstract class AbstractInteraction<T> implements Interaction<T> {
 		return actor.location().map.r;
 	}
 	
-	public boolean test(Skill sk, int vs) {
-		return actor.test(sk, vs);
+	public boolean test(int vs, Skill... sks) {
+		return actor.test(vs, sks);
 	}
 	
 	public boolean test(int successChance) {

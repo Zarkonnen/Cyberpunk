@@ -49,8 +49,12 @@ public class Person implements Serializable, HasName {
 		return skills.get(sk);
 	}
 	
-	public boolean test(Skill sk, int vs) {
-		return location.map.test(100 + getSkill(sk) - vs);
+	public boolean test(int vs, Skill... sks) {
+		int skillSum = 0;
+		for (Skill sk : sks) {
+			skillSum += getSkill(sk);
+		}
+		return location.map.test(100 + skillSum - vs);
 	}
 	
 	// qqDPS modify re: drugs

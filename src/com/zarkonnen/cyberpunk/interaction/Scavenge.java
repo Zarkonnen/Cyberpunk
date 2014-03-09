@@ -33,7 +33,7 @@ public class Scavenge extends AbstractInteraction<Tile> {
 		StringList found = new StringList();
 		for (Iterator<Tile.HiddenItem> it = target().hiddenItems.iterator(); it.hasNext();) {
 			Tile.HiddenItem hiddenItem = it.next();
-			if (test(Skill.SCAVENGING, hiddenItem.hidingScore)) {
+			if (actor().getSkill(Skill.SCAVENGING) > hiddenItem.hidingScore) {
 				actor().inventory.add(hiddenItem.item);
 				found.add(hiddenItem.item);
 				it.remove();

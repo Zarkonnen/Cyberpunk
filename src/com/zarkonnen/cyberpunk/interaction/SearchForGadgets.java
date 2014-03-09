@@ -33,7 +33,7 @@ public class SearchForGadgets extends AbstractInteraction<Tile> {
 		StringList found = new StringList();
 		for (Iterator<Tile.Gadget> it = target().gadgets.iterator(); it.hasNext();) {
 			Tile.Gadget gadget = it.next();
-			if (test(Skill.OBSERVATION, gadget.hidingScore) && gadget.owner != actor()) {
+			if (actor().getSkill(Skill.OBSERVATION) > gadget.hidingScore && gadget.owner != actor()) {
 				actor().inventory.add(gadget.item);
 				found.add(gadget.item);
 				it.remove();
