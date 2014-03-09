@@ -32,7 +32,10 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> {
 		ItemType.QUANTUM_CORE,
 		ItemType.RATIONS,
 		ItemType.SNACKS,
-		ItemType.SWITCHBLADE
+		ItemType.SWITCHBLADE,
+		ItemType.CHEMICALS,
+		ItemType.CPUS,
+		ItemType.RAM
 	);
 	
 	public final ItemType good;

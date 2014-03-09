@@ -12,6 +12,7 @@ public class Person implements Serializable, HasName {
 	public int health = 100;
 	public int money = 0;
 	public Tile home;
+	public Tile workplace;
 	public boolean isPlayer;
 	
 	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);

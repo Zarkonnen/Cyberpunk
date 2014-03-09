@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class BlackmailForMoney extends AbstractInteraction<Person> {
-	public static final int BONUS = 30;
+	public static final int BONUS = 50;
 
 	public BlackmailForMoney(Person actor, Person target) {
 		super(actor, target);

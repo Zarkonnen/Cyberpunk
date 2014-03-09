@@ -28,6 +28,28 @@ public enum ItemType implements Serializable {
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
+	CPUS(
+		"CPUs", /* name */ 
+		"State of the art processing cores.", /* description */ 
+		100, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
 	AR_GOGGLES(
 		"AR Goggles", /* name */ 
 		"NuvaTron 900 Augmented Reality Goggles. What everyone is wearing these days.", /* description */ 
@@ -246,6 +268,28 @@ public enum ItemType implements Serializable {
 		50, /* drugDuration */ 
 		500, /* drugAddictionDuration */ 
 		5, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
+	CHEMICALS(
+		"Precursors", /* name */ 
+		"Chemicals needed for drug production.", /* description */ 
+		5, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
 	UPPERS(
