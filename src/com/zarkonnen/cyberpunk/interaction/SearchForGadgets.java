@@ -30,6 +30,7 @@ public class SearchForGadgets extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		exhaust(8);
 		StringList found = new StringList();
 		for (Iterator<Tile.Gadget> it = target().gadgets.iterator(); it.hasNext();) {
 			Tile.Gadget gadget = it.next();

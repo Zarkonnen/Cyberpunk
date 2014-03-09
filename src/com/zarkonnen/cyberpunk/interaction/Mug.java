@@ -31,6 +31,7 @@ public class Mug extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
+		exhaust(6);
 		if (test(target().getSkill(Skill.FIGHTING) + target().getSkill(Skill.FORCE_OF_PERSONALITY) - BONUS, Skill.FIGHTING, Skill.FORCE_OF_PERSONALITY)) {
 			decreaseRep(5);
 			for (Iterator<Item> it = target().inventory.iterator(); it.hasNext();) {

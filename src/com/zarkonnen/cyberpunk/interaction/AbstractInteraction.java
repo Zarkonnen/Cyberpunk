@@ -25,7 +25,7 @@ public abstract class AbstractInteraction<T> implements Interaction<T> {
 	}
 	
 	public void exhaust(int amt) {
-		actor.exhaustion += amt;
+		actor.addExhaustion(amt);
 	}
 	
 	public Random r() {

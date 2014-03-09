@@ -41,6 +41,7 @@ public class ImplantImplantAtClinic extends AbstractInteraction<Tile> implements
 
 	@Override
 	public String run() {
+		exhaust(5);
 		actor().money -= IMPLANTATION_COST;
 		actor().inventory.remove(implant);
 		actor().implants.add(implant);

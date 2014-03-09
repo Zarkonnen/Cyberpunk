@@ -35,6 +35,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 
 	@Override
 	public String run() {
+		exhaust(1);
 		actor().money += item.type.value;
 		target().workplace.hiddenItems.add(new Tile.HiddenItem(r().nextInt(50), item));
 		if (!item.type.data) {

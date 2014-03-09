@@ -37,6 +37,7 @@ public class RemoveImplant extends AbstractInteraction<Item> implements ItemInte
 
 	@Override
 	public String run() {
+		exhaust(15);
 		if(actor().test(INJURY_VS, Skill.GRINDING)) {
 			if (actor().test(HARVEST_VS, Skill.GRINDING)) {
 				actor().inventory.add(target());

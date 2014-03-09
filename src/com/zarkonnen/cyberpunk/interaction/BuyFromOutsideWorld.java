@@ -65,6 +65,7 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements It
 
 	@Override
 	public String run() {
+		exhaust(4);
 		actor().inventory.add(good);
 		actor().money -= good.type.value;
 		return "You buy: " + good.getName();

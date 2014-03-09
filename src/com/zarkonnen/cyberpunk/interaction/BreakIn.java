@@ -26,6 +26,7 @@ public class BreakIn extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		exhaust(10);
 		if (actor().getSkill(Skill.BREAKING_AND_ENTERING) >= target().breakInResistance) {
 			target().locked = false;
 			return "You manage to get in.";

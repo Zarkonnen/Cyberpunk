@@ -104,6 +104,7 @@ public class DoWork extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		exhaust(5);
 		consume();
 		Item product = produce();
 		if (FREELANCERS.contains(target().type)) {

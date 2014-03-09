@@ -30,6 +30,7 @@ public class Datatrawl extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		exhaust(3);
 		StringList found = new StringList();
 		for (Iterator<Tile.HiddenItem> it = target().hiddenItems.iterator(); it.hasNext();) {
 			Tile.HiddenItem hiddenItem = it.next();

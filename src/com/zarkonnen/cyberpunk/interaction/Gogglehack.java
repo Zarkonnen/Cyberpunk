@@ -33,6 +33,7 @@ public class Gogglehack extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
+		exhaust(7);
 		StringList things = new StringList();
 		for (Iterator<Item> it = target().inventory.iterator(); it.hasNext();) {
 			Item item = it.next();

@@ -36,6 +36,7 @@ public class HealAtClinic extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		actor().removeExhaustion(3);
 		actor().health = Math.min(100, actor().health + HEAL_AMOUNT);
 		actor().money -= HEAL_COST;
 		return "The doctor's services are hurried but efficient. You feel better already.";

@@ -34,6 +34,7 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 
 	@Override
 	public String run() {
+		exhaust(1);
 		actor().money += item.type.value;
 		target().money -= item.type.value;
 		target().inventory.add(item);

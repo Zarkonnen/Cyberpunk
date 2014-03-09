@@ -33,6 +33,7 @@ public class Gamble extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
+		exhaust(1);
 		actor().money -= WAGER;
 		if (test(PAYOUT_P)) {
 			actor().money += PAYOUT;

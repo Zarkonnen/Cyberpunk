@@ -31,6 +31,7 @@ public class Attack extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
+		exhaust(15);
 		int result = actor().getSkill(Skill.FIGHTING) + BONUS - target().getSkill(Skill.FIGHTING) + r().nextInt(100) - 50;
 				
 		if (result > 0) {

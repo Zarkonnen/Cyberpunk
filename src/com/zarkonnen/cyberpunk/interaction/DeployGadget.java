@@ -31,6 +31,7 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 
 	@Override
 	public String run() {
+		exhaust(3);
 		actor().inventory.remove(gadget);
 		target().inventory.add(gadget);
 		return "You smoothly deploy the " + gadget.getName() + ".";
