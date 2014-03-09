@@ -7,6 +7,7 @@ import java.util.EnumMap;
 public class Person implements Serializable, HasName {
 	private Tile location;
 	public String message;
+	public int hunger = 0;
 	public int exhaustion = restedPoint();
 	public int health = 100;
 	public int money = 0;

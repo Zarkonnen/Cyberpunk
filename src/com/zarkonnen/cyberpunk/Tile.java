@@ -12,6 +12,7 @@ public class Tile implements Serializable, HasName {
 	public final int x, y, z;
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	public final ArrayList<HiddenItem> hiddenItems = new ArrayList<HiddenItem>();
+	public final ArrayList<Gadget> gadgets = new ArrayList<Gadget>();
 	public boolean locked = false;
 	public int breakInResistance = 0;
 	public int hackInResistance = 0;
@@ -26,6 +27,18 @@ public class Tile implements Serializable, HasName {
 
 		public HiddenItem(int hidingScore, Item item) {
 			this.hidingScore = hidingScore;
+			this.item = item;
+		}
+	}
+	
+	public static class Gadget implements Serializable {
+		public final int hidingScore;
+		public final Person owner;
+		public final Item item;
+		
+		public Gadget(int hidingScore, Person owner, Item item) {
+			this.hidingScore = hidingScore;
+			this.owner = owner;
 			this.item = item;
 		}
 	}
