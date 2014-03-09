@@ -52,6 +52,7 @@ public final class Factories {
 		ITEM_I_FACTORIES.add(new ImplantImplant.F());
 		ITEM_I_FACTORIES.add(new Eat.F());
 		ITEM_I_FACTORIES.add(new FirstAid.F());
+		ITEM_I_FACTORIES.add(new Disseminate.F());
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {
