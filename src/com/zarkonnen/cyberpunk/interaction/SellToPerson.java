@@ -20,6 +20,9 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 
 	@Override
 	public String disabledReason() {
+		if (actor().reputation < target().minDealRep) {
+			return "They refuse to do business with you.";
+		}
 		return null;
 	}
 

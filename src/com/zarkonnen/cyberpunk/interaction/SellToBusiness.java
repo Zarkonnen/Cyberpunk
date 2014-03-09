@@ -22,6 +22,9 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 
 	@Override
 	public String disabledReason() {
+		if (actor().reputation < target().minDealRep) {
+			return "They refuse to do business with you.";
+		}
 		return null;
 	}
 

@@ -24,6 +24,9 @@ public class Buy extends AbstractInteraction<Person> {
 		if (actor().money < item.type.value) {
 			return "You can't afford it.";
 		}
+		if (actor().reputation < target().minDealRep) {
+			return "They refuse to do business with you.";
+		}
 		return null;
 	}
 
