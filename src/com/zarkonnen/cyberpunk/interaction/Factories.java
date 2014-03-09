@@ -10,6 +10,7 @@ public final class Factories {
 	public static final List<InteractionFactory<Tile, ?>> TILE_I_FACTORIES = new ArrayList<InteractionFactory<Tile, ?>>();
 	static {
 		TILE_I_FACTORIES.add(new Scavenge.F());
+		TILE_I_FACTORIES.add(new HealAtClinic.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();

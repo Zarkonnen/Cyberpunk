@@ -5,6 +5,7 @@ import com.zarkonnen.cyberpunk.Person;
 public interface Interaction<T> {
 	public Person actor();
 	public T target();
+	public String name();
 	public String description();
 	public boolean enabled();
 	public String run();

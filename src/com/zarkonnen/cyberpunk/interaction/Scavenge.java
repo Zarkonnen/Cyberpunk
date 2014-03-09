@@ -14,8 +14,13 @@ public class Scavenge extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String desc() {
+	public String getName() {
 		return "Scavenge";
+	}
+	
+	@Override
+	public String description() {
+		return "Look around for anything of value.";
 	}
 
 	@Override

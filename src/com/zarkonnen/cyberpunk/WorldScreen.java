@@ -80,12 +80,12 @@ public class WorldScreen implements Screen {
 				l.add(new Button() {
 					@Override
 					public String text() {
-						return ti.description();
+						return ti.name();
 					}
 					
 					@Override
 					public String tooltip() {
-						return null;
+						return ti.description();
 					}
 
 					@Override

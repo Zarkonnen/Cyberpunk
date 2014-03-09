@@ -36,16 +36,16 @@ public abstract class AbstractInteraction<T> implements Interaction<T> {
 	}
 
 	@Override
-	public String description() {
+	public String name() {
 		String dr = disabledReason();
 		if (dr != null) {
-			return desc() + "\n" +  dr;
+			return getName() + "\n" +  dr;
 		} else {
-			return desc();
+			return getName();
 		}
 	}
 	
-	public abstract String desc();
+	public abstract String getName();
 	public abstract String disabledReason();
 
 	@Override
