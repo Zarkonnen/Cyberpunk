@@ -19,6 +19,7 @@ public class Person implements Serializable, HasName {
 	
 	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
+	public final ArrayList<Item> implants = new ArrayList<Item>();
 	
 	public Person(Tile location) {
 		this.location = location;
