@@ -51,6 +51,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 	public static class F implements InteractionFactory<Person, SellToBusiness> {
 		@Override
 		public List<SellToBusiness> make(Person actor, Person t) {
+			if (t.unconscious()) { return Collections.emptyList(); }
 			if (t.location() != t.workplace) { return Collections.emptyList(); }
 			ArrayList<SellToBusiness> l = new ArrayList<SellToBusiness>();
 			for (Item item : actor.inventory) {
