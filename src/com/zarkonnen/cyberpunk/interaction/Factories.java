@@ -12,6 +12,8 @@ public final class Factories {
 	static {
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
+		TILE_I_FACTORIES.add(new Gamble.F());
+		TILE_I_FACTORIES.add(new VisitDrugDen.F());
 		TILE_I_FACTORIES.add(new Rest.F());
 		TILE_I_FACTORIES.add(new BuyFromOutsideWorld.F());
 		TILE_I_FACTORIES.add(new SellToOutsideWorld.F());

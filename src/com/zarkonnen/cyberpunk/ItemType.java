@@ -1217,7 +1217,7 @@ public enum ItemType implements Serializable {
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	);
 
-	private ItemType(String name, String description, int value, boolean key, boolean data, boolean implant, boolean blackmailMaterial, int drone, int bug, int decrypt, int medicine, int food, int stun, int exhaustionModifier, double exhaustionGainModifier, double exhaustionLossModifier, int drugDuration, int drugAddictionDuration, int drugAdditionExhaustionBaseModifier, EnumMap<Skill, Integer> skillBonuses) {
+	private ItemType(String name, String description, int value, boolean key, boolean data, boolean implant, boolean blackmailMaterial, int drone, int bug, int decrypt, int medicine, int food, int stun, int exhaustionModifier, double exhaustionGainModifier, double exhaustionLossModifier, int drugDuration, int drugAddictionDuration, int drugAddictionExhaustionBaseModifier, EnumMap<Skill, Integer> skillBonuses) {
 		this.name = name;
 		this.description = description;
 		this.value = value;
@@ -1236,7 +1236,7 @@ public enum ItemType implements Serializable {
 		this.exhaustionLossModifier = exhaustionLossModifier;
 		this.drugDuration = drugDuration;
 		this.drugAddictionDuration = drugAddictionDuration;
-		this.drugAdditionExhaustionBaseModifier = drugAdditionExhaustionBaseModifier;
+		this.drugAddictionExhaustionBaseModifier = drugAddictionExhaustionBaseModifier;
 		this.skillBonuses = new EnumMap<Skill, Integer>(Skill.class);
 		for (Skill sk : Skill.values()) {
 			if (skillBonuses.containsKey(sk)) {
@@ -1265,6 +1265,6 @@ public enum ItemType implements Serializable {
 	public final double exhaustionLossModifier;
 	public final int drugDuration;
 	public final int drugAddictionDuration;
-	public final int drugAdditionExhaustionBaseModifier;
+	public final int drugAddictionExhaustionBaseModifier;
 	public final EnumMap<Skill, Integer> skillBonuses;
 }
