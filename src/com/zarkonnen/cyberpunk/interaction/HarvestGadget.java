@@ -1,7 +1,7 @@
 package com.zarkonnen.cyberpunk.interaction;
 
+import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
-import com.zarkonnen.cyberpunk.Skill;
 import com.zarkonnen.cyberpunk.StringList;
 import com.zarkonnen.cyberpunk.Tile;
 import java.util.Collections;
@@ -35,6 +35,11 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 			Tile.Gadget gadget = it.next();
 			if (gadget.owner == actor()) {
 				actor().inventory.add(gadget.item);
+				for (Item f : gadget.item.found) {
+					found.add(f);
+					actor().inventory.add(f);
+				}
+				gadget.item.found.clear();
 				found.add(gadget.item);
 				it.remove();
 			}

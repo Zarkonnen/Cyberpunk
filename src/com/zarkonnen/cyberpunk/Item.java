@@ -1,11 +1,13 @@
 package com.zarkonnen.cyberpunk;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Item implements Serializable, HasName {
 	public final ItemType type;
 	public Tile keyFor;
 	public Person blackmailFor;
+	public final ArrayList<Item> found = new ArrayList<Item>();
 
 	public Item(ItemType type) {
 		this.type = type;
