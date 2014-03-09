@@ -6,12 +6,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tile implements Serializable {
+public class Tile implements Serializable, HasName {
 	public final WorldMap map;
 	public final TileType type;
 	public final int x, y, z;
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	public final ArrayList<HiddenItem> hiddenItems = new ArrayList<HiddenItem>();
+	public boolean locked = false;
+	public int breakInResistance = 0;
+	public int hackInResistance = 0;
+
+	public boolean atMapEdge() {
+		return map.atMapEdge(x, y);
+	}
 	
 	public static class HiddenItem implements Serializable {
 		public final int hidingScore;
@@ -33,6 +40,11 @@ public class Tile implements Serializable {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	@Override
+	public String getName() {
+		return type.name().toLowerCase();
 	}
 	
 	public List<Person> people() {

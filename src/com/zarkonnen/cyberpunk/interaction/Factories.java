@@ -11,11 +11,14 @@ public final class Factories {
 	static {
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
+		TILE_I_FACTORIES.add(new Rest.F());
+		TILE_I_FACTORIES.add(new BuyFromOutsideWorld.F());
+		TILE_I_FACTORIES.add(new SellToOutsideWorld.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
 	static {
-		
+		PERSON_I_FACTORIES.add(new BlackmailForMoney.F());
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {

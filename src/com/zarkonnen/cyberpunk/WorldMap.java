@@ -60,6 +60,10 @@ public final class WorldMap implements Serializable {
 		return people;
 	}
 	
+	public boolean atMapEdge(int x, int y) {
+		return (x == 0 || x == map[0][0].length - 1) && (y == 0 || y == map[0].length - 1);
+	}
+	
 	public Tile at(int x, int y, int z) {
 		if (z < 0 || z >= map.length || y < 0 || y >= map[0].length || x < 0 || x >= map[0][0].length) {
 			return new Tile(this, TileType.NOTHING, x, y, z);
