@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 
-public class SellToOutsideWorld extends AbstractInteraction<Tile> {
+public class SellToOutsideWorld extends AbstractInteraction<Tile> implements ItemInteraction {
 	public static final EnumSet<ItemType> SELLABLES = EnumSet.of(
 		ItemType.AMATEUR_SEX_VID,
 		ItemType.ART,
@@ -50,6 +50,11 @@ public class SellToOutsideWorld extends AbstractInteraction<Tile> {
 		actor().inventory.remove(item);
 		actor().money += item.type.value;
 		return "Sell buy: " + item.getName();
+	}
+
+	@Override
+	public Item getItem() {
+		return item;
 	}
 	
 	public static class F implements InteractionFactory<Tile, SellToOutsideWorld> {
