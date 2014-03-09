@@ -75,6 +75,14 @@ public final class WorldMap implements Serializable {
 		return at(x, y, z).type == t;
 	}
 	
+	public boolean typeAt(TileType[] ts, int x, int y, int z) {
+		TileType tp = at(x, y, z).type;
+		for (TileType tt : ts) {
+			if (tt == tp) { return true; }
+		}
+		return false;
+	}
+	
 	private TileType r(TileType[] ts) {
 		return ts[r.nextInt(ts.length)];
 	}
@@ -102,8 +110,8 @@ public final class WorldMap implements Serializable {
 		// NS Bridges
 		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			if (typeAt(TileType.WATER, x, y, ground) &&
-				typeAt(TileType.ROOFTOP, x, y - 1, ground) &&
-				typeAt(TileType.ROOFTOP, x, y + 1, ground))
+				typeAt(ROOFTOPS, x, y - 1, ground) &&
+				typeAt(ROOFTOPS, x, y + 1, ground))
 			{
 				map[ground][y][x] = new Tile(this, TileType.BRIDGE_NS, x, y, ground);
 			}
@@ -112,8 +120,8 @@ public final class WorldMap implements Serializable {
 		// EW Bridges
 		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			if (typeAt(TileType.WATER, x, y, ground) &&
-				typeAt(TileType.ROOFTOP, x - 1, y, ground) &&
-				typeAt(TileType.ROOFTOP, x + 1, y, ground))
+				typeAt(ROOFTOPS, x - 1, y, ground) &&
+				typeAt(ROOFTOPS, x + 1, y, ground))
 			{
 				map[ground][y][x] = new Tile(this, TileType.BRIDGE_EW, x, y, ground);
 			}
@@ -137,6 +145,7 @@ public final class WorldMap implements Serializable {
 				}
 				map[z][y][x] = new Tile(this, tt, x, y, z);
 				map[z][y][x].hiddenItems.add(new Tile.HiddenItem(r.nextInt(30), new Item(ItemType.RAM)));
+				map[z][y][x].hiddenItems.add(new Tile.HiddenItem(r.nextInt(10), new Item(ItemType.SNACKS)));
 			}}
 		}
 		

@@ -29,7 +29,7 @@ public class BlackmailForItem extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Get them to hand over the " + item.getName() + ".";
 	}
 

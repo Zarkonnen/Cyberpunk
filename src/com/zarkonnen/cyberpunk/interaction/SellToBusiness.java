@@ -29,7 +29,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Engage in commercial transactions.";
 	}
 

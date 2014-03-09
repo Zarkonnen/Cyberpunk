@@ -20,7 +20,7 @@ public class BreakIn extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Get in using a combination of lockpicking and brute force.";
 	}
 

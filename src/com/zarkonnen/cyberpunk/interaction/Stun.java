@@ -27,7 +27,7 @@ public class Stun extends AbstractInteraction<Person> implements ItemInteraction
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Attempt to knock them out with the " + stunner.getName() + ".";
 	}
 

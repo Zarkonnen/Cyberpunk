@@ -31,7 +31,7 @@ public class RemoveImplant extends AbstractInteraction<Item> implements ItemInte
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Use your grinding skills to just pull that implant out.";
 	}
 

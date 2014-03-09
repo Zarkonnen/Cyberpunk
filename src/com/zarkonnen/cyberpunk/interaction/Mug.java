@@ -25,7 +25,7 @@ public class Mug extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Threaten them bodily harm if they don't hand over all their things.";
 	}
 

@@ -21,7 +21,7 @@ public class Person implements Serializable, HasName {
 	private Tile location;
 	public String message;
 	public int hunger = 0;
-	public int exhaustion = restedPoint();
+	public int exhaustion = BASE_EXHAUSTION;
 	public int reputation = 100;
 	public int minDealRep = 50;
 	public int health = 100;

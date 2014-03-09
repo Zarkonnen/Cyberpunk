@@ -23,7 +23,7 @@ public class Loot extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Rifle through their pockets for any valuables.";
 	}
 

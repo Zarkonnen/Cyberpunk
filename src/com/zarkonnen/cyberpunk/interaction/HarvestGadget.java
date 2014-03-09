@@ -15,7 +15,7 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 
 	@Override
 	public String getName() {
-		return "Harvest gadgets.";
+		return "Harvest Gadgets";
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Collect your drones, and see if your bugs and wiretaps have caught anything juicy.";
 	}
 
@@ -48,11 +48,14 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 	}
 	
 	public static class F implements InteractionFactory<Tile, HarvestGadget> {
-
 		@Override
 		public List<HarvestGadget> make(Person actor, Tile t) {
-			return Collections.singletonList(new HarvestGadget(actor, t));
+			for (Tile.Gadget g : t.gadgets) {
+				if (g.owner == actor) {
+					return Collections.singletonList(new HarvestGadget(actor, t));
+				}
+			}
+			return Collections.emptyList();
 		}
-		
 	}
 }

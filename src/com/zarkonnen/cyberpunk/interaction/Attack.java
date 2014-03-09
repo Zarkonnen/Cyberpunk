@@ -25,7 +25,7 @@ public class Attack extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Inflict bodily harm upon them.";
 	}
 

@@ -30,7 +30,7 @@ public class HealAtClinic extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "This clinic can patch you back up, for a price.";
 	}
 

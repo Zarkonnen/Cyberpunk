@@ -34,7 +34,7 @@ public class HarvestImplants extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Some quick and bloody surgery will remove the valuable implants in this unconscious body.";
 	}
 

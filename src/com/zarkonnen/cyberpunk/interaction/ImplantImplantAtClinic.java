@@ -35,7 +35,7 @@ public class ImplantImplantAtClinic extends AbstractInteraction<Tile> implements
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "The doctors here know what they're doing. You hope.";
 	}
 

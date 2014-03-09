@@ -28,7 +28,7 @@ public class VisitDrugDen extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Put something into you to help you relax.";
 	}
 

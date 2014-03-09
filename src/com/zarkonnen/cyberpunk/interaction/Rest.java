@@ -29,7 +29,7 @@ public class Rest extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Sit down, maybe close your eyes for a moment.";
 	}
 

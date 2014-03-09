@@ -25,7 +25,7 @@ public class Eat extends AbstractInteraction<Item> implements ItemInteraction {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "It may be time for a snack.";
 	}
 

@@ -20,7 +20,7 @@ public class HackIn extends AbstractInteraction<Tile> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Get in by hacking into the door locks.";
 	}
 

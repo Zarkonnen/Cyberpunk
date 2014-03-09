@@ -28,7 +28,7 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Engage in commercial transactions.";
 	}
 

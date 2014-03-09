@@ -25,7 +25,7 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Install wiretaps, hide bugs or set up drones.";
 	}
 

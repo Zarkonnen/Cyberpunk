@@ -33,7 +33,7 @@ public class RemoveImplantAtClinic extends AbstractInteraction<Tile> implements 
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Better let the doctor take it out than yank it out yourself.";
 	}
 

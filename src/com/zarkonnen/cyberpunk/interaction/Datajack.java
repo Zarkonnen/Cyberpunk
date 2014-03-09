@@ -24,7 +24,7 @@ public class Datajack extends AbstractInteraction<Person> {
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Plug into their wearables while they're unconscious and trawl for data.";
 	}
 

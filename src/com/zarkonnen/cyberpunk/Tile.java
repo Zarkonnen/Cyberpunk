@@ -43,8 +43,15 @@ public class Tile implements Serializable, HasName {
 		}
 	}
 	
-	public List<Interaction<Tile>> getInteractions(Person p) {
-		return Factories.make(p, this);
+	public List<Interaction<?>> getInteractions(Person p) {
+		ArrayList<Interaction<?>> l = new ArrayList<Interaction<?>>();
+		l.addAll(Factories.make(p, this));
+		for (Person p2 : people()) {
+			if (p != p2) {
+				l.addAll(Factories.make(p, p2));
+			}
+		}
+		return l;
 	}
 
 	public Tile(WorldMap map, TileType type, int x, int y, int z) {
