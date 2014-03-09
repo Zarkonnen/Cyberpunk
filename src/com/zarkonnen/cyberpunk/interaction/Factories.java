@@ -26,11 +26,21 @@ public final class Factories {
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
 	static {
+		PERSON_I_FACTORIES.add(new VisitBrothel.F());
 		PERSON_I_FACTORIES.add(new BlackmailForMoney.F());
 		PERSON_I_FACTORIES.add(new BlackmailForItem.F());
 		PERSON_I_FACTORIES.add(new Buy.F());
 		PERSON_I_FACTORIES.add(new SellToPerson.F());
 		PERSON_I_FACTORIES.add(new SellToBusiness.F());
+		PERSON_I_FACTORIES.add(new CheckOut.F());
+		PERSON_I_FACTORIES.add(new Gogglehack.F());
+		PERSON_I_FACTORIES.add(new Mug.F());
+		PERSON_I_FACTORIES.add(new Attack.F());
+		PERSON_I_FACTORIES.add(new Stun.F());
+		PERSON_I_FACTORIES.add(new Loot.F());
+		PERSON_I_FACTORIES.add(new Datajack.F());
+		PERSON_I_FACTORIES.add(new HarvestImplants.F());
+		PERSON_I_FACTORIES.add(new Murder.F());
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {

@@ -13,11 +13,15 @@ public abstract class AbstractInteraction<T> implements Interaction<T> {
 		this.target = target;
 	}
 	
-	public void decreaseRep(int decrease) {
-		int pop = actor.location().people().size() - 2;
+	public int decreaseRep(int decrease) {
+		int pop = 0;
+		for (Person p : actor.location().people()) {
+			if (p != actor && !p.unconscious()) { pop++; }
+		}
 		if (pop > 0) {
 			actor.reputation -= decrease * pop;
 		}
+		return pop;
 	}
 	
 	public void exhaust(int amt) {

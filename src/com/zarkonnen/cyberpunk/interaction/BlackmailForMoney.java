@@ -48,6 +48,7 @@ public class BlackmailForMoney extends AbstractInteraction<Person> {
 	public static class F implements InteractionFactory<Person, BlackmailForMoney> {
 		@Override
 		public List<BlackmailForMoney> make(Person actor, Person t) {
+			if (t.unconscious()) { return Collections.emptyList(); }
 			for (Item it : actor.inventory) {
 				if (it.blackmailFor == t) {
 					return Collections.singletonList(new BlackmailForMoney(actor, t));

@@ -3,6 +3,7 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SellToPerson extends AbstractInteraction<Person> implements ItemInteraction {
@@ -50,6 +51,7 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 	public static class F implements InteractionFactory<Person, SellToPerson> {
 		@Override
 		public List<SellToPerson> make(Person actor, Person t) {
+			if (t.unconscious()) { return Collections.emptyList(); }
 			ArrayList<SellToPerson> l = new ArrayList<SellToPerson>();
 			for (Item item : actor.inventory) {
 				if (t.willBuyForSelf(item)) {

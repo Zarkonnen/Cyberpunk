@@ -15,17 +15,25 @@ public class Person implements Serializable, HasName {
 	public int money = 0;
 	public Tile home;
 	public Tile workplace;
+	public int stunned;
+	public boolean dead = false;
 	public boolean isPlayer;
 	
 	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	public final ArrayList<Item> implants = new ArrayList<Item>();
+	public final ArrayList<Item> drugsTaken = new ArrayList<Item>();
+	public final ArrayList<Item> drugsLingering = new ArrayList<Item>();
 	
 	public Person(Tile location) {
 		this.location = location;
 		for (Skill sk : Skill.values()) {
 			skills.put(sk, 0);
 		}
+	}
+	
+	public boolean unconscious() {
+		return health <= 0 || stunned > 0 || exhaustion >= 100;
 	}
 	
 	// qqDPS
@@ -44,6 +52,10 @@ public class Person implements Serializable, HasName {
 	@Override
 	public String getName() {
 		return "some person"; // qqDPS
+	}
+	
+	public String description() {
+		return "A nondescript humanoid blob.";
 	}
 	
 	public int getSkill(Skill sk) {
@@ -75,5 +87,12 @@ public class Person implements Serializable, HasName {
 	
 	public void moveTo(Tile location) {
 		this.location = location;
+	}
+
+	public boolean hasItem(ItemType itemType) {
+		for (Item item : inventory) {
+			if (item.type == itemType) { return true; }
+		}
+		return false;
 	}
 }
