@@ -4,25 +4,42 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 
-public class Person implements Serializable {
+public class Person implements Serializable, HasName {
 	private Tile location;
 	public String message;
+	public int hunger = 0;
+	public int exhaustion = restedPoint();
 	public int health = 100;
 	public int money = 0;
-	public int hunger = 0;
+	public Tile home;
+	public boolean isPlayer;
 	
-	public final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
+	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	
-	public boolean test(Skill sk, int vs) {
-		return location.map.test(100 + skills.get(sk) - vs);
-	}
-
 	public Person(Tile location) {
 		this.location = location;
 		for (Skill sk : Skill.values()) {
 			skills.put(sk, 0);
 		}
+	}
+	
+	@Override
+	public String getName() {
+		return "some person"; // qqDPS
+	}
+	
+	public int getSkill(Skill sk) {
+		return skills.get(sk);
+	}
+	
+	public boolean test(Skill sk, int vs) {
+		return location.map.test(100 + getSkill(sk) - vs);
+	}
+	
+	// qqDPS modify re: drugs
+	public int restedPoint() {
+		return 20;
 	}
 	
     public Tile location() {

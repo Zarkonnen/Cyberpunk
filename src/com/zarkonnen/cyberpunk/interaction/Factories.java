@@ -11,6 +11,9 @@ public final class Factories {
 	static {
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
+		TILE_I_FACTORIES.add(new Rest.F());
+		TILE_I_FACTORIES.add(new BuyFromOutsideWorld.F());
+		TILE_I_FACTORIES.add(new SellToOutsideWorld.F());
 		TILE_I_FACTORIES.add(new BuyFoodAtRestaurantOrBar.F());
 		TILE_I_FACTORIES.add(new SearchForGadgets.F());
 		TILE_I_FACTORIES.add(new HarvestBug.F());
@@ -18,7 +21,7 @@ public final class Factories {
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
 	static {
-		
+		PERSON_I_FACTORIES.add(new BlackmailForMoney.F());
 	}
 	
 	public static List<Interaction<Tile>> make(Person actor, Tile target) {
