@@ -4,7 +4,10 @@ import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
 import com.zarkonnen.cyberpunk.StringList;
 import com.zarkonnen.cyberpunk.Tile;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class HarvestBug extends AbstractInteraction<Tile> {
 	public HarvestBug(Person actor, Tile target) {
@@ -40,4 +43,12 @@ public class HarvestBug extends AbstractInteraction<Tile> {
 		return found.isEmpty() ? "There are no bugs here." : "You found " + found + ".";
 	}
 	
+	public static class F implements InteractionFactory<Tile, HarvestBug> {
+
+		@Override
+		public List<HarvestBug> make(Person actor, Tile t) {
+			return Collections.singletonList(new HarvestBug(actor, t));
+		}
+		
+	}
 }
