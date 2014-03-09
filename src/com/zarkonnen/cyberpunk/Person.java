@@ -3,6 +3,7 @@ package com.zarkonnen.cyberpunk;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.Iterator;
 
 public class Person implements Serializable, HasName {
 	public static final int BASE_EXHAUSTION = 20;
@@ -30,12 +31,52 @@ public class Person implements Serializable, HasName {
 	public int stunned;
 	public boolean dead = false;
 	public boolean isPlayer;
+	public int bigTickCounter = 0;
 	
 	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	public final ArrayList<Item> implants = new ArrayList<Item>();
-	public final ArrayList<Item> drugsTaken = new ArrayList<Item>();
-	public final ArrayList<Item> drugsLingering = new ArrayList<Item>();
+	public final ArrayList<Drug> drugsTaken = new ArrayList<Drug>();
+	public final ArrayList<Drug> drugsLingering = new ArrayList<Drug>();
+	
+	public static class Drug {
+		public final Item drug;
+		public int counter;
+
+		public Drug(Item drug) {
+			this.drug = drug;
+		}
+	}
+	
+	public boolean bodyTick() {
+		for (Iterator<Drug> it = drugsTaken.iterator(); it.hasNext();) {
+			Drug d = it.next();
+			if (d.counter++ >= d.drug.type.drugDuration) {
+				drugsLingering.add(d);
+				d.counter = 0;
+				it.remove();
+			}
+		}
+		for (Iterator<Drug> it = drugsLingering.iterator(); it.hasNext();) {
+			Drug d = it.next();
+			if (d.counter++ >= d.drug.type.drugAddictionDuration) {
+				it.remove();
+			}
+		}
+		if (bigTickCounter++ == 20) {
+			bigBodyTick();
+			bigTickCounter = 0;
+		}
+		if (unconscious()) {
+			exhaustion--;
+		}
+		return dead;
+	}
+	
+	private void bigBodyTick() {
+		hunger += 3;
+		health = Math.min(100, health + 1);
+	}
 	
 	public Person(Tile location) {
 		this.location = location;
@@ -133,16 +174,16 @@ public class Person implements Serializable, HasName {
 	
 	public int restedPoint() {
 		int pt = BASE_EXHAUSTION;
-		for (Item drug : drugsLingering) {
-			pt += drug.type.drugAddictionExhaustionBaseModifier;
+		for (Drug drug : drugsLingering) {
+			pt += drug.drug.type.drugAddictionExhaustionBaseModifier;
 		}
 		return pt;
 	}
 	
 	public int getVisibleExhaustion() {
 		int ex = exhaustion;
-		for (Item drug : drugsTaken) {
-			ex += drug.type.exhaustionModifier;
+		for (Drug drug : drugsTaken) {
+			ex += drug.drug.type.exhaustionModifier;
 		}
 		return Math.max(0, ex);
 	}
@@ -157,16 +198,16 @@ public class Person implements Serializable, HasName {
 	
 	public double exhaustionLossMultiplier() {
 		double mod = 0.0;
-		for (Item drug : drugsTaken) {
-			mod += drug.type.exhaustionLossModifier;
+		for (Drug drug : drugsTaken) {
+			mod += drug.drug.type.exhaustionLossModifier;
 		}
 		return mod + 1.0;
 	}
 	
 	public double exhaustionGainMultiplier() {
 		double mod = 0.0;
-		for (Item drug : drugsTaken) {
-			mod += drug.type.exhaustionGainModifier;
+		for (Drug drug : drugsTaken) {
+			mod += drug.drug.type.exhaustionGainModifier;
 		}
 		return mod + 1.0;
 	}

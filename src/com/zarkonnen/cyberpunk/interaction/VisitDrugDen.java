@@ -3,6 +3,7 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
+import com.zarkonnen.cyberpunk.Person.Drug;
 import com.zarkonnen.cyberpunk.Tile;
 import com.zarkonnen.cyberpunk.TileType;
 
@@ -34,7 +35,7 @@ public class VisitDrugDen extends AbstractInteraction<Tile> {
 	@Override
 	public String run() {
 		actor().money -= COST;
-		actor().drugsTaken.add(new Item(ItemType.DOWNERS));
+		actor().drugsTaken.add(new Drug(new Item(ItemType.DOWNERS)));
 		return "The drugs are smooth and relaxing, as always.";
 	}
 	
