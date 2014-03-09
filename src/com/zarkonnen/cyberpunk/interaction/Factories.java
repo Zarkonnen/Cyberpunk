@@ -16,7 +16,8 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new SellToOutsideWorld.F());
 		TILE_I_FACTORIES.add(new BuyFoodAtRestaurantOrBar.F());
 		TILE_I_FACTORIES.add(new SearchForGadgets.F());
-		TILE_I_FACTORIES.add(new HarvestBug.F());
+		TILE_I_FACTORIES.add(new HarvestGadget.F());
+		TILE_I_FACTORIES.add(new DeployGadget.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
