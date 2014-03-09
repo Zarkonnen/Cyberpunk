@@ -30,7 +30,7 @@ public class ImplantImplant extends AbstractInteraction<Item> implements ItemInt
 	}
 
 	@Override
-	public String description() {
+	public String getDescription() {
 		return "Insert that implant and hook it up yourself.";
 	}
 
