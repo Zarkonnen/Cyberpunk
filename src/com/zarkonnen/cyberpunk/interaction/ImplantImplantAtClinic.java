@@ -3,6 +3,7 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Tile;
+import com.zarkonnen.cyberpunk.TileType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +56,11 @@ public class ImplantImplantAtClinic extends AbstractInteraction<Tile> implements
 		@Override
 		public List<ImplantImplantAtClinic> make(Person actor, Tile t) {
 			ArrayList<ImplantImplantAtClinic> l = new ArrayList<ImplantImplantAtClinic>();
-			for (Item it : actor.inventory) {
-				if (it.type.implant) {
-					l.add(new ImplantImplantAtClinic(actor, t, it));
+			if (t.type == TileType.CLINIC) {
+				for (Item it : actor.inventory) {
+					if (it.type.implant) {
+						l.add(new ImplantImplantAtClinic(actor, t, it));
+					}
 				}
 			}
 			return l;
