@@ -34,6 +34,7 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new Unlock.F());
 		TILE_I_FACTORIES.add(new BuySupply.F());
 		TILE_I_FACTORIES.add(new Wander.F());
+		TILE_I_FACTORIES.add(new MoveToMapEdge.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();

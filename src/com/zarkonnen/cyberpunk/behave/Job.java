@@ -4,16 +4,20 @@ import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.TileType;
 import com.zarkonnen.cyberpunk.interaction.Buy;
+import com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.BuySupply;
 import com.zarkonnen.cyberpunk.interaction.DoWork;
 import com.zarkonnen.cyberpunk.interaction.Eat;
 import com.zarkonnen.cyberpunk.interaction.HealAtClinic;
 import com.zarkonnen.cyberpunk.interaction.MoveToHome;
+import com.zarkonnen.cyberpunk.interaction.MoveToMapEdge;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Rest;
-import com.zarkonnen.cyberpunk.interaction.Wander;
+import com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld;
+import com.zarkonnen.cyberpunk.interaction.SellToPerson;
 import com.zarkonnen.cyberpunk.interaction.Unlock;
+import com.zarkonnen.cyberpunk.interaction.Wander;
 import java.util.EnumSet;
 import java.util.concurrent.locks.Lock;
 
@@ -45,7 +49,7 @@ public enum Job {
 			p.behave(Wander.class).between(11, 22);
 		}
 	},
-	FOOD_MERCHANT("food merchant", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS, ItemType.VEGETABLES), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS)) {
+	FOOD_MERCHANT("food merchant", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS, ItemType.VEGETABLES), EnumSet.of(ItemType.VEGETABLES, ItemType.SNACKS)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
@@ -56,6 +60,41 @@ public enum Job {
 			p.behave(MoveToWork.class).between(4, 6);
 			p.behave(BuySupply.class).item(ItemType.VEGETABLES);
 			p.behave(MoveToType.class).moveTo(TileType.MARKET).between(6, 19);
+		}
+	},
+	TRADER("trader", SellToOutsideWorld.SELLABLES, BuyFromOutsideWorld.BUYABLES, EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(20, 24);
+			p.behave(MoveToHome.class).between(0, 3);
+			p.behave(Rest.class).between(20, 24);
+			p.behave(Rest.class).between(0, 3);
+			p.behave(MoveToMapEdge.class).between(3, 10);
+			p.behave(SellToOutsideWorld.class);
+			p.behave(BuyFromOutsideWorld.class).item(ItemType.CHEMICALS).between(8, 9);
+			p.behave(BuyFromOutsideWorld.class).item(ItemType.MACHINE_PARTS).between(9, 10);
+			p.behave(BuyFromOutsideWorld.class);
+			p.behave(MoveToType.class).moveTo(TileType.DOCK).between(12, 19);
+		}
+	},
+	HARDWARE_MERCHANT("hardware merchant", ItemType.HARDWARE, ItemType.HARDWARE, EnumSet.of(ItemType.MACHINE_PARTS)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(20, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(Rest.class).between(20, 24);
+			p.behave(Rest.class).between(0, 7);
+			p.behave(Lock.class).between(15, 16);
+			p.behave(MoveToWork.class).between(7, 15);
+			p.behave(Unlock.class).between(9, 15);
+			p.behave(DoWork.class).between(7, 16);
+			p.behave(MoveToType.class).moveTo(TileType.DOCK).between(16, 19);
+			for (ItemType h : ItemType.HARDWARE) {
+				p.behave(Buy.class).item(h);
+				p.behave(SellToPerson.class).item(h);
+			}
 		}
 	},
 	GRINDER("grinder", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.GRINDER_TOOLS)) {

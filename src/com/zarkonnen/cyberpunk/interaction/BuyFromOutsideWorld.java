@@ -10,6 +10,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements ItemInteraction {
+	public static final double MULT = 0.7;
+	
 	public static final EnumSet<ItemType> BUYABLES = EnumSet.of(
 		ItemType.ANGLE_GRINDER,
 		ItemType.ANTIVIRUS_SOFTWARE,
@@ -53,7 +55,7 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements It
 
 	@Override
 	public String disabledReason() {
-		if (actor().money < good.type.value) {
+		if (actor().money < good.type.value * MULT) {
 			return "You can't afford it.";
 		}
 		return null;
@@ -68,7 +70,7 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements It
 	public String run() {
 		exhaust(4);
 		actor().inventory.add(good);
-		actor().money -= good.type.value;
+		actor().money -= good.type.value * MULT;
 		return "You buy: " + good.getName();
 	}
 

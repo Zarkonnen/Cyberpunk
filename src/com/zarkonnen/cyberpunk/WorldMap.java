@@ -175,6 +175,19 @@ public final class WorldMap implements Serializable {
 		Person pr = new Person(at(towerX + 1, towerY + 1, zS - 1));
 		Job.PROSTITUTE.install(pr);
 		people.add(pr);
+		
+		
+		// DO THIS LAST
+		calcPathsTowardsEdge();
+	}
+	
+	private void calcPathsTowardsEdge() {
+		LinkedList<Tile> q = new LinkedList<Tile>();
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			map[z][y][x].pathDist = atMapEdge(x, y) && z == map.length - 1 ? 0 : Integer.MAX_VALUE;
+			map[z][y][x].bestPath = null;
+		}}}
+		floodFillAndSetTowards(q, null, null);
 	}
 
 	public void calcPathsFor(Tile t) {
@@ -232,6 +245,11 @@ public final class WorldMap implements Serializable {
 		if (forTile != null) {
 			for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
 				map[z][y][x].towardsTile.put(forTile, map[z][y][x].bestPath);
+			}}}
+		}
+		if (forType == null && forTile == null) {
+			for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+				map[z][y][x].towardsEdge = map[z][y][x].bestPath;
 			}}}
 		}
 	}

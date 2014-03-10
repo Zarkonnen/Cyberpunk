@@ -10,6 +10,8 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class SellToOutsideWorld extends AbstractInteraction<Tile> implements ItemInteraction {
+	public static final double MULT = 1.1;
+	
 	public static final EnumSet<ItemType> SELLABLES = EnumSet.of(
 		ItemType.AMATEUR_SEX_VID,
 		ItemType.ART,
@@ -49,7 +51,7 @@ public class SellToOutsideWorld extends AbstractInteraction<Tile> implements Ite
 	public String run() {
 		exhaust(3);
 		actor().inventory.remove(item);
-		actor().money += item.type.value;
+		actor().money += item.type.value * MULT;
 		return "Sell buy: " + item.getName();
 	}
 
