@@ -37,8 +37,10 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 			if (gadget.owner == actor()) {
 				actor().inventory.add(gadget.item);
 				for (Item f : gadget.item.found) {
-					found.add(f);
-					actor().inventory.add(f);
+					if (!actor().inventory.contains(f)) {
+						found.add(f);
+						actor().inventory.add(f);
+					}
 				}
 				gadget.item.found.clear();
 				found.add(gadget.item);
