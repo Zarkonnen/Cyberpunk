@@ -126,6 +126,15 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
 		}
+	},
+	VAGRANT("vagrant", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Wander.class).between(10, 20);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
 	};
 	
 	public final String jobName;
