@@ -13,6 +13,8 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new MoveToHome.F());
 		TILE_I_FACTORIES.add(new MoveToWork.F());
 		TILE_I_FACTORIES.add(new MoveToType.F());
+		TILE_I_FACTORIES.add(new BreakIn.F());
+		TILE_I_FACTORIES.add(new HackIn.F());
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
 		TILE_I_FACTORIES.add(new Gamble.F());

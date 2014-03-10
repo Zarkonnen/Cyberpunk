@@ -19,6 +19,7 @@ public class BuyFoodAtRestaurantOrBar extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
+		if (!target().inBusiness()) { return "The place is closed."; }
 		if (actor().hunger <= 0) {
 			return "You're not hungry.";
 		}

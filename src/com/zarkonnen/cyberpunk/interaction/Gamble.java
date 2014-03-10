@@ -20,6 +20,7 @@ public class Gamble extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
+		if (!target().inBusiness()) { return "The gambling den is closed."; }
 		if (actor().money < WAGER) {
 			return "You can't afford the wager.";
 		}

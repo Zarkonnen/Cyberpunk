@@ -62,6 +62,23 @@ public class Tile implements Serializable, HasName {
 	public boolean atMapEdge() {
 		return map.atMapEdge(x, y);
 	}
+
+	public boolean lockedFor(Person actor) {
+		if (!locked) { return false; }
+		for (Item item : actor.inventory) {
+			if (item.keyFor == this) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean inBusiness() {
+		for (Person p : people()) {
+			if (p.workplace == this) { return true; }
+		}
+		return false;
+	}
 	
 	public static class HiddenItem implements Serializable {
 		public final int hidingScore;

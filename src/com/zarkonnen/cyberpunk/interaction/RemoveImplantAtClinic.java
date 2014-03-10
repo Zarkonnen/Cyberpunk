@@ -5,6 +5,7 @@ import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Tile;
 import com.zarkonnen.cyberpunk.TileType;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RemoveImplantAtClinic extends AbstractInteraction<Tile> implements ItemInteraction {
@@ -54,6 +55,7 @@ public class RemoveImplantAtClinic extends AbstractInteraction<Tile> implements 
 	public static class F implements InteractionFactory<Tile, RemoveImplantAtClinic> {
 		@Override
 		public List<RemoveImplantAtClinic> make(Person actor, Tile t) {
+			if (!t.inBusiness()) { return Collections.emptyList(); }
 			ArrayList<RemoveImplantAtClinic> l = new ArrayList<RemoveImplantAtClinic>();
 			if (t.type == TileType.CLINIC) {
 				for (Item it : actor.implants) {

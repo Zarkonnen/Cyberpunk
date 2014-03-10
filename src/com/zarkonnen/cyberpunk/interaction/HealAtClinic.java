@@ -20,6 +20,7 @@ public class HealAtClinic extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
+		if (!target().inBusiness()) { return "The clinic is closed."; }
 		if (actor().health >= 100) {
 			return "You don't need a doctor.";
 		}

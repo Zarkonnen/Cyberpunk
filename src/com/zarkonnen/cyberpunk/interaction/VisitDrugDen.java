@@ -21,6 +21,7 @@ public class VisitDrugDen extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
+		if (!target().inBusiness()) { return "The place is closed."; }
 		if (actor().money < COST) {
 			return "You can't afford it.";
 		}

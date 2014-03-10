@@ -25,6 +25,7 @@ public class Datatrawl extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
+		if (locked()) { return "The door is locked."; }
 		return null;
 	}
 

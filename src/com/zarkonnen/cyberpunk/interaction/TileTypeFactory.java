@@ -18,7 +18,12 @@ public abstract class TileTypeFactory implements InteractionFactory<Tile, Intera
 	@Override
 	public List<Interaction<Tile>> make(Person actor, Tile t) {
 		if (t.type == type) {
-			return Collections.singletonList(get(actor, t));
+			Interaction<Tile> i = get(actor, t);
+			if (i == null) {
+				return Collections.emptyList();
+			} else {
+				return Collections.singletonList(i);
+			}
 		} else {
 			return Collections.emptyList();
 		}

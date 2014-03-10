@@ -3,6 +3,8 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
 import com.zarkonnen.cyberpunk.Tile;
+import java.util.Collections;
+import java.util.List;
 
 public class BreakIn extends AbstractInteraction<Tile> {
 	public BreakIn(Person actor, Tile target) {
@@ -32,6 +34,17 @@ public class BreakIn extends AbstractInteraction<Tile> {
 			return "You manage to get in.";
 		} else {
 			return "This place is locked down altogether too well.";
+		}
+	}
+	
+	public static class F implements InteractionFactory<Tile, BreakIn> {
+		@Override
+		public List<BreakIn> make(Person actor, Tile t) {
+			if (t.lockedFor(actor)) {
+				return Collections.singletonList(new BreakIn(actor, t));
+			} else {
+				return Collections.emptyList();
+			}
 		}
 	}
 }

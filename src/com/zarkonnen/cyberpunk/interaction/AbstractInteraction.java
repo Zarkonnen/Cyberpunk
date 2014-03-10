@@ -1,5 +1,6 @@
 package com.zarkonnen.cyberpunk.interaction;
 
+import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
 import java.util.Random;
@@ -22,6 +23,10 @@ public abstract class AbstractInteraction<T> implements Interaction<T> {
 			actor.reputation -= decrease * pop;
 		}
 		return pop;
+	}
+	
+	public boolean locked() {
+		return actor.location().lockedFor(actor);
 	}
 	
 	public void exhaust(int amt) {
