@@ -3,6 +3,8 @@ package com.zarkonnen.cyberpunk;
 import com.zarkonnen.cyberpunk.interaction.Attack;
 import com.zarkonnen.cyberpunk.interaction.BreakIn;
 import com.zarkonnen.cyberpunk.interaction.Datajack;
+import com.zarkonnen.cyberpunk.interaction.Datatrawl;
+import com.zarkonnen.cyberpunk.interaction.DoWork;
 import com.zarkonnen.cyberpunk.interaction.Factories;
 import com.zarkonnen.cyberpunk.interaction.Gamble;
 import com.zarkonnen.cyberpunk.interaction.HackIn;
@@ -119,6 +121,15 @@ public class Tile implements Serializable, HasName {
 		BLACKMAILABLES.addAll(Arrays.asList(cls));
 	};
 	
+	public static final HashSet<Class> WIRETAP_BLACKMAILABLES = new HashSet<Class>();
+	static {
+		Class[] cls = {
+			Datatrawl.class,
+			HackIn.class,
+		};
+		WIRETAP_BLACKMAILABLES.addAll(Arrays.asList(cls));
+	};
+	
 	public void observe(Interaction i) {
 		if (BLACKMAILABLES.contains(i.getClass())) {
 			Item material = new Item(ItemType.BLACKMAIL_MATERIAL);
@@ -126,8 +137,42 @@ public class Tile implements Serializable, HasName {
 			material.recordOf = i;
 			
 			for (Gadget g : gadgets) {
-				if (map.r.nextInt(100) < g.item.type.bug) {
+				if (g.item.type == ItemType.BUG && map.r.nextInt(100) < g.item.type.bug) {
 					g.item.found.add(material);
+				}
+			}
+		}
+		
+		if (WIRETAP_BLACKMAILABLES.contains(i.getClass())) {
+			Item material = new Item(ItemType.BLACKMAIL_MATERIAL);
+			material.blackmailFor = i.actor();
+			material.recordOf = i;
+			
+			for (Gadget g : gadgets) {
+				if ((g.item.type == ItemType.WIRETAP || g.item.type == ItemType.REMOTE_WIRETAP) && map.r.nextInt(100) < g.item.type.bug) {
+					g.item.found.add(material);
+				}
+			}
+		}
+		
+		if (i instanceof DoWork) {
+			for (Item it : i.actor().inventory) {
+				if (it.type.data) {
+					for (Gadget g : gadgets) {
+						if (!g.item.found.contains(it) && (g.item.type == ItemType.WIRETAP || g.item.type == ItemType.REMOTE_WIRETAP) && map.r.nextInt(100) < g.item.type.bug) {
+							g.item.found.add(it);
+						}
+					}
+				}
+			}
+			for (HiddenItem hit : i.actor().location().hiddenItems) {
+				Item it = hit.item;
+				if (it.type.data) {
+					for (Gadget g : gadgets) {
+						if (!g.item.found.contains(it) && (g.item.type == ItemType.WIRETAP || g.item.type == ItemType.REMOTE_WIRETAP) && g.item.type.bug > hit.hidingScore) {
+							g.item.found.add(it);
+						}
+					}
 				}
 			}
 		}
