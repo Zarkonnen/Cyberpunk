@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.EnumMap;
 import static com.zarkonnen.catengine.util.Utils.*;
 import static com.zarkonnen.cyberpunk.Skill.*;
+import java.util.EnumSet;
 
 public enum ItemType implements Serializable {
 	RAM(
@@ -1289,4 +1290,6 @@ public enum ItemType implements Serializable {
 	public final int drugAddictionDuration;
 	public final int drugAddictionExhaustionBaseModifier;
 	public final EnumMap<Skill, Integer> skillBonuses;
+	
+	public static final EnumSet<ItemType> HARDWARE = EnumSet.of(ItemType.ANGLE_GRINDER, ItemType.AR_GOGGLES, ItemType.ASSAULT_RIFLE, ItemType.CPUS, ItemType.CRYPTOGRAPHIC_COPROCESSOR, ItemType.FANCY_AR_GOGGLES, ItemType.GUARD_DRONE, ItemType.LOCKPICKS, ItemType.MACHINE_PARTS, ItemType.NANO_PICKS, ItemType.OPTICAL_CAMO, ItemType.PISTOL, ItemType.PISTOL, ItemType.RAM, ItemType.REMOTE_WIRETAP, ItemType.SWITCHBLADE, ItemType.TRANQ_BUG, ItemType.TRANQ_DART, ItemType.WIRETAP);
 }

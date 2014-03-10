@@ -44,6 +44,7 @@ public class Tile implements Serializable, HasName {
 	// Pathing
 	HashMap<Tile, Tile> towardsTile = new HashMap<Tile, Tile>();
 	EnumMap<TileType, Tile> towardsTileType = new EnumMap<TileType, Tile>(TileType.class);
+	Tile towardsEdge;
 	
 	public Tile towardsTile(Tile t) {
 		if (!towardsTile.containsKey(t)) {
@@ -57,6 +58,10 @@ public class Tile implements Serializable, HasName {
 			map.calcPathsFor(tt);
 		}
 		return towardsTileType.get(tt);
+	}
+	
+	public Tile towardsEdge() {
+		return towardsEdge;
 	}
 
 	public boolean atMapEdge() {
