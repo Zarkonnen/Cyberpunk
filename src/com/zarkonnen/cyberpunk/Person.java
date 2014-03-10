@@ -57,8 +57,7 @@ public class Person implements Serializable, HasName {
 		}
 	}
 	
-	public void tick() {
-		bodyTick();
+	public boolean tick() {
 		if (!isPlayer) {
 			ArrayList<Interaction> l = new ArrayList<Interaction>();
 			l.addAll(location.getInteractions(this));
@@ -68,12 +67,14 @@ public class Person implements Serializable, HasName {
 			lp: for (InteractionBehavior b : behaviors) {
 				for (Interaction i : l) {
 					if (b.enabled(i)) {
+						System.out.println(getName() + ": " + i.name());
 						i.run();
 						break lp;
 					}
 				}
 			}
 		}
+		return bodyTick();
 	}
 	
 	public InteractionBehavior behave(Class type) {

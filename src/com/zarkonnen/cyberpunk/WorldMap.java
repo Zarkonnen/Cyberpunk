@@ -1,7 +1,9 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.behave.Job;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -65,8 +67,10 @@ public final class WorldMap implements Serializable {
 	
 	public void tick() {
 		time++;
-		for (Person p : people) {
-			p.tick();
+		for (Iterator<Person> it = people.iterator(); it.hasNext();) {
+			if (it.next().tick()) {
+				it.remove();
+			}
 		}
 	}
 	
@@ -168,6 +172,9 @@ public final class WorldMap implements Serializable {
 		}
 		
 		people.add(new Person(at(towerX + 2, towerY + 2, zS - 1)));
+		Person pr = new Person(at(towerX + 1, towerY + 1, zS - 1));
+		Job.PROSTITUTE.install(pr);
+		people.add(pr);
 	}
 
 	public void calcPathsFor(Tile t) {
