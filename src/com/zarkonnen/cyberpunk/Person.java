@@ -33,6 +33,7 @@ public class Person implements Serializable, HasName {
 	public int money = 0;
 	public Tile home;
 	public Tile workplace;
+	public Tile supplier;
 	public int stunned;
 	public boolean dead = false;
 	public boolean isPlayer;

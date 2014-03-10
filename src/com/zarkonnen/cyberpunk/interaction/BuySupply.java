@@ -19,7 +19,7 @@ public class BuySupply extends AbstractInteraction<Tile> implements ItemInteract
 
 	@Override
 	public String getName() {
-		return "Buy cheap " + item.item.getName();
+		return "Buy cheap " + item.item.getName() + " for $" + (int) (item.item.type.value * COST_MULT);
 	}
 
 	@Override
@@ -37,7 +37,10 @@ public class BuySupply extends AbstractInteraction<Tile> implements ItemInteract
 
 	@Override
 	public String run() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		actor().inventory.add(item.item);
+		actor().money -= item.item.type.value * COST_MULT;
+		target().hiddenItems.remove(item);
+		return "You buy a cheap " + item.item.getName() + ".";
 	}
 
 	@Override
@@ -48,7 +51,7 @@ public class BuySupply extends AbstractInteraction<Tile> implements ItemInteract
 	public static final class F implements InteractionFactory<Tile, BuySupply> {
 		@Override
 		public List<BuySupply> make(Person actor, Tile t) {
-			if (actor.workplace == t) {
+			if (actor.workplace == t || actor.supplier == t) {
 				ArrayList<BuySupply> l = new ArrayList<BuySupply>();
 				for (Tile.HiddenItem item : t.hiddenItems) {
 					if (!item.item.type.data) {

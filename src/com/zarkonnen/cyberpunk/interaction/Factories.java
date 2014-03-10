@@ -12,7 +12,10 @@ public final class Factories {
 	static {
 		TILE_I_FACTORIES.add(new MoveToHome.F());
 		TILE_I_FACTORIES.add(new MoveToWork.F());
+		TILE_I_FACTORIES.add(new MoveToSupplier.F());
 		TILE_I_FACTORIES.add(new MoveToType.F());
+		TILE_I_FACTORIES.add(new MoveToMapEdge.F());
+		TILE_I_FACTORIES.add(new Wander.F());
 		TILE_I_FACTORIES.add(new BreakIn.F());
 		TILE_I_FACTORIES.add(new HackIn.F());
 		TILE_I_FACTORIES.add(new Scavenge.F());
@@ -33,8 +36,6 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new Lock.F());
 		TILE_I_FACTORIES.add(new Unlock.F());
 		TILE_I_FACTORIES.add(new BuySupply.F());
-		TILE_I_FACTORIES.add(new Wander.F());
-		TILE_I_FACTORIES.add(new MoveToMapEdge.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
