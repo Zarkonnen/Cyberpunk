@@ -11,9 +11,10 @@ import com.zarkonnen.cyberpunk.interaction.MoveToHome;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Rest;
+import java.util.EnumSet;
 
 public enum Job {
-	PROSTITUTE() {
+	PROSTITUTE("prostitute", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
@@ -23,6 +24,16 @@ public enum Job {
 			p.behave(Rest.class).between(0, 9);
 		}
 	};
+	
+	public final String jobName;
+	public final EnumSet<ItemType> buys;
+	public final EnumSet<ItemType> sells;
+
+	private Job(String jobName, EnumSet<ItemType> buys, EnumSet<ItemType> sells) {
+		this.jobName = jobName;
+		this.buys = buys;
+		this.sells = sells;
+	}
 	
 	public abstract void install(Person p);
 	
