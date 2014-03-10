@@ -125,7 +125,11 @@ public class Tile implements Serializable, HasName {
 			material.blackmailFor = i.actor();
 			material.recordOf = i;
 			
-			
+			for (Gadget g : gadgets) {
+				if (map.r.nextInt(100) < g.item.type.bug) {
+					g.item.found.add(material);
+				}
+			}
 		}
 	}
 	
