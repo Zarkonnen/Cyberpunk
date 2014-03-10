@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class Person implements Serializable, HasName {
 	public static final int BASE_EXHAUSTION = 20;
@@ -23,7 +24,7 @@ public class Person implements Serializable, HasName {
 	
 	public ArrayList<InteractionBehavior> behaviors = new ArrayList<InteractionBehavior>();
 	private Tile location;
-	public String message;
+	public LinkedList<String> messages = new LinkedList<String>();
 	public int hunger = 0;
 	public int exhaustion = BASE_EXHAUSTION;
 	public int reputation = 100;
@@ -259,6 +260,9 @@ public class Person implements Serializable, HasName {
 	public void moveBy(Direction d) {
 		if (location.passable(d)) {
 			moveTo(location.in(d));
+			if (d == Direction.UP) {
+				addExhaustion(1);
+			}
 		}
 	}
 	

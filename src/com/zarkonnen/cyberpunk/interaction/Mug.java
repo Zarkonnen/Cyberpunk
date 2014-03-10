@@ -43,11 +43,11 @@ public class Mug extends AbstractInteraction<Person> {
 			}
 			actor().money += target().money;
 			target().money = 0;
-			target().message = "You are mugged by " + actor().getName() + ".";
+			target().messages.add("You are mugged by " + actor().getName() + ".");
 			return "You corner your victim and quickly relieve them of their valuables.";
 		} else {
 			decreaseRep(5);
-			target().message = actor().getName() + " tries to mug you, but you walk away, laughing off their threats.";
+			target().messages.add(actor().getName() + " tries to mug you, but you walk away, laughing off their threats.");
 			return "They laugh at your feeble threats and walk on.";
 		}
 	}

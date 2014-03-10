@@ -1,6 +1,7 @@
 package com.zarkonnen.cyberpunk;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -167,5 +168,64 @@ public final class WorldMap implements Serializable {
 		}
 		
 		people.add(new Person(at(towerX + 2, towerY + 2, zS - 1)));
+	}
+
+	public void calcPathsFor(Tile t) {
+		LinkedList<Tile> q = new LinkedList<Tile>();
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			map[z][y][x].pathDist = Integer.MAX_VALUE;
+			map[z][y][x].bestPath = null;
+		}}}
+		t.pathDist = 0;
+		q.add(t);
+		floodFillAndSetTowards(q, null, t);
+	}
+	
+	public void calcPathsFor(TileType tt) {
+		LinkedList<Tile> q = new LinkedList<Tile>();
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			map[z][y][x].bestPath = null;
+			if (map[z][y][x].type == tt) {
+				map[z][y][x].pathDist = 0;
+				q.add(map[z][y][x]);
+			} else {
+				map[z][y][x].pathDist = Integer.MAX_VALUE;
+			}
+		}}}
+		floodFillAndSetTowards(q, tt, null);
+	}
+	
+	private void floodFillAndSetTowards(LinkedList<Tile> q, TileType forType, Tile forTile) {
+		HashSet<Tile> qs = new HashSet<Tile>();
+		qs.addAll(q);
+		while (!q.isEmpty()) {
+			Tile t = q.pollFirst();
+			qs.remove(t);
+			for (Direction dir : Direction.values()) {
+				if (t.passable(dir)) {
+					Tile t2 = t.in(dir);
+					int newDist = t.pathDist + 1;
+					if (t2.pathDist > newDist) {
+						t2.pathDist = newDist;
+						t2.bestPath = t;
+						if (!qs.contains(t2)) {
+							qs.add(t2);
+							q.add(t2);
+						}
+					}
+				}
+			}
+		}
+		
+		if (forType != null) {
+			for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+				map[z][y][x].towardsTileType.put(forType, map[z][y][x].bestPath);
+			}}}
+		}
+		if (forTile != null) {
+			for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+				map[z][y][x].towardsTile.put(forTile, map[z][y][x].bestPath);
+			}}}
+		}
 	}
 }

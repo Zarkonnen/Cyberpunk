@@ -3,32 +3,51 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Tile;
 import com.zarkonnen.cyberpunk.TileType;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MoveToType extends AbstractInteraction<Tile> {
-	public final TileType type;
-
-	public MoveToType(TileType type, Person actor, Tile target) {
+	public MoveToType(TileType tileType, Person actor, Tile target) {
 		super(actor, target);
-		this.type = type;
+		this.tileType = tileType;
 	}
-
+	
+	public final TileType tileType;
+	
 	@Override
 	public String getName() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return "Move towards a " + tileType.name() + ".";
 	}
 
 	@Override
 	public String disabledReason() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		if (actor().location().towardsTileType(tileType) == null) {
+			return "No path to a " + tileType.name() + ".";
+		}
+		return null;
 	}
 
 	@Override
 	public String getDescription() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return "Off you go.";
 	}
 
 	@Override
 	public String run() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		actor().moveTo(actor().location().towardsTileType(tileType));
+		return "You move towards a " + tileType.name() + ".";
+	}
+	
+	public static class F implements InteractionFactory<Tile, MoveToType> {
+		@Override
+		public List<MoveToType> make(Person actor, Tile t) {
+			if (actor.isPlayer) { return Collections.emptyList(); }
+			ArrayList<MoveToType> l = new ArrayList<MoveToType>();
+			for (TileType tt : TileType.values()) {
+				l.add(new MoveToType(tt, actor, t));
+			}
+			return l;
+		}
 	}
 }

@@ -14,7 +14,7 @@ public class InteractionBehavior {
 		for (Condition c : conditions) {
 			if (!c.check(interaction)) { return false; }
 		}
-		return true;
+		return interaction.enabled();
 	}
 	
 	public static InteractionBehavior behave(Class iType) {
@@ -87,7 +87,7 @@ public class InteractionBehavior {
 		@Override
 		public boolean check(Interaction interaction) {
 			if (!(interaction instanceof MoveToType)) { return false; }
-			return ((MoveToType) interaction).type == type;
+			return ((MoveToType) interaction).tileType == type;
 		}
 	}
 	

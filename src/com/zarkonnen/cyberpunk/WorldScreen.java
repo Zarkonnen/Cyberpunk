@@ -14,6 +14,7 @@ import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.util.ArrayList;
 import static com.zarkonnen.cyberpunk.DrawUtils.*;
 import com.zarkonnen.cyberpunk.interaction.Factories;
+import com.zarkonnen.cyberpunk.interaction.MoveInDirection;
 
 public class WorldScreen implements Screen {
 	public final GameState g;
@@ -132,7 +133,7 @@ public class WorldScreen implements Screen {
 					@Override
 					public void run() {
 						if (interaction != null) {
-							g.player.message = interaction.run();
+							g.playerAction(interaction);
 						}
 					}
 				});
@@ -165,7 +166,7 @@ public class WorldScreen implements Screen {
 
 					@Override
 					public void run() {
-						g.player.message = ti.run();
+						g.playerAction(ti);
 					}
 				});
 			}
@@ -180,7 +181,7 @@ public class WorldScreen implements Screen {
 		if (msSinceScroll >= MS_PER_SCROLL) {
 			for (Pair<String, Direction> dk : DIRECTION_KEYS) {
 				if (in.keyDown(dk.a)) {
-					g.player.moveBy(dk.b);
+					g.playerAction(new MoveInDirection(dk.b, g.player, g.player.location()));
 					msSinceScroll = 0;
 				}
 			}
@@ -197,8 +198,8 @@ public class WorldScreen implements Screen {
 		inventory.input(in, 0, 0, LIST_W, sm.height);
 		interactions.input(in, sm.width - LIST_W, 0, LIST_W, sm.height);
 		
-		if (g.player.message != null && in.keyPressed("SPACE")) {
-			g.player.message = null;
+		if (!g.player.messages.isEmpty() && in.keyPressed("SPACE")) {
+			g.player.messages.pollFirst();
 		}
 	}
 
@@ -221,14 +222,14 @@ public class WorldScreen implements Screen {
 		inventory.draw(d, 0, 0, LIST_W, sm.height);
 		interactions.draw(d, sm.width - LIST_W, 0, LIST_W, sm.height);
 		
-		if (g.player.message != null) {
+		if (!g.player.messages.isEmpty()) {
 			d.rect(BG, sm.width / 2 - 150, sm.height / 2 - 150, 300, 300, new Hook(Hook.Type.MOUSE_1_CLICKED) {
 				@Override
 				public void run(Input in, Pt p, Type type) {
-					g.player.message = null;
+					g.player.messages.pollFirst();
 				}
 			});
-			d.text(TEXT_PREFIX + g.player.message, Cyberpunk.OCRA, sm.width / 2 - 150 + PADDING, sm.height / 2 - 150 + PADDING, 300 - PADDING * 2);
+			d.text(TEXT_PREFIX + g.player.messages.get(0), Cyberpunk.OCRA, sm.width / 2 - 150 + PADDING, sm.height / 2 - 150 + PADDING, 300 - PADDING * 2);
 		}
 	}
 }

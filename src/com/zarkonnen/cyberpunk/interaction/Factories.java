@@ -10,6 +10,9 @@ public final class Factories {
 	private Factories() {}
 	public static final List<InteractionFactory<Tile, ?>> TILE_I_FACTORIES = new ArrayList<InteractionFactory<Tile, ?>>();
 	static {
+		TILE_I_FACTORIES.add(new MoveToHome.F());
+		TILE_I_FACTORIES.add(new MoveToWork.F());
+		TILE_I_FACTORIES.add(new MoveToType.F());
 		TILE_I_FACTORIES.add(new Scavenge.F());
 		TILE_I_FACTORIES.add(new HealAtClinic.F());
 		TILE_I_FACTORIES.add(new Gamble.F());

@@ -1,5 +1,6 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.io.Serializable;
 
 public class GameState implements Serializable {
@@ -14,5 +15,17 @@ public class GameState implements Serializable {
 	public GameState(long seed, int xS, int yS, int zS) {
 		this.map = new WorldMap(seed, xS, yS, zS);
 		this.player = this.map.people().get(0);
+		player.isPlayer = true;
+		for (Skill sk : Skill.values()) {
+			player.setSkill(sk, 40);
+		}
+	}
+
+	public void playerAction(Interaction<?> interaction) {
+		String msg = interaction.run();
+		if (msg != null) {
+			player.messages.add(msg);
+		}
+		map.tick();
 	}
 }

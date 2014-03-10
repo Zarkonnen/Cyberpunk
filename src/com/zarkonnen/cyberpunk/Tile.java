@@ -4,6 +4,8 @@ import com.zarkonnen.cyberpunk.interaction.Factories;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 
 public class Tile implements Serializable, HasName {
@@ -16,6 +18,26 @@ public class Tile implements Serializable, HasName {
 	public boolean locked = false;
 	public int breakInResistance = 0;
 	public int hackInResistance = 0;
+	public transient int pathDist;
+	public transient Tile bestPath;
+	
+	// Pathing
+	HashMap<Tile, Tile> towardsTile = new HashMap<Tile, Tile>();
+	EnumMap<TileType, Tile> towardsTileType = new EnumMap<TileType, Tile>(TileType.class);
+	
+	public Tile towardsTile(Tile t) {
+		if (!towardsTile.containsKey(t)) {
+			map.calcPathsFor(t);
+		}
+		return towardsTile.get(t);
+	}
+	
+	public Tile towardsTileType(TileType tt) {
+		if (!towardsTileType.containsKey(tt)) {
+			map.calcPathsFor(tt);
+		}
+		return towardsTileType.get(tt);
+	}
 
 	public boolean atMapEdge() {
 		return map.atMapEdge(x, y);
