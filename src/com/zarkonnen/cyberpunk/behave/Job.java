@@ -164,6 +164,81 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
 		}
+	},
+	PLUTOCRAT("plutocrat", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(10, 12);
+			p.behave(DoWork.class).between(10, 12);
+			p.behave(Lock.class).between(12, 14);
+			p.behave(Unlock.class).between(14, 17);
+			p.behave(DoWork.class).between(14, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(1, 8);
+			p.behave(MoveToWork.class).between(9, 10);
+			p.behave(Rest.class).between(1, 8);
+		}
+	},
+	GENETICIST("geneticist", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	GENETICIST_BOSS("chief geneticist", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	PA("personal assistant", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	DRUG_COOKER("drug cooker", EnumSet.of(ItemType.CHEMICALS), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(7, 12);
+			p.behave(DoWork.class).between(7, 12);
+			p.behave(Unlock.class).between(12, 17);
+			p.behave(DoWork.class).between(12, 17);
+			p.behave(Lock.class).between(12, 14);
+			p.behave(MoveToType.class).moveTo(TileType.DOCK).between(14, 17);
+			p.behave(Buy.class).item(ItemType.CHEMICALS);
+			p.behave(Buy.class).item(ItemType.CHEMICALS);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 17);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 5);
+		}
 	};
 	
 	public final String jobName;
