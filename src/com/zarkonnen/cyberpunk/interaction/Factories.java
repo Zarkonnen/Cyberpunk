@@ -32,6 +32,8 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new RemoveImplantAtClinic.F());
 		TILE_I_FACTORIES.add(new Lock.F());
 		TILE_I_FACTORIES.add(new Unlock.F());
+		TILE_I_FACTORIES.add(new BuySupply.F());
+		TILE_I_FACTORIES.add(new Wander.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();
