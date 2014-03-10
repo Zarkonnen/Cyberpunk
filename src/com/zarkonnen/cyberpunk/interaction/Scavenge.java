@@ -31,6 +31,7 @@ public class Scavenge extends AbstractInteraction<Tile> {
 	@Override
 	public String run() {
 		exhaust(8);
+		decreaseRep(8);
 		StringList found = new StringList();
 		for (Iterator<Tile.HiddenItem> it = target().hiddenItems.iterator(); it.hasNext();) {
 			Tile.HiddenItem hiddenItem = it.next();

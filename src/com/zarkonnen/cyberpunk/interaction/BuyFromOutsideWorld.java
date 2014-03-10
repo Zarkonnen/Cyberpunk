@@ -35,7 +35,8 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements It
 		ItemType.SWITCHBLADE,
 		ItemType.CHEMICALS,
 		ItemType.CPUS,
-		ItemType.RAM
+		ItemType.RAM,
+		ItemType.MACHINE_PARTS
 	);
 	
 	public final Item good;

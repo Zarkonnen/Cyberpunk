@@ -28,6 +28,28 @@ public enum ItemType implements Serializable {
 		0, /* drugAdditionExhaustionBaseModifier */ 
 		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
 	),
+	MACHINE_PARTS(
+		"Machine Parts", /* name */ 
+		"Wires, motors, sensors. Someone skilled could put this together into something useful.", /* description */ 
+		20, /* value */ 
+		false, /* key */ 
+		false, /* data */ 
+		false, /* implant */ 
+		false, /* blackmailMaterial */ 
+		0, /* drone */ 
+		0, /* bug */ 
+		0, /* decrypt */ 
+		0, /* medicine */ 
+		0, /* food */ 
+		0, /* stun */ 
+		0, /* exhaustionModifier */ 
+		0, /* exhaustionGainModifier */ 
+		0, /* exhaustionLossModifier */ 
+		0, /* drugDuration */ 
+		0, /* drugAddictionDuration */ 
+		0, /* drugAdditionExhaustionBaseModifier */ 
+		new EnumMap<Skill, Integer>(m(p(SCAVENGING, 0)))/* skillBonuses */ 
+	),
 	CPUS(
 		"CPUs", /* name */ 
 		"State of the art processing cores.", /* description */ 

@@ -31,8 +31,8 @@ public class DoWork extends AbstractInteraction<Tile> {
 	));
 	
 	public static final EnumMap<TileType, EnumSet<ItemType>> INPUTS = new EnumMap<TileType, EnumSet<ItemType>>(m(
-		p(CLINIC, EnumSet.of(MEDICAL_SUPPLIES)),
-		p(HARDWARE_SHOP, EnumSet.of(RAM, CPUS)),
+		p(CLINIC, EnumSet.of(MEDICAL_SUPPLIES, MACHINE_PARTS)),
+		p(HARDWARE_SHOP, EnumSet.of(RAM, CPUS, MACHINE_PARTS)),
 		p(DRUG_LAB, EnumSet.of(CHEMICALS)),
 		p(PENTHOUSE, EnumSet.of(UPPERS, EXPERIMENTAL_UPPERS))
 	));
