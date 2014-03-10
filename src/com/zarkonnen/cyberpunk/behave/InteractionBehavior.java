@@ -40,22 +40,32 @@ public class InteractionBehavior {
 		}
 	}
 	
-	public InteractionBehavior item(ItemType type) {
-		conditions.add(new IItemType(type));
+	public InteractionBehavior item(ItemType... anyOf) {
+		conditions.add(new IItemType(anyOf));
+		return this;
+	}
+	
+	public InteractionBehavior isntItem(ItemType... anyOf) {
+		conditions.add(new Not(new IItemType(anyOf)));
 		return this;
 	}
 	
 	public static class IItemType implements Condition {
-		public final ItemType type;
+		public final ItemType[] types;
 
-		public IItemType(ItemType type) {
-			this.type = type;
+		public IItemType(ItemType... anyOf) {
+			this.types = anyOf;
 		}
 
 		@Override
 		public boolean check(Interaction interaction) {
 			if (!(interaction instanceof ItemInteraction)) { return false; }
-			return ((ItemInteraction) interaction).getItem().type == type;
+			for (ItemType type : types) {
+				if (((ItemInteraction) interaction).getItem().type == type) {
+					return true;
+				}
+			}
+			return false;
 		}
 	}
 	

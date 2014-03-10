@@ -27,7 +27,7 @@ public class MoveToMapEdge extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
-		actor().moveTo(actor().location().towardsTile(actor().home));
+		actor().moveTo(actor().location().towardsEdge());
 		return "You move towards the map edge.";
 	}
 	

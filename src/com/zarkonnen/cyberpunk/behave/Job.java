@@ -3,17 +3,24 @@ package com.zarkonnen.cyberpunk.behave;
 import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.TileType;
+import com.zarkonnen.cyberpunk.interaction.Attack;
+import com.zarkonnen.cyberpunk.interaction.BreakIn;
 import com.zarkonnen.cyberpunk.interaction.Buy;
 import com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.BuySupply;
 import com.zarkonnen.cyberpunk.interaction.DoWork;
 import com.zarkonnen.cyberpunk.interaction.Eat;
+import com.zarkonnen.cyberpunk.interaction.HarvestImplants;
 import com.zarkonnen.cyberpunk.interaction.HealAtClinic;
+import com.zarkonnen.cyberpunk.interaction.Loot;
 import com.zarkonnen.cyberpunk.interaction.MoveToHome;
 import com.zarkonnen.cyberpunk.interaction.MoveToMapEdge;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
+import com.zarkonnen.cyberpunk.interaction.Mug;
 import com.zarkonnen.cyberpunk.interaction.Rest;
+import com.zarkonnen.cyberpunk.interaction.Scavenge;
+import com.zarkonnen.cyberpunk.interaction.SellToBusiness;
 import com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.SellToPerson;
 import com.zarkonnen.cyberpunk.interaction.Unlock;
@@ -202,6 +209,72 @@ public enum Job {
 			p.behave(Wander.class).between(10, 20);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	KID("kid", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(20, 24);
+			p.behave(MoveToHome.class).between(0, 10);
+			p.behave(Rest.class).between(20, 24);
+			p.behave(Rest.class).between(0, 10);
+			p.behave(Wander.class).between(10, 20);
+		}
+	},
+	MUGGER("mugger", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(3, 13);
+			p.behave(Rest.class).between(3, 13);
+			p.behave(Mug.class).between(22, 24).unobservedExceptVictim();
+			p.behave(Mug.class).between(0, 3).unobservedExceptVictim();
+			p.behave(Buy.class).item(ItemType.SWITCHBLADE).hasnt(ItemType.SWITCHBLADE);
+			p.behave(Buy.class).item(ItemType.PISTOL).hasnt(ItemType.PISTOL);
+			p.behave(SellToPerson.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
+			p.behave(SellToBusiness.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
+			p.behave(Wander.class).between(20, 24);
+			p.behave(Wander.class).between(0, 3);
+
+		}
+	},
+	THIEF("thief", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(6, 15);
+			p.behave(Rest.class).between(6, 15);
+			p.behave(Scavenge.class).between(0, 6).unobserved();
+			p.behave(BreakIn.class).between(0, 6).unobserved();
+			p.behave(Buy.class).item(ItemType.LOCKPICKS).hasnt(ItemType.LOCKPICKS);
+			p.behave(Buy.class).item(ItemType.ANGLE_GRINDER).hasnt(ItemType.ANGLE_GRINDER);
+			p.behave(Buy.class).item(ItemType.NANO_PICKS).hasnt(ItemType.NANO_PICKS);
+			p.behave(SellToPerson.class).isntItem(ItemType.LOCKPICKS, ItemType.ANGLE_GRINDER, ItemType.NANO_PICKS);
+			p.behave(SellToBusiness.class).isntItem(ItemType.LOCKPICKS, ItemType.ANGLE_GRINDER, ItemType.NANO_PICKS);
+			p.behave(Wander.class).between(22, 24);
+			p.behave(Wander.class).between(0, 6);
+		}
+	},
+	GANGSTER("gangster", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(2, 11);
+			p.behave(Rest.class).between(2, 11);
+			p.behave(MoveToType.class).moveTo(TileType.GANG_HIDEOUT).between(23, 24);
+			p.behave(MoveToType.class).moveTo(TileType.GANG_HIDEOUT).between(0, 2);
+			p.behave(Attack.class).unobservedExceptVictim();
+			p.behave(Loot.class).unobservedExceptVictim();
+			p.behave(HarvestImplants.class).unobservedExceptVictim();
+			p.behave(Buy.class).item(ItemType.SWITCHBLADE).hasnt(ItemType.SWITCHBLADE);
+			p.behave(Buy.class).item(ItemType.PISTOL).hasnt(ItemType.PISTOL);
+			p.behave(Buy.class).item(ItemType.ASSAULT_RIFLE).hasnt(ItemType.ASSAULT_RIFLE);
+			p.behave(Buy.class).item(ItemType.SHARP_SUIT).hasnt(ItemType.SHARP_SUIT);
+			p.behave(Buy.class).item(ItemType.GRINDER_TOOLS).hasnt(ItemType.GRINDER_TOOLS);
+			p.behave(SellToPerson.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
+			p.behave(SellToBusiness.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
+			p.behave(Wander.class).between(11, 23);
 		}
 	},
 	PLUTOCRAT("plutocrat", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
