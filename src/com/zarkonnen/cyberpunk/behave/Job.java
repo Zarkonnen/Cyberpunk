@@ -11,14 +11,19 @@ import com.zarkonnen.cyberpunk.interaction.MoveToHome;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Rest;
+import com.zarkonnen.cyberpunk.interaction.Unlock;
 import java.util.EnumSet;
+import java.util.concurrent.locks.Lock;
 
 public enum Job {
 	PROSTITUTE("prostitute", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(12, 23);
 			p.behave(DoWork.class).between(12, 23);
+			p.behave(Lock.class).between(23, 24);
+			p.behave(Lock.class).between(0, 1);
 			p.behave(MoveToHome.class).between(0, 9);
 			p.behave(MoveToWork.class).between(11, 22);
 			p.behave(Rest.class).between(0, 9);
@@ -28,7 +33,9 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
 			p.behave(MoveToHome.class).between(22, 24);
 			p.behave(MoveToHome.class).between(0, 7);
 			p.behave(MoveToWork.class).between(8, 16);
@@ -40,7 +47,9 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(6, 18);
 			p.behave(DoWork.class).between(6, 18);
+			p.behave(Lock.class).between(18, 20);
 			p.behave(MoveToHome.class).between(21, 24);
 			p.behave(MoveToHome.class).between(0, 5);
 			p.behave(MoveToWork.class).between(5, 17);
@@ -52,7 +61,9 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
 			p.behave(MoveToHome.class).between(22, 24);
 			p.behave(MoveToHome.class).between(0, 7);
 			p.behave(MoveToWork.class).between(8, 16);
@@ -64,7 +75,9 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(6, 18);
 			p.behave(DoWork.class).between(6, 18);
+			p.behave(Lock.class).between(18, 20);
 			p.behave(MoveToHome.class).between(21, 24);
 			p.behave(MoveToHome.class).between(0, 5);
 			p.behave(MoveToWork.class).between(5, 17);
@@ -76,10 +89,42 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
-			p.behave(MoveToHome.class).between(22, 7);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
 			p.behave(MoveToWork.class).between(8, 16);
-			p.behave(Rest.class).between(22, 7);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	PROGRAMMER("programmer", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	PROGRAMMER_BOSS("programmer boss", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
 		}
 	};
 	
