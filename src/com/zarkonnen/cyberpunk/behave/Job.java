@@ -4,6 +4,7 @@ import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.TileType;
 import com.zarkonnen.cyberpunk.interaction.Buy;
+import com.zarkonnen.cyberpunk.interaction.BuySupply;
 import com.zarkonnen.cyberpunk.interaction.DoWork;
 import com.zarkonnen.cyberpunk.interaction.Eat;
 import com.zarkonnen.cyberpunk.interaction.HealAtClinic;
@@ -11,6 +12,7 @@ import com.zarkonnen.cyberpunk.interaction.MoveToHome;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Rest;
+import com.zarkonnen.cyberpunk.interaction.Wander;
 import java.util.EnumSet;
 
 public enum Job {
@@ -22,6 +24,33 @@ public enum Job {
 			p.behave(MoveToHome.class).between(0, 9);
 			p.behave(MoveToWork.class).between(11, 22);
 			p.behave(Rest.class).between(0, 9);
+		}
+	},
+	DRUG_DEALER("dealer", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS, ItemType.EXPERIMENTAL_UPPERS, ItemType.EXPERIMENTAL_DOWNERS), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(0, 10);
+			p.behave(Rest.class).between(0, 9);
+			p.behave(MoveToWork.class).hasnt(ItemType.UPPERS, ItemType.DOWNERS, ItemType.EXPERIMENTAL_UPPERS, ItemType.EXPERIMENTAL_DOWNERS);
+			p.behave(BuySupply.class).item(ItemType.EXPERIMENTAL_DOWNERS);
+			p.behave(BuySupply.class).item(ItemType.EXPERIMENTAL_UPPERS);
+			p.behave(BuySupply.class).item(ItemType.DOWNERS);
+			p.behave(BuySupply.class).item(ItemType.UPPERS);
+			p.behave(Wander.class).between(11, 22);
+		}
+	},
+	FOOD_MERCHANT("food merchant", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS, ItemType.VEGETABLES), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 4);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 4);
+			p.behave(MoveToWork.class).between(4, 6);
+			p.behave(BuySupply.class).item(ItemType.VEGETABLES);
+			p.behave(MoveToType.class).moveTo(TileType.MARKET).between(6, 19);
 		}
 	},
 	GRINDER("grinder", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.GRINDER_TOOLS)) {
@@ -105,4 +134,4 @@ public enum Job {
 		p.behave(Buy.class).food().hungry(75);
 		p.behave(Rest.class).exhausted(80);
 	}
-		}
+}
