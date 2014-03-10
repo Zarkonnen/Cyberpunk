@@ -23,6 +23,7 @@ public class GameState implements Serializable {
 
 	public void playerAction(Interaction<?> interaction) {
 		String msg = interaction.run();
+		player.location().observe(interaction);
 		if (msg != null) {
 			player.messages.add(msg);
 		}

@@ -58,7 +58,7 @@ public class Person implements Serializable, HasName {
 	}
 	
 	public boolean tick() {
-		if (!isPlayer) {
+		if (!isPlayer && !unconscious()) {
 			ArrayList<Interaction> l = new ArrayList<Interaction>();
 			l.addAll(location.getInteractions(this));
 			for (Item item : allItems()) {
@@ -69,6 +69,7 @@ public class Person implements Serializable, HasName {
 					if (b.enabled(i)) {
 						System.out.println(getName() + ": " + i.name());
 						i.run();
+						location.observe(i);
 						break lp;
 					}
 				}

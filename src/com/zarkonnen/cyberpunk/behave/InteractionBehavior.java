@@ -230,6 +230,30 @@ public class InteractionBehavior {
 		}
 	}
 	
+	public InteractionBehavior unobserved() {
+		conditions.add(new Unobserved());
+		return this;
+	}
+	
+	public static class Unobserved implements Condition {
+		@Override
+		public boolean check(Interaction interaction) {
+			return interaction.actor().location().people().size() < 2;
+		}
+	}
+	
+	public InteractionBehavior unobservedExceptVictim() {
+		conditions.add(new UnobservedExceptVictim());
+		return this;
+	}
+	
+	public static class UnobservedExceptVictim implements Condition {
+		@Override
+		public boolean check(Interaction interaction) {
+			return interaction.actor().location().people().size() < 3;
+		}
+	}
+	
 	public static class Not implements Condition {
 		public final Condition c;
 

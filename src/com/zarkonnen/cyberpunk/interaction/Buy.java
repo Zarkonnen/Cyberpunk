@@ -46,6 +46,7 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 				target().inventory.remove(item);
 				target().money += item.type.value;
 			} else {
+				target().money += item.type.value / 8; // Sales commission, basically.
 				target().location().inventory.remove(item);
 				for (Tile.HiddenItem hi : target().location().hiddenItems) {
 					if (hi.item == item) {
