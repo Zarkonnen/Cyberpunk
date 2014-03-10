@@ -163,26 +163,29 @@ public class InteractionBehavior {
 		}
 	}
 	
-	public InteractionBehavior has(ItemType type) {
-		conditions.add(new Carrying(type));
+	public InteractionBehavior has(ItemType... anyOf) {
+		conditions.add(new Carrying(anyOf));
 		return this;
 	}
 	
-	public InteractionBehavior hasnt(ItemType type) {
-		conditions.add(new Not(new Carrying(type)));
+	public InteractionBehavior hasnt(ItemType... anyOf) {
+		conditions.add(new Not(new Carrying(anyOf)));
 		return this;
 	}
 	
 	public static class Carrying implements Condition {
-		public final ItemType type;
+		public final ItemType[] types;
 
-		public Carrying(ItemType type) {
-			this.type = type;
+		public Carrying(ItemType... anyOf) {
+			this.types = anyOf;
 		}
 
 		@Override
 		public boolean check(Interaction interaction) {
-			return interaction.actor().hasItem(type);
+			for (ItemType t : types) {
+				if (interaction.actor().hasItem(t)) { return true; }
+			}
+			return false;
 		}
 	}
 	

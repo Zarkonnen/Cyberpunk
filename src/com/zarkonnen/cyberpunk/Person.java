@@ -43,7 +43,7 @@ public class Person implements Serializable, HasName {
 	public final ArrayList<Item> implants = new ArrayList<Item>();
 	public final ArrayList<Drug> drugsTaken = new ArrayList<Drug>();
 	public final ArrayList<Drug> drugsLingering = new ArrayList<Drug>();
-
+	
 	public void setSkill(Skill skill, int amt) {
 		skills.put(skill, amt);
 	}
