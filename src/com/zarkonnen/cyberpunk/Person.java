@@ -69,6 +69,7 @@ public class Person implements Serializable, HasName {
 					if (b.enabled(i)) {
 						System.out.println(getName() + ": " + i.name());
 						i.run();
+						location.observe(i);
 						break lp;
 					}
 				}

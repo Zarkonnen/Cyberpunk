@@ -1,11 +1,26 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.interaction.Attack;
+import com.zarkonnen.cyberpunk.interaction.BreakIn;
+import com.zarkonnen.cyberpunk.interaction.Datajack;
 import com.zarkonnen.cyberpunk.interaction.Factories;
+import com.zarkonnen.cyberpunk.interaction.Gamble;
+import com.zarkonnen.cyberpunk.interaction.HackIn;
+import com.zarkonnen.cyberpunk.interaction.HarvestImplants;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
+import com.zarkonnen.cyberpunk.interaction.Loot;
+import com.zarkonnen.cyberpunk.interaction.Mug;
+import com.zarkonnen.cyberpunk.interaction.Murder;
+import com.zarkonnen.cyberpunk.interaction.Scavenge;
+import com.zarkonnen.cyberpunk.interaction.Stun;
+import com.zarkonnen.cyberpunk.interaction.VisitBrothel;
+import com.zarkonnen.cyberpunk.interaction.VisitDrugDen;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 public class Tile implements Serializable, HasName {
@@ -82,6 +97,36 @@ public class Tile implements Serializable, HasName {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+	
+	public static final HashSet<Class> BLACKMAILABLES = new HashSet<Class>();
+	static {
+		Class[] cls = {
+			Attack.class,
+			BreakIn.class,
+			Datajack.class,
+			Gamble.class,
+			HackIn.class,
+			HarvestImplants.class,
+			Loot.class,
+			Mug.class,
+			Murder.class,
+			Scavenge.class,
+			Stun.class,
+			VisitBrothel.class,
+			VisitDrugDen.class
+		};
+		BLACKMAILABLES.addAll(Arrays.asList(cls));
+	};
+	
+	public void observe(Interaction i) {
+		if (BLACKMAILABLES.contains(i.getClass())) {
+			Item material = new Item(ItemType.BLACKMAIL_MATERIAL);
+			material.blackmailFor = i.actor();
+			material.recordOf = i;
+			
+			
+		}
 	}
 	
 	@Override
