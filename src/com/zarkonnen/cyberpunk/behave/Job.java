@@ -8,8 +8,11 @@ import com.zarkonnen.cyberpunk.interaction.BreakIn;
 import com.zarkonnen.cyberpunk.interaction.Buy;
 import com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.BuySupply;
+import com.zarkonnen.cyberpunk.interaction.Datatrawl;
+import com.zarkonnen.cyberpunk.interaction.DeployGadget;
 import com.zarkonnen.cyberpunk.interaction.DoWork;
 import com.zarkonnen.cyberpunk.interaction.Eat;
+import com.zarkonnen.cyberpunk.interaction.Gogglehack;
 import com.zarkonnen.cyberpunk.interaction.HarvestImplants;
 import com.zarkonnen.cyberpunk.interaction.HealAtClinic;
 import com.zarkonnen.cyberpunk.interaction.Loot;
@@ -20,6 +23,7 @@ import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Mug;
 import com.zarkonnen.cyberpunk.interaction.Rest;
 import com.zarkonnen.cyberpunk.interaction.Scavenge;
+import com.zarkonnen.cyberpunk.interaction.SellDataToOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.SellToBusiness;
 import com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld;
 import com.zarkonnen.cyberpunk.interaction.SellToPerson;
@@ -239,6 +243,36 @@ public enum Job {
 
 		}
 	},
+	HACKER("hacker", ItemType.HACKER_KIT, EnumSet.of(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA), EnumSet.of(ItemType.AR_GOGGLES)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(SellToPerson.class).item(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA);
+			p.behave(MoveToHome.class).between(5, 15);
+			p.behave(Rest.class).between(5, 15);
+			p.behave(MoveToType.class).moveTo(TileType.BACK_ROOM).between(15, 20);
+			p.behave(Datatrawl.class).between(0, 5).unobserved();
+			p.behave(Gogglehack.class).between(0, 5).unobservedExceptVictim();
+			p.behave(DeployGadget.class).between(0, 5).unobserved();
+			p.behave(DeployGadget.class).between(0, 5).unobserved();
+			for (ItemType h : ItemType.HACKER_KIT) {
+				p.behave(Buy.class).item(h).hasnt(h);
+			}
+			p.behave(Wander.class).between(0, 5);
+			p.behave(Wander.class).between(15, 20);
+		}
+	},
+	DATA_FENCE("data fence", EnumSet.of(ItemType.VALUABLE_DATA, ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SHARP_SUIT)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(SellDataToOutsideWorld.class);
+			p.behave(Buy.class).item(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA);
+			p.behave(MoveToHome.class).between(0, 12);
+			p.behave(Rest.class).between(0, 12);
+			p.behave(MoveToType.class).moveTo(TileType.BACK_ROOM).between(15, 22);
+		}
+	},
 	THIEF("thief", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
 		@Override
 		public void install(Person p) {
@@ -433,6 +467,14 @@ public enum Job {
 		this.buys = buys;
 		this.sells = sells;
 		this.equipment = equipment;
+	}
+	
+	public void doInstall(Person p) {
+		p.description += jobName;
+		p.buyForWork = buys;
+		p.buyForSelf = buys;
+		p.sell = sells;
+		install(p);
 	}
 
 	public abstract void install(Person p);

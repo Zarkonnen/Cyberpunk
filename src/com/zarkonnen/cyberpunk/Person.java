@@ -6,6 +6,7 @@ import com.zarkonnen.cyberpunk.interaction.Interaction;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -44,6 +45,11 @@ public class Person implements Serializable, HasName {
 	public final ArrayList<Item> implants = new ArrayList<Item>();
 	public final ArrayList<Drug> drugsTaken = new ArrayList<Drug>();
 	public final ArrayList<Drug> drugsLingering = new ArrayList<Drug>();
+	
+	public String description = "";
+	public EnumSet<ItemType> buyForSelf = EnumSet.noneOf(ItemType.class);
+	public EnumSet<ItemType> buyForWork = EnumSet.noneOf(ItemType.class);
+	public EnumSet<ItemType> sell = EnumSet.noneOf(ItemType.class);
 	
 	public void setSkill(Skill skill, int amt) {
 		skills.put(skill, amt);
@@ -133,26 +139,29 @@ public class Person implements Serializable, HasName {
 		return health <= 0 || stunned > 0 || exhaustion >= 100;
 	}
 	
-	// qqDPS
 	public boolean willBuyForSelf(Item it) {
-		return true;
+		return !inventory.contains(it) && buyForSelf.contains(it.type);
 	}
 	
-	public boolean willForWork(Item it) {
-		return true;
+	public boolean willBuyForWork(Item it) {
+		if (workplace == null) { return false; }
+		for (Tile.HiddenItem hi : workplace.hiddenItems) {
+			if (hi.item == it) { return false; }
+		}
+		return buyForWork.contains(it.type);
 	}
 	
 	public boolean willSell(Item it) {
-		return true;
+		return sell.contains(it.type);
 	}
 	
 	@Override
 	public String getName() {
-		return "some person"; // qqDPS
+		return "a " + description;
 	}
 	
 	public String description() {
-		return "A nondescript humanoid blob.";
+		return "A " + description + ".";
 	}
 	
 	public int getSkill(Skill sk) {

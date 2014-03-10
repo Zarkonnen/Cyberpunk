@@ -56,7 +56,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 			if (t.location() != t.workplace) { return Collections.emptyList(); }
 			ArrayList<SellToBusiness> l = new ArrayList<SellToBusiness>();
 			for (Item item : actor.inventory) {
-				if (t.willForWork(item)) {
+				if (t.willBuyForWork(item)) {
 					l.add(new SellToBusiness(item, actor, t));
 				}
 			}

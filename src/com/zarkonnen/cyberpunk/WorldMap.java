@@ -54,6 +54,7 @@ public final class WorldMap implements Serializable {
 	private final Tile[][][] map;
 	private final LinkedList<Person> people = new LinkedList<Person>();
 	public final Random r;
+	public HashSet<Item> knownData = new HashSet<Item>();
 	public int time = 0;
 	public static final int DAY_LENGTH = 6 * 24;
 	
