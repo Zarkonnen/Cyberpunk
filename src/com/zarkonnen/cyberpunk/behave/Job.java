@@ -18,6 +18,7 @@ import com.zarkonnen.cyberpunk.interaction.HealAtClinic;
 import com.zarkonnen.cyberpunk.interaction.Loot;
 import com.zarkonnen.cyberpunk.interaction.MoveToHome;
 import com.zarkonnen.cyberpunk.interaction.MoveToMapEdge;
+import com.zarkonnen.cyberpunk.interaction.MoveToSupplier;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
 import com.zarkonnen.cyberpunk.interaction.MoveToWork;
 import com.zarkonnen.cyberpunk.interaction.Mug;
@@ -101,9 +102,9 @@ public enum Job {
 			p.behave(MoveToWork.class).between(7, 15);
 			p.behave(Unlock.class).between(9, 15);
 			p.behave(DoWork.class).between(7, 16);
-			p.behave(MoveToType.class).moveTo(TileType.DOCK).between(16, 19);
+			p.behave(MoveToSupplier.class).between(16, 19);
 			for (ItemType h : ItemType.HARDWARE) {
-				p.behave(Buy.class).item(h);
+				p.behave(BuySupply.class).item(h);
 				p.behave(SellToPerson.class).item(h);
 			}
 		}
@@ -404,6 +405,8 @@ public enum Job {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(MoveToSupplier.class).between(6, 9);
+			p.behave(BuySupply.class).item(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART).between(6, 9);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
 			p.behave(Lock.class).between(17, 19);
@@ -411,13 +414,16 @@ public enum Job {
 			p.behave(MoveToHome.class).between(0, 7);
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
-			p.behave(Rest.class).between(0, 7);
+			p.behave(Rest.class).between(0, 6);
+			p.behave(SellToPerson.class).item(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART);
 		}
 	},
 	CLOTHES_DEALER("clothes dealer", EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(MoveToSupplier.class).between(6, 9);
+			p.behave(BuySupply.class).item(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES).between(6, 9);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
 			p.behave(Lock.class).between(17, 19);
@@ -426,12 +432,15 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			p.behave(SellToPerson.class).item(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES);
 		}
 	},
 	JEWELLERY_DEALER("jewellery dealer", EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(MoveToSupplier.class).between(6, 9);
+			p.behave(BuySupply.class).item(ItemType.JEWELLERY).between(6, 9);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
 			p.behave(Lock.class).between(17, 19);
@@ -440,12 +449,15 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			p.behave(SellToPerson.class).item(ItemType.JEWELLERY);
 		}
 	},
 	ART_DEALER("art dealer", EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART)) {
 		@Override
 		public void install(Person p) {
 			addBasicNeeds(p);
+			p.behave(MoveToSupplier.class).between(6, 9);
+			p.behave(BuySupply.class).item(ItemType.ART).between(6, 9);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
 			p.behave(Lock.class).between(17, 19);
@@ -454,6 +466,7 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			p.behave(SellToPerson.class).item(ItemType.ART);
 		}
 	};
 	
