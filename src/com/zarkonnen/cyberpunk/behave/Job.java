@@ -215,7 +215,8 @@ public enum Job {
 			p.behave(DoWork.class).between(14, 17);
 			p.behave(Lock.class).between(17, 19);
 			p.behave(MoveToHome.class).between(1, 8);
-			p.behave(MoveToWork.class).between(9, 10);
+			p.behave(MoveToWork.class).between(9, 12);
+			p.behave(MoveToWork.class).between(14, 16);
 			p.behave(Rest.class).between(1, 8);
 		}
 	},
@@ -277,6 +278,75 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 17);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 5);
+		}
+	},
+	GAMBLING_PARLOUR_OPERATOR("gambling parlour operator", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(17, 23);
+			p.behave(DoWork.class).between(17, 23);
+			p.behave(Lock.class).between(23, 24);
+			p.behave(Lock.class).between(0, 1);
+			p.behave(MoveToHome.class).between(24, 9);
+			p.behave(MoveToWork.class).between(16, 22);
+			p.behave(Rest.class).between(0, 9);
+		}
+	},
+	GUN_DEALER("gun dealer", EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART), EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART), EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	CLOTHES_DEALER("clothes dealer", EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	JEWELLERY_DEALER("jewellery dealer", EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
+		}
+	},
+	ART_DEALER("art dealer", EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART)) {
+		@Override
+		public void install(Person p) {
+			addBasicNeeds(p);
+			p.behave(Unlock.class).between(9, 17);
+			p.behave(DoWork.class).between(9, 17);
+			p.behave(Lock.class).between(17, 19);
+			p.behave(MoveToHome.class).between(22, 24);
+			p.behave(MoveToHome.class).between(0, 7);
+			p.behave(MoveToWork.class).between(8, 16);
+			p.behave(Rest.class).between(22, 24);
+			p.behave(Rest.class).between(0, 7);
 		}
 	};
 	
