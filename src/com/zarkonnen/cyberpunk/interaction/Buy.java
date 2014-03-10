@@ -38,6 +38,7 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 
 	@Override
 	public String run() {
+		exhaust(1);
 		actor().inventory.add(item);
 		actor().money -= item.type.value;
 		if (!item.type.data) {
