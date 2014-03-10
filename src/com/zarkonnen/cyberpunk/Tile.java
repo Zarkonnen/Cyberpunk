@@ -10,11 +10,14 @@ import com.zarkonnen.cyberpunk.interaction.Gamble;
 import com.zarkonnen.cyberpunk.interaction.HackIn;
 import com.zarkonnen.cyberpunk.interaction.HarvestImplants;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
+import com.zarkonnen.cyberpunk.interaction.ItemInteraction;
+import com.zarkonnen.cyberpunk.interaction.Lock;
 import com.zarkonnen.cyberpunk.interaction.Loot;
 import com.zarkonnen.cyberpunk.interaction.Mug;
 import com.zarkonnen.cyberpunk.interaction.Murder;
 import com.zarkonnen.cyberpunk.interaction.Scavenge;
 import com.zarkonnen.cyberpunk.interaction.Stun;
+import com.zarkonnen.cyberpunk.interaction.Unlock;
 import com.zarkonnen.cyberpunk.interaction.VisitBrothel;
 import com.zarkonnen.cyberpunk.interaction.VisitDrugDen;
 import java.io.Serializable;
@@ -172,6 +175,17 @@ public class Tile implements Serializable, HasName {
 						if (!g.item.found.contains(it) && (g.item.type == ItemType.WIRETAP || g.item.type == ItemType.REMOTE_WIRETAP) && g.item.type.bug > hit.hidingScore) {
 							g.item.found.add(it);
 						}
+					}
+				}
+			}
+		}
+		
+		if (i instanceof Lock || i instanceof Unlock) {
+			Item key = ((ItemInteraction) i).getItem();
+			if (key.type.data) {
+				for (Gadget g : gadgets) {
+					if (!g.item.found.contains(key) && (g.item.type == ItemType.WIRETAP || g.item.type == ItemType.REMOTE_WIRETAP) && map.r.nextInt(100) < g.item.type.bug) {
+						g.item.found.add(key);
 					}
 				}
 			}
