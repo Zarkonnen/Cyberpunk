@@ -3,6 +3,7 @@ package com.zarkonnen.cyberpunk.interaction;
 import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
+import com.zarkonnen.cyberpunk.StringList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -32,19 +33,27 @@ public class Mug extends AbstractInteraction<Person> {
 	@Override
 	public String run() {
 		exhaust(6);
-		if (test(target().getSkill(Skill.FIGHTING) + target().getSkill(Skill.FORCE_OF_PERSONALITY) - BONUS, Skill.FIGHTING, Skill.FORCE_OF_PERSONALITY)) {
-			decreaseRep(5);
+		if (test(target().getSkill(Skill.FIGHTING) + target().getSkill(Skill.FORCE_OF_PERSONALITY) + BONUS, Skill.FIGHTING, Skill.FORCE_OF_PERSONALITY)) {
+			decreaseRep(15);
+			StringList stolen = new StringList();
 			for (Iterator<Item> it = target().inventory.iterator(); it.hasNext();) {
 				Item item = it.next();
 				if (!item.type.data) {
 					actor().inventory.add(item);
 					it.remove();
+					stolen.add(item);
 				}
 			}
+			int money = target().money;
 			actor().money += target().money;
 			target().money = 0;
 			target().messages.add("You are mugged by " + actor().getName() + ".");
-			return "You corner your victim and quickly relieve them of their valuables.";
+			if (stolen.isEmpty()) {
+				return "You corner your victim and quickly relieve them of $" + money + ".";
+			} else {
+				return "You corner your victim and quickly relieve them of $" + money + ", and: " + stolen + ".";
+			}
+			
 		} else {
 			decreaseRep(5);
 			target().messages.add(actor().getName() + " tries to mug you, but you walk away, laughing off their threats.");

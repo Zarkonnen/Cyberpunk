@@ -51,8 +51,8 @@ public class ButtonList {
 		button(d, "v", null, x, bottom - BUTTON_H, w, new Runnable() {
 			@Override
 			public void run() {
-				scroll = Math.max(0, scroll - 5);
+				scroll = scroll - 5;//Math.max(0, scroll - 5);
 			}
-		}, scroll > 0, true);
+		}, true/*scroll > 0*/, true);
 	}
 }

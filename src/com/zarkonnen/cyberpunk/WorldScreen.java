@@ -107,6 +107,21 @@ public class WorldScreen implements Screen {
 				@Override
 				public void run() {}
 			});
+			l.add(new Button() {
+				@Override
+				public String text() {
+					return "$" + g.player.money;
+				}
+
+				@Override
+				public String tooltip() { return null; }
+
+				@Override
+				public boolean enabled() { return false; }
+
+				@Override
+				public void run() {}
+			});
 			for (final Item it : g.player.allItems()) {
 				List<Interaction<Item>> is = Factories.make(g.player, it);
 				final Interaction<Item> interaction = is.isEmpty() ? null : is.get(0); // qqDPS

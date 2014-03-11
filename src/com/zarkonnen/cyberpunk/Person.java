@@ -79,7 +79,7 @@ public class Person implements Serializable, HasName {
 			lp: for (InteractionBehavior b : behaviors) {
 				for (Interaction i : l) {
 					if (b.enabled(i)) {
-						System.out.println(getName() + ": " + i.name());
+						//System.out.println(getName() + ": " + i.name());
 						i.run();
 						location.observe(i);
 						break lp;
