@@ -19,6 +19,43 @@ public enum Detail {
 			p.behave(MoveToType.class).moveTo(DRUG_DEN);
 			p.behave(Buy.class).item(UPPERS, EXPERIMENTAL_UPPERS);
 		}
+	},
+	SHAVEN(" Their hair and eyebrows have been completely razored off.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	SCARRED(" A gnarled trail of scar tissue crosses their face and disappears under their jacket.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	PIERCED(" You can see several piercings on their face and body.", EnumSet.of(JEWELLERY), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+		@Override
+		public void install(Person p, Random r) {
+			p.behave(Buy.class).item(JEWELLERY);
+		}
+	},
+	MODDED(" They have extensive body modifications.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	FASHIONABLE(" They're wearing the very latest in up-to-the-nanosecond fashion.", EnumSet.of(DESIGNER_CLOTHES), EnumSet.noneOf(ItemType.class), EnumSet.of(DESIGNER_CLOTHES)) {
+		@Override
+		public void install(Person p, Random r) {
+			p.behave(Buy.class).item(DESIGNER_CLOTHES);
+		}
+	},
+	BLINGY(" You wonder how they can stand under the weight of all that jewellery.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	FILTHY(" They are covered in a greasy layer of filth.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
 	};
 
 	private Detail(String description, EnumSet<ItemType> buys, EnumSet<ItemType> sells, EnumSet<ItemType> equipment) {
