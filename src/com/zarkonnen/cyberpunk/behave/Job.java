@@ -530,6 +530,8 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
 			p.behave(SellToPerson.class).item(ItemType.JEWELLERY);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
 		}
 	},
 	ART_DEALER("art dealer", EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART)) {
