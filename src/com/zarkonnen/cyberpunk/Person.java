@@ -49,7 +49,7 @@ public class Person implements Serializable, HasName {
 	public final ArrayList<Drug> drugsTaken = new ArrayList<Drug>();
 	public final ArrayList<Drug> drugsLingering = new ArrayList<Drug>();
 	
-	public String description = "";
+	public String description = "", jobTitle = "";
 	public EnumSet<ItemType> buyForSelf = EnumSet.noneOf(ItemType.class);
 	public EnumSet<ItemType> buyForWork = EnumSet.noneOf(ItemType.class);
 	public EnumSet<ItemType> sell = EnumSet.noneOf(ItemType.class);
@@ -60,6 +60,10 @@ public class Person implements Serializable, HasName {
 	
 	public void setApproximateSkill(Skill skill, int amt, Random r) {
 		skills.put(skill, (int) (amt * (0.5 + r.nextDouble())));
+	}
+	
+	public void addApproximateSkill(Skill skill, int amt, Random r) {
+		skills.put(skill, skills.get(skill) + (int) (amt * (0.5 + r.nextDouble())));
 	}
 
 	public boolean hasKeyFor(Tile t) {
@@ -207,11 +211,11 @@ public class Person implements Serializable, HasName {
 	
 	@Override
 	public String getName() {
-		return /*itemCount(ItemType.VEGETABLES) + " " + */name + ", " + description;
+		return /*itemCount(ItemType.VEGETABLES) + " " + */name + ", " + jobTitle;
 	}
 	
 	public String description() {
-		String desc = "A " + description + ".";
+		String desc = "A " + jobTitle + "." + description;
 		if (health <= 0) {
 			desc += " They appear to have been knocked out.";
 		}

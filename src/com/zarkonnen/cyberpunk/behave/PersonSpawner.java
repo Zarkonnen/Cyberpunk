@@ -95,6 +95,9 @@ public enum PersonSpawner {
 					p.inventory.add(key);
 				}
 				//System.out.println("Adding: " + p.description());
+				
+				Detail.values()[wm.r.nextInt(Detail.values().length)].doInstall(p, wm.r);
+				
 				wm.addPerson(p);
 			}
 		}

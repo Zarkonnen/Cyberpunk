@@ -36,6 +36,9 @@ public final class Factories {
 		TILE_I_FACTORIES.add(new Lock.F());
 		TILE_I_FACTORIES.add(new Unlock.F());
 		TILE_I_FACTORIES.add(new BuySupply.F());
+		TILE_I_FACTORIES.add(new Adultery.F());
+		TILE_I_FACTORIES.add(new WatchHorriblePorn.F());
+		TILE_I_FACTORIES.add(new StealFromEmployers.F());
 	}
 	
 	public static final List<InteractionFactory<Person, ?>> PERSON_I_FACTORIES = new ArrayList<InteractionFactory<Person, ?>>();

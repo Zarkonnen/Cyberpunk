@@ -615,7 +615,7 @@ public enum Job {
 	}
 	
 	public void doInstall(Person p, Random r) {
-		p.description += jobName;
+		p.jobTitle = jobName;
 		p.buyForWork = buys;
 		p.buyForSelf = buys;
 		p.sell = sells;

@@ -1,6 +1,7 @@
 package com.zarkonnen.cyberpunk.behave;
 
 import com.zarkonnen.cyberpunk.ItemType;
+import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.TileType;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
 import com.zarkonnen.cyberpunk.interaction.ItemInteraction;
@@ -246,6 +247,25 @@ public class InteractionBehavior implements Serializable {
 		public boolean check(Interaction interaction) {
 			int hr = interaction.actor().location().map.hour();
 			return hr >= fromHour && hr <= toHour;
+		}
+	}
+	
+	public InteractionBehavior targetDisliked(int amt) {
+		conditions.add(new TargetDisliked(amt));
+		return this;
+	}
+	
+	public static class TargetDisliked implements Condition {
+		public final int amt;
+
+		public TargetDisliked(int amt) {
+			this.amt = amt;
+		}
+		
+		@Override
+		public boolean check(Interaction interaction) {
+			if (!(interaction.target() instanceof Person)) { return false; }
+			return ((Person) interaction.target()).reputation < amt;
 		}
 	}
 	

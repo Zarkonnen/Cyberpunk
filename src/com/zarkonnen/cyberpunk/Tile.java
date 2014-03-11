@@ -1,5 +1,6 @@
 package com.zarkonnen.cyberpunk;
 
+import com.zarkonnen.cyberpunk.interaction.Adultery;
 import com.zarkonnen.cyberpunk.interaction.Attack;
 import com.zarkonnen.cyberpunk.interaction.BreakIn;
 import com.zarkonnen.cyberpunk.interaction.Datajack;
@@ -16,10 +17,12 @@ import com.zarkonnen.cyberpunk.interaction.Loot;
 import com.zarkonnen.cyberpunk.interaction.Mug;
 import com.zarkonnen.cyberpunk.interaction.Murder;
 import com.zarkonnen.cyberpunk.interaction.Scavenge;
+import com.zarkonnen.cyberpunk.interaction.StealFromEmployers;
 import com.zarkonnen.cyberpunk.interaction.Stun;
 import com.zarkonnen.cyberpunk.interaction.Unlock;
 import com.zarkonnen.cyberpunk.interaction.VisitBrothel;
 import com.zarkonnen.cyberpunk.interaction.VisitDrugDen;
+import com.zarkonnen.cyberpunk.interaction.WatchHorriblePorn;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -141,7 +144,10 @@ public class Tile implements Serializable, HasName {
 			Scavenge.class,
 			Stun.class,
 			VisitBrothel.class,
-			VisitDrugDen.class
+			VisitDrugDen.class,
+			Adultery.class,
+			WatchHorriblePorn.class,
+			StealFromEmployers.class
 		};
 		BLACKMAILABLES.addAll(Arrays.asList(cls));
 	};
