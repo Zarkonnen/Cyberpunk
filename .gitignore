@@ -1,4 +1,5 @@
 .DS_Store
+/java.hprof.txt
 /build.xml
 /build
 /lib
