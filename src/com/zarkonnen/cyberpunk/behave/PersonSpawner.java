@@ -94,7 +94,7 @@ public enum PersonSpawner {
 					key.keyFor = workT;
 					p.inventory.add(key);
 				}
-				System.out.println("Adding: " + p.description());
+				//System.out.println("Adding: " + p.description());
 				wm.addPerson(p);
 			}
 		}

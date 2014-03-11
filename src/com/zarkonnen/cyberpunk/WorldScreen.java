@@ -20,12 +20,16 @@ import com.zarkonnen.cyberpunk.interaction.ItemInteraction;
 import com.zarkonnen.cyberpunk.interaction.MoveInDirection;
 import com.zarkonnen.cyberpunk.interaction.SellToBusiness;
 import com.zarkonnen.cyberpunk.interaction.SellToPerson;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class WorldScreen implements Screen {
+	public final Cyberpunk cyb;
 	public final GameState g;
 	public final WorldMap m;
 	private int topLeftX, topLeftY, topLeftZ;
@@ -33,6 +37,9 @@ public class WorldScreen implements Screen {
 	public final ButtonList inventory = new ButtonList();
 	public final ButtonList interactions = new ButtonList();
 	public static final int LIST_W = 250;
+	public boolean menu = false;
+	public int saveCounter;
+	public int menuSaveAndQuit = 0;
 	
 	public static final int GRID_SIZE = 200;
 	public static final int MS_PER_SCROLL = 200;
@@ -45,7 +52,8 @@ public class WorldScreen implements Screen {
 		p("PERIOD", Direction.DOWN)
 	);
 
-	public WorldScreen(GameState g) {
+	public WorldScreen(Cyberpunk cyb, GameState g) {
+		this.cyb = cyb;
 		this.g = g;
 		m = g.map;
 		inventory.model = new InventoryModel();
@@ -53,7 +61,11 @@ public class WorldScreen implements Screen {
 	}
 	
 	public String help() {
-		return "Arrow keys and ,. to move.";
+		if (saveCounter > 100) {
+			return "Autosaving...";
+		} else {
+			return "Arrow keys and ,. to move.";
+		}
 	}
 	
 	private class InventoryModel implements ButtonList.Model {
@@ -254,6 +266,7 @@ public class WorldScreen implements Screen {
 					public void run() {
 						if (interaction != null) {
 							g.playerAction(interaction);
+							saveMaybe();
 						}
 					}
 				});
@@ -324,6 +337,7 @@ public class WorldScreen implements Screen {
 					@Override
 					public void run() {
 						g.playerAction(ti);
+						saveMaybe();
 					}
 				});
 			}
@@ -331,9 +345,23 @@ public class WorldScreen implements Screen {
 			return l;
 		}
 	}
+	
+	private void inputMenu(Input in) {
+		if (menuSaveAndQuit > 0) {
+			menuSaveAndQuit++;
+		}
+		if (menuSaveAndQuit > 2) {
+			save();
+			System.exit(0);
+		}
+	}
 
 	@Override
 	public void input(Input in) {
+		if (menu) {
+			inputMenu(in);
+			return;
+		}
 		msSinceScroll += in.msDelta();
 		if (msSinceScroll >= MS_PER_SCROLL) {
 			for (Pair<String, Direction> dk : DIRECTION_KEYS) {
@@ -341,6 +369,7 @@ public class WorldScreen implements Screen {
 					g.playerAction(new MoveInDirection(dk.b, g.player, g.player.location()));
 					interactions.scroll = 0;
 					msSinceScroll = 0;
+					saveMaybe();
 				}
 			}
 		}
@@ -359,10 +388,82 @@ public class WorldScreen implements Screen {
 		if (!g.player.messages.isEmpty() && in.keyPressed("SPACE")) {
 			g.player.messages.pollFirst();
 		}
+		
+		if (saveCounter > 100) {
+			saveCounter++;
+		}
+		if (saveCounter > 103) {
+			save();
+			saveCounter = 0;
+		}
+	}
+	
+	private void renderMenu(Draw d, ScreenMode sm) {
+		d.rect(BG, 0, 0, sm.width, sm.height);
+		if (menuSaveAndQuit > 0) {
+			Pt pt = d.textSize("Saving...", Cyberpunk.OCRA);
+			d.text(TEXT_PREFIX + "Saving...", Cyberpunk.OCRA, sm.width / 2 - (int) pt.x / 2, sm.height / 2 - (int) pt.y / 2);
+			return;
+		}
+		int h = 3 * (BUTTON_H + MARGIN_Y) - MARGIN_Y;
+		int w = 250;
+		int x = sm.width / 2 - w / 2;
+		int y = sm.height / 2 - h / 2;
+		button(d, "Return", "Return to the game.", x, y, w, new Runnable() {
+			@Override
+			public void run() {
+				menu = false;
+			}
+		}, true, false);
+		y += BUTTON_H + MARGIN_Y;
+		button(d, "Reset", "Start a new game.", x, y, w, new Runnable() {
+			@Override
+			public void run() {
+				reset();
+				menu = false;
+			}
+		}, true, false);
+		y += BUTTON_H + MARGIN_Y;
+		button(d, "Quit", "Exit the game.", x, y, w, new Runnable() {
+			@Override
+			public void run() {
+				menuSaveAndQuit = 1;
+			}
+		}, true, false);
+		y += BUTTON_H + MARGIN_Y;
+	}
+	
+	private void saveMaybe() {
+		saveCounter++;
+	}
+	
+	private void save() {
+		File f = new File("cyberpunk_save");
+		System.out.println(f.getAbsoluteFile());
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(new FileOutputStream(f));
+			oos.writeObject(g);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { oos.flush(); oos.close(); } catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Done!");
+	}
+	
+	private void reset() {
+		cyb.currentScreen = new SetupScreen(cyb);
 	}
 
 	@Override
 	public void render(Draw d, ScreenMode sm) {
+		if (menu) {
+			renderMenu(d, sm);
+			return;
+		}
 		if (g.player.unconscious()) {
 			d.rect(Clr.BLACK, 0, 0, sm.width, sm.height);
 			d.text(TEXT_PREFIX + "You are unconscious.", Cyberpunk.OCRA, sm.width / 2 - 125, sm.height / 2);
@@ -436,5 +537,12 @@ public class WorldScreen implements Screen {
 			});
 			d.text(TEXT_PREFIX + g.player.messages.get(0), Cyberpunk.OCRA, sm.width / 2 - 150 + PADDING, sm.height / 2 - 150 + PADDING, 300 - PADDING * 2);
 		}
+		
+		button(d, "Menu", null, sm.width / 2 - 125, 0, 250, new Runnable() {
+			@Override
+			public void run() {
+				menu = true;
+			}
+		}, true, false);
 	}
 }

@@ -5,9 +5,10 @@ import com.zarkonnen.cyberpunk.TileType;
 import com.zarkonnen.cyberpunk.interaction.Interaction;
 import com.zarkonnen.cyberpunk.interaction.ItemInteraction;
 import com.zarkonnen.cyberpunk.interaction.MoveToType;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class InteractionBehavior {
+public class InteractionBehavior implements Serializable {
 	public final ArrayList<Condition> conditions = new ArrayList<Condition>();
 
 	public boolean enabled(Interaction interaction) {
@@ -23,7 +24,7 @@ public class InteractionBehavior {
 		return ib;
 	}
 	
-	public static interface Condition {
+	public static interface Condition extends Serializable {
 		public boolean check(Interaction interaction);
 	}
 	

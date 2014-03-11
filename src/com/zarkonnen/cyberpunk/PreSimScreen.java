@@ -25,7 +25,7 @@ public class PreSimScreen implements Screen {
 		tick++;
 		if (tick > PRESIM_TICKS) {
 			gs.player = gs.map.makePlayer(cc);
-			g.currentScreen = new WorldScreen(gs);
+			g.currentScreen = new WorldScreen(g, gs);
 		}
 	}
 

@@ -15,8 +15,8 @@ public class SetupScreen implements Screen {
 
 	@Override
 	public void input(Input in) {
-		
 	}
+	
 
 	@Override
 	public void render(Draw d, ScreenMode sm) {
