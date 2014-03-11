@@ -73,7 +73,7 @@ public class Person implements Serializable, HasName {
 		return false;
 	}
 	
-	public static class Drug {
+	public static class Drug implements Serializable {
 		public final Item drug;
 		public int counter;
 
