@@ -160,6 +160,11 @@ public class InteractionBehavior {
 		return this;
 	}
 	
+	public InteractionBehavior hasMoney(int money) {
+		conditions.add(new Not(new Poor(money)));
+		return this;
+	}
+	
 	public static class Poor implements Condition {
 		public final int money;
 

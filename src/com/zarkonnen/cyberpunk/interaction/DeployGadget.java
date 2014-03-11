@@ -16,7 +16,7 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 
 	@Override
 	public String getName() {
-		return "Deploy gadgets.";
+		return "Deploy " + gadget.getName();
 	}
 
 	@Override
@@ -26,14 +26,14 @@ public class DeployGadget extends AbstractInteraction<Tile> implements ItemInter
 
 	@Override
 	public String getDescription() {
-		return "Install wiretaps, hide bugs or set up drones.";
+		return "Install a " + gadget.getName() + " to keep tabs on things.";
 	}
 
 	@Override
 	public String run() {
 		exhaust(3);
 		actor().inventory.remove(gadget);
-		target().inventory.add(gadget);
+		target().gadgets.add(new Tile.Gadget(r().nextInt(50), actor(), gadget));
 		return "You smoothly deploy the " + gadget.getName() + ".";
 	}
 

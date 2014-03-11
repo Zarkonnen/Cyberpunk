@@ -17,7 +17,7 @@ public class MoveToMapEdge extends AbstractInteraction<Tile> {
 
 	@Override
 	public String disabledReason() {
-		return null;
+		return target().towardsEdge() == null ? "You are at the edge." : null;
 	}
 
 	@Override

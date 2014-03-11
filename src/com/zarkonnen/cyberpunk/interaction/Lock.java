@@ -45,7 +45,6 @@ public class Lock extends AbstractInteraction<Tile> implements ItemInteraction {
 	}
 	
 	public static class F implements InteractionFactory<Tile, Lock> {
-
 		@Override
 		public List<Lock> make(Person actor, Tile t) {
 			ArrayList<Lock> l = new ArrayList<Lock>();
@@ -56,7 +55,5 @@ public class Lock extends AbstractInteraction<Tile> implements ItemInteraction {
 			}
 			return l;
 		}
-		
 	}
-	
 }

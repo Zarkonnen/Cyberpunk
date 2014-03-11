@@ -17,7 +17,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 	
 	@Override
 	public String getName() {
-		return "Sell " + item.getName() + " to the " + target().workplace.getName() + " for $" + item.type.value;
+		return "Sell " + item.getName() + " ($" + item.type.value + ")";
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 
 	@Override
 	public String getDescription() {
-		return "Engage in commercial transactions.";
+		return "Sell " + item.getName() + " to the " + target().workplace.getName() + " for $" + item.type.value;
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class SellToBusiness extends AbstractInteraction<Person> implements ItemI
 		if (!item.type.data) {
 			actor().inventory.remove(item);
 		}
-		return "You sell the " + item.getName() + ".";
+		return null;//"You sell the " + item.getName() + ".";
 	}
 
 	@Override

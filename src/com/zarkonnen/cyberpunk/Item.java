@@ -18,7 +18,7 @@ public class Item implements Serializable, HasName {
 	@Override
 	public String getName() {
 		if (keyFor != null) {
-			return "Key for " + keyFor.getName();
+			return (type.data ? "Password " : "Key ") + "for " + keyFor.getName();
 		}
 		if (blackmailFor != null) {
 			return "Blackmail material on " + blackmailFor.getName();

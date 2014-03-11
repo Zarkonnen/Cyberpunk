@@ -30,17 +30,21 @@ public class Rest extends AbstractInteraction<Tile> {
 
 	@Override
 	public String getDescription() {
-		return "Sit down, maybe close your eyes for a moment.";
+		if (target() == actor().home) {
+			return "Have a lie down. You're at home.";
+		} else {
+			return "Sit down, maybe close your eyes for a moment.";
+		}
 	}
 
 	@Override
 	public String run() {
 		if (target() == actor().home) {
 			actor().removeExhaustion(HOME_REST_AMT);
-			return "You make a clearing in the electronic junk and kip for a little while. It's nice to be home.";
+			return null;//"You make a clearing in the electronic junk and kip for a little while. It's nice to be home.";
 		} else {
 			actor().removeExhaustion(ELSEWHERE_REST_AMT);
-			return "You sit down and rest your eyes for a moment.";
+			return null;//"You sit down and rest your eyes for a moment.";
 		}
 	}
 	

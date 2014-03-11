@@ -33,6 +33,7 @@ public class VisitBrothel extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
+		actor().money -= COST;
 		actor().removeExhaustion(EXHAUSTION_DECREASE);
 		return "You have A Good Time.";
 	}

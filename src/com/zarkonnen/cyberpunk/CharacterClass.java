@@ -9,19 +9,25 @@ public enum CharacterClass {
 			p.setSkill(Skill.HACKING, 50);
 			p.setSkill(Skill.COUNTER_INTRUSION, 50);
 			p.setSkill(Skill.GRINDING, 10);
-			p.setSkill(Skill.SCAVENGING, 20);
+			p.setSkill(Skill.SCAVENGING, 30);
 			p.setSkill(Skill.OBSERVATION, 20);
 			
 			p.inventory.add(new Item(ItemType.AR_GOGGLES));
+			p.money = 50;
+			p.reputation = 90;
 		}
 	},
 	SCAVENGER("Scavenger", "Finding things is your business. Who cares who those things belonged to? They're yours now.") {
 		@Override
 		public void install(Person p, Random r) {
 			p.setSkill(Skill.HACKING, 10);
+			p.setSkill(Skill.FIGHTING, 10);
 			p.setSkill(Skill.BREAKING_AND_ENTERING, 30);
 			p.setSkill(Skill.SCAVENGING, 50);
-			p.setSkill(Skill.OBSERVATION, 30);			
+			p.setSkill(Skill.OBSERVATION, 30);
+			
+			p.money = 10;
+			p.reputation = 85;
 		}
 	},
 	GRINDER("Grinder", "Augments and implants. Improve yourself!") {
@@ -29,10 +35,12 @@ public enum CharacterClass {
 		public void install(Person p, Random r) {
 			p.setSkill(Skill.HACKING, 10);
 			p.setSkill(Skill.GRINDING, 60);
-			p.setSkill(Skill.SCAVENGING, 20);
+			p.setSkill(Skill.SCAVENGING, 30);
 			p.setSkill(Skill.FIGHTING, 10);
 			
 			p.inventory.add(new Item(ItemType.GRINDER_TOOLS));
+			p.money = 100;
+			p.reputation = 90;
 		}
 	},
 	SOCIAL_ENGINEER("Social Engineer", "You can be very... convincing if needed.") {
@@ -41,8 +49,11 @@ public enum CharacterClass {
 			p.setSkill(Skill.HACKING, 30);
 			p.setSkill(Skill.FORCE_OF_PERSONALITY, 50);
 			p.setSkill(Skill.OBSERVATION, 10);
+			p.setSkill(Skill.SCAVENGING, 10);
 			
 			p.inventory.add(new Item(ItemType.AR_GOGGLES));
+			p.money = 200;
+			p.reputation = 90;
 		}
 	},
 	SECURITY_SPECIALIST("Security Specialist", "Keeping things safe can mean a lot of things.") {
@@ -52,9 +63,11 @@ public enum CharacterClass {
 			p.setSkill(Skill.OBSERVATION, 40);
 			p.setSkill(Skill.FIGHTING, 20);
 			p.setSkill(Skill.BREAKING_AND_ENTERING, 20);
-			p.setSkill(Skill.SCAVENGING, 10);
+			p.setSkill(Skill.SCAVENGING, 20);
 			
 			p.inventory.add(new Item(ItemType.AR_GOGGLES));
+			p.money = 100;
+			p.reputation = 100;
 		}
 	},
 	BRUISER("Bruiser", "Handy with a knife.") {
@@ -64,9 +77,11 @@ public enum CharacterClass {
 			p.setSkill(Skill.FIGHTING, 50);
 			p.setSkill(Skill.GRINDING, 10);
 			p.setSkill(Skill.BREAKING_AND_ENTERING, 20);
-			p.setSkill(Skill.SCAVENGING, 10);
+			p.setSkill(Skill.SCAVENGING, 30);
 			
 			p.inventory.add(new Item(ItemType.SWITCHBLADE));
+			p.money = 20;
+			p.reputation = 90;
 		}
 	};
 		

@@ -61,6 +61,7 @@ public final class Factories {
 	static {
 		ITEM_I_FACTORIES.add(new RemoveImplant.F());
 		ITEM_I_FACTORIES.add(new ImplantImplant.F());
+		ITEM_I_FACTORIES.add(new TakeDrug.F());
 		ITEM_I_FACTORIES.add(new Eat.F());
 		ITEM_I_FACTORIES.add(new FirstAid.F());
 		ITEM_I_FACTORIES.add(new Disseminate.F());

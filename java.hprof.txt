@@ -1,0 +1,2791 @@
+JAVA PROFILE 1.0.1, created Tue Mar 11 17:40:37 2014
+
+Header for -agentlib:hprof (or -Xrunhprof) ASCII Output (JDK 5.0 JVMTI based)
+
+%W% %E%
+
+ Copyright (c) 2006 Sun Microsystems, Inc. All  Rights Reserved.
+
+WARNING!  This file format is under development, and is subject to
+change without notice.
+
+This file contains the following types of records:
+
+THREAD START
+THREAD END      mark the lifetime of Java threads
+
+TRACE           represents a Java stack trace.  Each trace consists
+                of a series of stack frames.  Other records refer to
+                TRACEs to identify (1) where object allocations have
+                taken place, (2) the frames in which GC roots were
+                found, and (3) frequently executed methods.
+
+HEAP DUMP       is a complete snapshot of all live objects in the Java
+                heap.  Following distinctions are made:
+
+                ROOT    root set as determined by GC
+                CLS     classes 
+                OBJ     instances
+                ARR     arrays
+
+SITES           is a sorted list of allocation sites.  This identifies
+                the most heavily allocated object types, and the TRACE
+                at which those allocations occurred.
+
+CPU SAMPLES     is a statistical profile of program execution.  The VM
+                periodically samples all running threads, and assigns
+                a quantum to active TRACEs in those threads.  Entries
+                in this record are TRACEs ranked by the percentage of
+                total quanta they consumed; top-ranked TRACEs are
+                typically hot spots in the program.
+
+CPU TIME        is a profile of program execution obtained by measuring
+                the time spent in individual methods (excluding the time
+                spent in callees), as well as by counting the number of
+                times each method is called. Entries in this record are
+                TRACEs ranked by the percentage of total CPU time. The
+                "count" field indicates the number of times each TRACE 
+                is invoked.
+
+MONITOR TIME    is a profile of monitor contention obtained by measuring
+                the time spent by a thread waiting to enter a monitor.
+                Entries in this record are TRACEs ranked by the percentage
+                of total monitor contention time and a brief description
+                of the monitor.  The "count" field indicates the number of 
+                times the monitor was contended at that TRACE.
+
+MONITOR DUMP    is a complete snapshot of all the monitors and threads in 
+                the System.
+
+HEAP DUMP, SITES, CPU SAMPLES|TIME and MONITOR DUMP|TIME records are generated 
+at program exit.  They can also be obtained during program execution by typing 
+Ctrl-\ (on Solaris) or by typing Ctrl-Break (on Win32).
+
+--------
+
+THREAD START (obj=50000150, id = 200001, name="main", group="main")
+THREAD START (obj=50000305, id = 200004, name="Thread-3", group="main")
+THREAD START (obj=50000306, id = 200005, name="AWT-Shutdown", group="main")
+THREAD START (obj=50000384, id = 200006, name="AWT-EventQueue-0", group="main")
+THREAD START (obj=500003e5, id = 200007, name="Java2D Disposer", group="system")
+THREAD START (obj=500006d5, id = 200008, name="Thread-4", group="main")
+THREAD END (id = 200008)
+THREAD START (obj=500006f8, id = 200010, name="SIGTERM handler", group="system")
+THREAD START (obj=500006fc, id = 200011, name="Thread-2", group="main")
+THREAD END (id = 200011)
+THREAD START (obj=500006fd, id = 200012, name="Thread-1", group="main")
+THREAD END (id = 200012)
+THREAD END (id = 200010)
+TRACE 300746:
+	org.lwjgl.opengl.MacOSXContextImplementation.nSwapBuffers(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.swapBuffers(MacOSXContextImplementation.java:62)
+	org.lwjgl.opengl.ContextGL.swapBuffers(ContextGL.java:175)
+	org.lwjgl.opengl.DrawableGL.swapBuffers(DrawableGL.java:90)
+TRACE 300755:
+	org.lwjgl.opengl.GL11.nglBegin(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glBegin(GL11.java:683)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glBegin(ImmediateModeOGLRenderer.java:71)
+	org.newdawn.slick.Image.draw(Image.java:1007)
+TRACE 300754:
+	org.lwjgl.opengl.GL11.nglColor4f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glColor4f(GL11.java:882)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glColor4f(ImmediateModeOGLRenderer.java:127)
+	org.newdawn.slick.Color.bind(Color.java:182)
+TRACE 300900:
+	org.lwjgl.opengl.GL11.nglBegin(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glBegin(GL11.java:683)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glBegin(ImmediateModeOGLRenderer.java:71)
+	org.newdawn.slick.Graphics.fillRect(Graphics.java:891)
+TRACE 300826:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300883:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check(InteractionBehavior.java:118)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300846:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$TimeBetween.check(InteractionBehavior.java:246)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300835:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:100)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 300838:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:228)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301030:
+	org.lwjgl.opengl.GL11.nglVertex3f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex3f(GL11.java:2690)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex3f(ImmediateModeOGLRenderer.java:309)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:729)
+TRACE 300750:
+	org.lwjgl.opengl.GL11.nglTexCoord2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTexCoord2f(GL11.java:3145)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTexCoord2f(ImmediateModeOGLRenderer.java:281)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:728)
+TRACE 300764:
+	java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager(KeyboardFocusManager.java:180)
+	java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager(KeyboardFocusManager.java:174)
+	java.awt.Component.hasFocus(Component.java:7910)
+	java.awt.Component.isFocusOwner(Component.java:7923)
+TRACE 300799:
+	org.lwjgl.opengl.GL11.nglEnd(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glEnd(GL11.java:692)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glEnd(ImmediateModeOGLRenderer.java:169)
+	org.newdawn.slick.Image.draw(Image.java:1009)
+TRACE 300880:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	com.zarkonnen.cyberpunk.Tile.observe(Tile.java:159)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:95)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300840:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:228)
+	com.zarkonnen.cyberpunk.Tile.inBusiness(Tile.java:82)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:58)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:55)
+TRACE 300752:
+	java.lang.Thread.yield(Thread.java:Unknown line)
+	org.lwjgl.opengl.Sync.sync(Sync.java:81)
+	org.lwjgl.opengl.Display.sync(Display.java:408)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:718)
+TRACE 300876:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$TimeBetween.check(InteractionBehavior.java:246)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300562:
+	apple.awt.CGraphicsEnvironment.loadNativeFonts(CGraphicsEnvironment.java:Unknown line)
+	apple.awt.CGraphicsEnvironment.access$000(CGraphicsEnvironment.java:18)
+	apple.awt.CGraphicsEnvironment$1.run(CGraphicsEnvironment.java:196)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 301017:
+	org.lwjgl.opengl.GL11.nglTranslatef(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTranslatef(GL11.java:2738)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTranslatef(ImmediateModeOGLRenderer.java:295)
+	org.newdawn.slick.Image.draw(Image.java:1000)
+TRACE 301029:
+	org.lwjgl.opengl.GL11.nglTranslatef(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTranslatef(GL11.java:2738)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTranslatef(ImmediateModeOGLRenderer.java:295)
+	org.newdawn.slick.Image.draw(Image.java:1016)
+TRACE 300836:
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:98)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:48)
+TRACE 301076:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.GameState.playerAction(GameState.java:25)
+TRACE 300893:
+	java.util.AbstractList$Itr.hasNext(AbstractList.java:339)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:126)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+TRACE 300828:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:228)
+	com.zarkonnen.cyberpunk.Tile.inBusiness(Tile.java:82)
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:60)
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:57)
+TRACE 301131:
+	apple.awt.CGraphicsDevice.exitFullScreen(CGraphicsDevice.java:Unknown line)
+	apple.awt.CGraphicsDevice.exitFullScreenExclusive(CGraphicsDevice.java:452)
+	apple.awt.CGraphicsDevice.setFullScreenWindowSynchronized(CGraphicsDevice.java:378)
+	apple.awt.CGraphicsDevice.access$000(CGraphicsDevice.java:25)
+TRACE 301035:
+	org.lwjgl.opengl.GL11.nglVertex2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex2f(GL11.java:2666)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex2f(ImmediateModeOGLRenderer.java:302)
+	org.newdawn.slick.Graphics.fillRect(Graphics.java:892)
+TRACE 300875:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300798:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:99)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 301060:
+	org.lwjgl.opengl.GL11.nglTexCoord2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTexCoord2f(GL11.java:3145)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTexCoord2f(ImmediateModeOGLRenderer.java:281)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:730)
+TRACE 300909:
+	org.lwjgl.opengl.GL11.nglVertex3f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex3f(GL11.java:2690)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex3f(ImmediateModeOGLRenderer.java:309)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:734)
+TRACE 301044:
+	org.lwjgl.opengl.GL11.nglTexCoord2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTexCoord2f(GL11.java:3145)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTexCoord2f(ImmediateModeOGLRenderer.java:281)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:732)
+TRACE 300761:
+	org.lwjgl.opengl.GL11.nglVertex3f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex3f(GL11.java:2690)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex3f(ImmediateModeOGLRenderer.java:309)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:731)
+TRACE 300245:
+	java.lang.ClassLoader$NativeLibrary.load(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.loadLibrary0(ClassLoader.java:1833)
+	java.lang.ClassLoader.loadLibrary(ClassLoader.java:1730)
+	java.lang.Runtime.loadLibrary0(Runtime.java:823)
+TRACE 300852:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.EnumMap.isValidKey(EnumMap.java:292)
+	java.util.EnumMap.containsKey(EnumMap.java:196)
+	com.zarkonnen.cyberpunk.interaction.DoWork$F.make(DoWork.java:167)
+TRACE 300698:
+	net.java.games.input.OSXHIDDevice.nGetDeviceProperties(OSXHIDDevice.java:Unknown line)
+	net.java.games.input.OSXHIDDevice.getDeviceProperties(OSXHIDDevice.java:277)
+	net.java.games.input.OSXHIDDevice.<init>(OSXHIDDevice.java:112)
+	net.java.games.input.OSXHIDDeviceIterator.nNext(OSXHIDDeviceIterator.java:Unknown line)
+TRACE 300887:
+	java.lang.Object.clone(Object.java:Unknown line)
+	com.zarkonnen.cyberpunk.Direction.values(Direction.java:5)
+	com.zarkonnen.cyberpunk.interaction.Wander.run(Wander.java:31)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+TRACE 300870:
+	java.util.AbstractList$Itr.hasNext(AbstractList.java:339)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:122)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+TRACE 300963:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check(InteractionBehavior.java:118)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300410:
+	apple.awt.CGraphicsEnvironment.loadNativeDirFonts(CGraphicsEnvironment.java:Unknown line)
+	apple.awt.CGraphicsEnvironment.registerFontsInDir(CGraphicsEnvironment.java:144)
+	sun.java2d.SunGraphicsEnvironment$2.run(SunGraphicsEnvironment.java:226)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300894:
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:703)
+TRACE 300714:
+	org.lwjgl.opengl.GL11.nglClear(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glClear(GL11.java:588)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glClear(ImmediateModeOGLRenderer.java:99)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:693)
+TRACE 300813:
+	java.util.HashMap.put(HashMap.java:374)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+TRACE 301049:
+	org.lwjgl.opengl.GL11.nglTexCoord2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glTexCoord2f(GL11.java:3145)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glTexCoord2f(ImmediateModeOGLRenderer.java:281)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:735)
+TRACE 301034:
+	org.lwjgl.opengl.GL11.nglEnable(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glEnable(GL11.java:1003)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glEnable(ImmediateModeOGLRenderer.java:162)
+	org.newdawn.slick.opengl.TextureImpl.bind(TextureImpl.java:142)
+TRACE 300814:
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason(MoveToHome.java:23)
+TRACE 301085:
+	org.lwjgl.opengl.GL11.nglVertex3f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex3f(GL11.java:2690)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex3f(ImmediateModeOGLRenderer.java:309)
+	org.newdawn.slick.Image.drawEmbedded(Image.java:736)
+TRACE 300854:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300889:
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:60)
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:57)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300811:
+	java.util.HashMap.transfer(HashMap.java:484)
+	java.util.HashMap.resize(HashMap.java:463)
+	java.util.HashMap.addEntry(HashMap.java:755)
+	java.util.HashMap.put(HashMap.java:385)
+TRACE 300959:
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:76)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:67)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 301064:
+	org.lwjgl.opengl.GL11.nglBindTexture(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glBindTexture(GL11.java:653)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glBindTexture(ImmediateModeOGLRenderer.java:78)
+	org.newdawn.slick.opengl.TextureImpl.bind(TextureImpl.java:143)
+TRACE 301041:
+	java.lang.String.intern(String.java:Unknown line)
+	java.lang.Class.searchFields(Class.java:2656)
+	java.lang.Class.getField0(Class.java:2675)
+	java.lang.Class.getField(Class.java:1554)
+TRACE 301032:
+	java.lang.System.currentTimeMillis(System.java:Unknown line)
+	org.lwjgl.J2SESysImplementation.getTime(J2SESysImplementation.java:47)
+	org.lwjgl.Sys.getTime(Sys.java:178)
+	org.newdawn.slick.GameContainer.getTime(GameContainer.java:468)
+TRACE 300832:
+	com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make(RemoveImplant.java:69)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300850:
+	java.util.AbstractList.iterator(AbstractList.java:273)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:120)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+TRACE 300856:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 301103:
+	java.lang.Class.getClassLoader0(Class.java:Unknown line)
+	java.lang.ClassLoader.getCallerClassLoader(ClassLoader.java:1395)
+	java.lang.Class.getField(Class.java:1553)
+	com.zarkonnen.catengine.SlickEngine$MyInput.keyDown(SlickEngine.java:140)
+TRACE 300877:
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:58)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:55)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301065:
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:27)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:678)
+TRACE 301059:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.EnumSet.typeCheck(EnumSet.java:361)
+	java.util.RegularEnumSet.add(RegularEnumSet.java:141)
+	java.util.RegularEnumSet.add(RegularEnumSet.java:18)
+TRACE 300978:
+	com.zarkonnen.cyberpunk.interaction.Buy.getItem(Buy.java:64)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$IItemType.check(InteractionBehavior.java:64)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301039:
+	org.lwjgl.opengl.GL11.nglEnd(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glEnd(GL11.java:692)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glEnd(ImmediateModeOGLRenderer.java:169)
+	org.newdawn.slick.Graphics.fillRect(Graphics.java:896)
+TRACE 300226:
+	java.lang.ClassLoader.defineClass1(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.defineClassCond(ClassLoader.java:637)
+	java.lang.ClassLoader.defineClass(ClassLoader.java:621)
+	java.security.SecureClassLoader.defineClass(SecureClassLoader.java:141)
+TRACE 300788:
+	com.zarkonnen.cyberpunk.WorldMap.tilesOfType(WorldMap.java:148)
+	com.zarkonnen.cyberpunk.WorldMap.randomOfType(WorldMap.java:157)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.install(PersonSpawner.java:72)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.installAll(PersonSpawner.java:105)
+TRACE 300896:
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+	com.zarkonnen.cyberpunk.interaction.MoveToWork.disabledReason(MoveToWork.java:23)
+TRACE 300872:
+	com.zarkonnen.cyberpunk.interaction.Stun$F.make(Stun.java:64)
+	com.zarkonnen.cyberpunk.interaction.Stun$F.make(Stun.java:55)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300576:
+	apple.awt.ComponentModel._setBounds(ComponentModel.java:Unknown line)
+	apple.awt.ComponentModel.setBounds(ComponentModel.java:155)
+	java.awt.Component.reshapeNativePeer(Component.java:2255)
+	java.awt.Component.reshape(Component.java:2203)
+TRACE 301056:
+	sun.misc.Unsafe.copyMemory(Unsafe.java:Unknown line)
+	java.nio.Bits.copyFromArray(Bits.java:695)
+	java.nio.DirectByteBuffer.put(DirectByteBuffer.java:360)
+	java.nio.ByteBuffer.put(ByteBuffer.java:813)
+TRACE 301036:
+	java.lang.Thread.currentThread(Thread.java:Unknown line)
+	java.lang.ThreadLocal.get(ThreadLocal.java:124)
+	org.lwjgl.opengl.ContextGL.getCurrentContext(ContextGL.java:107)
+	org.lwjgl.opengl.MacOSXContextImplementation.swapBuffers(MacOSXContextImplementation.java:58)
+TRACE 301061:
+	sun.reflect.Reflection.getCallerClass(Reflection.java:Unknown line)
+	java.lang.ClassLoader.getCallerClassLoader(ClassLoader.java:1389)
+	java.lang.Class.getField(Class.java:1553)
+	com.zarkonnen.catengine.SlickEngine$MyInput.keyDown(SlickEngine.java:140)
+TRACE 300605:
+	apple.awt.CWindow._setVisible(CWindow.java:Unknown line)
+	apple.awt.CWindow.doSetVisible(CWindow.java:805)
+	apple.awt.CWindow.setVisible(CWindow.java:814)
+	apple.awt.CComponent.show(CComponent.java:219)
+TRACE 300885:
+	java.util.AbstractList.iterator(AbstractList.java:273)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:120)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+TRACE 300918:
+	com.zarkonnen.cyberpunk.interaction.FirstAid$F.make(FirstAid.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300917:
+	com.zarkonnen.cyberpunk.interaction.BlackmailForItem$F.make(BlackmailForItem.java:60)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300932:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301098:
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:98)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.GameState.playerAction(GameState.java:25)
+	com.zarkonnen.cyberpunk.WorldScreen.input(WorldScreen.java:337)
+TRACE 300902:
+	java.io.FileOutputStream.writeBytes(FileOutputStream.java:Unknown line)
+	java.io.FileOutputStream.write(FileOutputStream.java:282)
+	java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:65)
+	java.io.BufferedOutputStream.flush(BufferedOutputStream.java:123)
+TRACE 300628:
+	apple.awt.CGlobalCursorManager.findHeavyweightUnderCursor(CGlobalCursorManager.java:Unknown line)
+	apple.awt.CGlobalCursorManager._updateCursor(CGlobalCursorManager.java:130)
+	apple.awt.CGlobalCursorManager.updateCursorImmediately(CGlobalCursorManager.java:75)
+	apple.awt.ComponentModel.updateCursorImmediately(ComponentModel.java:166)
+TRACE 300975:
+	com.zarkonnen.cyberpunk.interaction.Wander.run(Wander.java:31)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300944:
+	com.zarkonnen.cyberpunk.interaction.BlackmailForMoney$F.make(BlackmailForMoney.java:49)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 301055:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+TRACE 300891:
+	java.lang.System.currentTimeMillis(System.java:Unknown line)
+	org.lwjgl.J2SESysImplementation.getTime(J2SESysImplementation.java:47)
+	org.lwjgl.Sys.getTime(Sys.java:178)
+	org.lwjgl.opengl.Sync.getTime(Sync.java:133)
+TRACE 300942:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301075:
+	com.zarkonnen.cyberpunk.interaction.MoveToWork$F.make(MoveToWork.java:44)
+	com.zarkonnen.cyberpunk.interaction.MoveToWork$F.make(MoveToWork.java:40)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301070:
+	sun.misc.Unsafe.getByte(Unsafe.java:Unknown line)
+	java.nio.DirectByteBuffer.get(DirectByteBuffer.java:248)
+	org.lwjgl.input.Keyboard.isKeyDown(Keyboard.java:399)
+	org.newdawn.slick.Input.isKeyDown(Input.java:754)
+TRACE 300637:
+	apple.awt.CComponent._requestFocus(CComponent.java:Unknown line)
+	apple.awt.CComponent.requestFocus(CComponent.java:56)
+	java.awt.Component.requestFocusHelper(Component.java:7571)
+	java.awt.Component.requestFocusHelper(Component.java:7524)
+TRACE 301037:
+	org.lwjgl.opengl.GL11.nglDisable(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glDisable(GL11.java:1011)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glDisable(ImmediateModeOGLRenderer.java:155)
+	org.newdawn.slick.opengl.TextureImpl.bindNone(TextureImpl.java:124)
+TRACE 300863:
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:66)
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:63)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300833:
+	java.util.AbstractCollection.toArray(AbstractCollection.java:119)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300922:
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:65)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300969:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300753:
+	java.util.regex.Pattern$BitClass.<init>(Pattern.java:2910)
+	java.util.regex.Pattern.clazz(Pattern.java:2190)
+	java.util.regex.Pattern.sequence(Pattern.java:1818)
+	java.util.regex.Pattern.expr(Pattern.java:1752)
+TRACE 300736:
+	org.lwjgl.opengl.MacOSXContextImplementation.setView(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.makeCurrent(MacOSXContextImplementation.java:103)
+	org.lwjgl.opengl.ContextGL.makeCurrent(ContextGL.java:194)
+	org.lwjgl.opengl.DrawableGL.makeCurrent(DrawableGL.java:110)
+TRACE 300842:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.toArray(ArrayList.java:275)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+TRACE 300968:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:226)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300980:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:100)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 300952:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300744:
+	apple.awt.CGraphicsDevice.enterFullScreen(CGraphicsDevice.java:Unknown line)
+	apple.awt.CGraphicsDevice.enterFullScreenExclusive(CGraphicsDevice.java:445)
+	apple.awt.CGraphicsDevice.setFullScreenWindowSynchronized(CGraphicsDevice.java:424)
+	apple.awt.CGraphicsDevice.access$000(CGraphicsDevice.java:25)
+TRACE 300947:
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:57)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300998:
+	com.zarkonnen.cyberpunk.interaction.Rest.run(Rest.java:42)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300747:
+	org.lwjgl.opengl.MacOSXContextImplementation.clearDrawable(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.resetView(MacOSXContextImplementation.java:92)
+	org.lwjgl.opengl.MacOSXDisplay.update(MacOSXDisplay.java:278)
+	org.lwjgl.opengl.Display.processMessages(Display.java:597)
+TRACE 301100:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.put(HeapByteBuffer.java:183)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:65)
+	org.lwjgl.opengl.MacOSXDisplay.readMouse(MacOSXDisplay.java:345)
+TRACE 301006:
+	java.util.ArrayList.size(ArrayList.java:177)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$UnobservedExceptVictim.check(InteractionBehavior.java:271)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301097:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.compact(HeapByteBuffer.java:204)
+	org.lwjgl.input.Keyboard.read(Keyboard.java:385)
+	org.lwjgl.input.Keyboard.poll(Keyboard.java:380)
+TRACE 301009:
+	java.util.ArrayList.contains(ArrayList.java:199)
+	com.zarkonnen.cyberpunk.Person.willBuyForSelf(Person.java:181)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:62)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+TRACE 301020:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:16)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300938:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.ArrayList.fastRemove(ArrayList.java:439)
+	java.util.ArrayList.remove(ArrayList.java:424)
+	com.zarkonnen.cyberpunk.interaction.BuySupply.run(BuySupply.java:42)
+TRACE 300923:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:226)
+	com.zarkonnen.cyberpunk.Tile.inBusiness(Tile.java:82)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:58)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make(RemoveImplantAtClinic.java:55)
+TRACE 300920:
+	com.zarkonnen.cyberpunk.interaction.Lock$F.make(Lock.java:50)
+	com.zarkonnen.cyberpunk.interaction.Lock$F.make(Lock.java:47)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301096:
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel.buttons(WorldScreen.java:214)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:417)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+TRACE 301040:
+	org.lwjgl.opengl.GL11.nglVertex2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex2f(GL11.java:2666)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex2f(ImmediateModeOGLRenderer.java:302)
+	org.newdawn.slick.Graphics.fillRect(Graphics.java:894)
+TRACE 301104:
+	java.lang.Thread.sleep(Thread.java:Unknown line)
+	org.lwjgl.opengl.Sync.sync(Sync.java:72)
+	org.lwjgl.opengl.Display.sync(Display.java:408)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:718)
+TRACE 300915:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.addAll(ArrayList.java:474)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 301047:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.compact(HeapByteBuffer.java:204)
+	org.lwjgl.input.Mouse.read(Mouse.java:384)
+	org.lwjgl.input.Mouse.poll(Mouse.java:379)
+TRACE 301079:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.compact(HeapByteBuffer.java:204)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:67)
+	org.lwjgl.opengl.KeyboardEventQueue.copyEvents(KeyboardEventQueue.java:283)
+TRACE 300899:
+	com.zarkonnen.cyberpunk.interaction.Loot$F.make(Loot.java:55)
+	com.zarkonnen.cyberpunk.interaction.Loot$F.make(Loot.java:52)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 301058:
+	sun.misc.Unsafe.putInt(Unsafe.java:Unknown line)
+	java.nio.DirectIntBufferU.put(DirectIntBufferU.java:295)
+	org.lwjgl.opengl.MouseEventQueue.poll(MouseEventQueue.java:141)
+	org.lwjgl.opengl.MacOSXDisplay.pollMouse(MacOSXDisplay.java:341)
+TRACE 301063:
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:52)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:678)
+	org.newdawn.slick.AppGameContainer.gameLoop(AppGameContainer.java:456)
+TRACE 300820:
+	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:45)
+	java.lang.StringBuilder.<init>(StringBuilder.java:68)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:92)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300867:
+	com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make(RemoveImplant.java:72)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make(RemoveImplant.java:69)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+TRACE 300865:
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.add(ArrayList.java:351)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:48)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:42)
+TRACE 300851:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check(InteractionBehavior.java:118)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300685:
+	sun.misc.Unsafe.putByte(Unsafe.java:Unknown line)
+	java.nio.DirectByteBuffer.put(DirectByteBuffer.java:286)
+	sun.nio.cs.ISO_8859_1$Encoder.encodeBufferLoop(ISO_8859_1.java:169)
+	sun.nio.cs.ISO_8859_1$Encoder.encodeLoop(ISO_8859_1.java:189)
+TRACE 300501:
+	apple.awt.CToolkit.createFrame(CToolkit.java:502)
+	java.awt.Frame.addNotify(Frame.java:460)
+	java.awt.Window.pack(Window.java:708)
+	org.lwjgl.opengl.MacOSXFrame.<init>(MacOSXFrame.java:101)
+TRACE 300469:
+	org.lwjgl.opengl.MacOSXPeerInfo.nChoosePixelFormat(MacOSXPeerInfo.java:Unknown line)
+	org.lwjgl.opengl.MacOSXPeerInfo.choosePixelFormat(MacOSXPeerInfo.java:60)
+	org.lwjgl.opengl.MacOSXPeerInfo.<init>(MacOSXPeerInfo.java:55)
+	org.lwjgl.opengl.MacOSXCanvasPeerInfo.<init>(MacOSXCanvasPeerInfo.java:50)
+TRACE 300720:
+	java.util.zip.ZipFile.getEntry(ZipFile.java:Unknown line)
+	java.util.zip.ZipFile.getEntry(ZipFile.java:163)
+	java.util.jar.JarFile.getEntry(JarFile.java:209)
+	java.util.jar.JarFile.getJarEntry(JarFile.java:192)
+TRACE 300735:
+	apple.awt.ContainerModel._endValidate(ContainerModel.java:Unknown line)
+	apple.awt.ContainerModel.endValidate(ContainerModel.java:93)
+	java.awt.Container.validate(Container.java:1481)
+	java.awt.Window.dispatchEventImpl(Window.java:2485)
+TRACE 300748:
+	org.lwjgl.opengl.MacOSXContextImplementation.setView(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.resetView(MacOSXContextImplementation.java:93)
+	org.lwjgl.opengl.MacOSXDisplay.update(MacOSXDisplay.java:278)
+	org.lwjgl.opengl.Display.processMessages(Display.java:597)
+TRACE 300749:
+	java.lang.Thread.currentThread(Thread.java:Unknown line)
+	org.lwjgl.opengl.GLContext.getCapabilitiesImpl(GLContext.java:132)
+	org.lwjgl.opengl.GLContext.getCapabilities(GLContext.java:122)
+	org.lwjgl.opengl.GL11.glColor4f(GL11.java:879)
+TRACE 300751:
+	java.lang.Object.clone(Object.java:Unknown line)
+	com.zarkonnen.catengine.Hook$Type.values(Hook.java:6)
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:27)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+TRACE 300364:
+	sun.nio.cs.UTF_8$Encoder.encodeArrayLoop(UTF_8.java:351)
+	sun.nio.cs.UTF_8$Encoder.encodeLoop(UTF_8.java:447)
+	java.nio.charset.CharsetEncoder.encode(CharsetEncoder.java:544)
+	java.lang.StringCoding$StringEncoder.encode(StringCoding.java:240)
+TRACE 300767:
+	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:45)
+	java.lang.StringBuilder.<init>(StringBuilder.java:68)
+	java.net.URLStreamHandler.parseURL(URLStreamHandler.java:232)
+	sun.net.www.protocol.file.Handler.parseURL(Handler.java:50)
+TRACE 300773:
+	java.util.Arrays.copyOf(Arrays.java:2786)
+	sun.misc.Resource.getBytes(Resource.java:101)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:257)
+	java.net.URLClassLoader.access$000(URLClassLoader.java:58)
+TRACE 300086:
+	java.lang.ClassLoader.findBootstrapClass(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.findBootstrapClassOrNull(ClassLoader.java:932)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:297)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:295)
+TRACE 300787:
+	com.zarkonnen.cyberpunk.WorldMap.tilesOfType(WorldMap.java:148)
+	com.zarkonnen.cyberpunk.WorldMap.randomOfType(WorldMap.java:157)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.install(PersonSpawner.java:76)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.installAll(PersonSpawner.java:105)
+TRACE 300789:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.io.BufferedOutputStream.write(BufferedOutputStream.java:111)
+	java.io.PrintStream.write(PrintStream.java:430)
+	sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:202)
+TRACE 300812:
+	java.util.HashMap.resize(HashMap.java:462)
+	java.util.HashMap.addEntry(HashMap.java:755)
+	java.util.HashMap.put(HashMap.java:385)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+TRACE 300821:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.toArray(ArrayList.java:275)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+TRACE 300822:
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:66)
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:63)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300831:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Injured.check(InteractionBehavior.java:136)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300843:
+	java.util.HashMap.containsKey(HashMap.java:335)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:50)
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason(MoveToHome.java:23)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+TRACE 300853:
+	com.zarkonnen.cyberpunk.interaction.FirstAid$F.make(FirstAid.java:54)
+	com.zarkonnen.cyberpunk.interaction.FirstAid$F.make(FirstAid.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+TRACE 300525:
+	apple.awt.CWindow.createNativeWindow(CWindow.java:Unknown line)
+	apple.awt.CWindow.initPeer(CWindow.java:353)
+	apple.awt.ComponentModel.initPeer(ComponentModel.java:66)
+	apple.awt.ContainerModel.initPeer(ContainerModel.java:29)
+TRACE 300864:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.ArrayList.fastRemove(ArrayList.java:439)
+	java.util.ArrayList.remove(ArrayList.java:424)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson.run(SellToPerson.java:46)
+TRACE 300868:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Injured.check(InteractionBehavior.java:136)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300871:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Person.allItems(Person.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:85)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300895:
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:319)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+	com.zarkonnen.cyberpunk.interaction.MoveToWork.disabledReason(MoveToWork.java:23)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+TRACE 300897:
+	java.util.HashMap.addEntry(HashMap.java:753)
+	java.util.HashMap.put(HashMap.java:385)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+TRACE 300905:
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:60)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300906:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.addAll(ArrayList.java:474)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300908:
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.run(MoveToHome.java:36)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300912:
+	java.util.EnumMap.isValidKey(EnumMap.java:288)
+	java.util.EnumMap.containsKey(EnumMap.java:196)
+	com.zarkonnen.cyberpunk.interaction.DoWork$F.make(DoWork.java:167)
+	com.zarkonnen.cyberpunk.interaction.DoWork$F.make(DoWork.java:164)
+TRACE 300913:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$UnobservedExceptVictim.check(InteractionBehavior.java:271)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300914:
+	com.zarkonnen.cyberpunk.TileType.values(TileType.java:7)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:47)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:42)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300921:
+	java.util.AbstractList$Itr.hasNext(AbstractList.java:339)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:122)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300930:
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:56)
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300931:
+	com.zarkonnen.cyberpunk.interaction.Buy.getItem(Buy.java:64)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$IItemType.check(InteractionBehavior.java:64)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300941:
+	java.util.AbstractList.listIterator(AbstractList.java:284)
+	java.util.AbstractSequentialList.iterator(AbstractSequentialList.java:222)
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:224)
+	com.zarkonnen.cyberpunk.Tile.inBusiness(Tile.java:82)
+TRACE 300943:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.toArray(ArrayList.java:275)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300946:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Poor.check(InteractionBehavior.java:177)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Not.check(InteractionBehavior.java:284)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300956:
+	com.zarkonnen.cyberpunk.interaction.Unlock.disabledReason(Unlock.java:24)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300961:
+	java.util.AbstractList$Itr.hasNext(AbstractList.java:339)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:126)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+TRACE 300976:
+	com.zarkonnen.cyberpunk.interaction.Lock$F.make(Lock.java:55)
+	com.zarkonnen.cyberpunk.interaction.Lock$F.make(Lock.java:47)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300982:
+	com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make(SellToBusiness.java:52)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300984:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.interaction.Stun$F.make(Stun.java:59)
+	com.zarkonnen.cyberpunk.interaction.Stun$F.make(Stun.java:55)
+TRACE 300990:
+	com.zarkonnen.cyberpunk.interaction.Unlock$F.make(Unlock.java:54)
+	com.zarkonnen.cyberpunk.interaction.Unlock$F.make(Unlock.java:47)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300995:
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:48)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:42)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301000:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301014:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301015:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301022:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301025:
+	java.util.AbstractList.iterator(AbstractList.java:273)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:120)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 301033:
+	java.awt.KeyboardFocusManager.getFocusOwner(KeyboardFocusManager.java:440)
+	java.awt.Component.hasFocus(Component.java:7910)
+	java.awt.Component.isFocusOwner(Component.java:7923)
+	org.lwjgl.opengl.MacOSXDisplay.isActive(MacOSXDisplay.java:232)
+TRACE 301048:
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:56)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:418)
+TRACE 301050:
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:418)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+TRACE 301053:
+	org.newdawn.slick.Image.draw(Image.java:904)
+	com.zarkonnen.catengine.SlickEngine$MyFrame.blit(SlickEngine.java:434)
+	com.zarkonnen.catengine.Draw.blit(Draw.java:71)
+	com.zarkonnen.catengine.Draw.text(Draw.java:348)
+TRACE 301062:
+	sun.reflect.Reflection.getClassAccessFlags(Reflection.java:Unknown line)
+	sun.reflect.Reflection.quickCheckMemberAccess(Reflection.java:51)
+	java.lang.reflect.Field.doSecurityCheck(Field.java:948)
+	java.lang.reflect.Field.getFieldAccessor(Field.java:896)
+TRACE 301066:
+	com.zarkonnen.catengine.SlickEngine$MyInput.cursor(SlickEngine.java:162)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:52)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:678)
+TRACE 301071:
+	org.lwjgl.opengl.GL11.nglVertex2f(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glVertex2f(GL11.java:2666)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glVertex2f(ImmediateModeOGLRenderer.java:302)
+	org.newdawn.slick.Graphics.fillRect(Graphics.java:893)
+TRACE 301078:
+	java.util.regex.Pattern.compile(Pattern.java:1452)
+	java.util.regex.Pattern.<init>(Pattern.java:1133)
+	java.util.regex.Pattern.compile(Pattern.java:823)
+	java.util.regex.Pattern.matches(Pattern.java:928)
+TRACE 301084:
+	org.lwjgl.opengl.GL11.nglLineWidth(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glLineWidth(GL11.java:1961)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glLineWidth(ImmediateModeOGLRenderer.java:211)
+	org.newdawn.slick.opengl.renderer.DefaultLineStripRenderer.setWidth(DefaultLineStripRenderer.java:35)
+TRACE 301086:
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text(WorldScreen.java:62)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:417)
+TRACE 301088:
+	org.newdawn.slick.Input.isMouseButtonDown(Input.java:800)
+	com.zarkonnen.catengine.SlickEngine$MyInput.mouseDown(SlickEngine.java:168)
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:27)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+TRACE 301089:
+	com.zarkonnen.catengine.SlickEngine$MyInput.keyDown(SlickEngine.java:140)
+	com.zarkonnen.cyberpunk.WorldScreen.input(WorldScreen.java:336)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:48)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+TRACE 301093:
+	org.lwjgl.opengl.GL11.nglLoadIdentity(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glLoadIdentity(GL11.java:1945)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glLoadIdentity(ImmediateModeOGLRenderer.java:218)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:696)
+TRACE 301102:
+	com.zarkonnen.cyberpunk.WorldMap.timeOfDay(WorldMap.java:86)
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text(WorldScreen.java:62)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+TRACE 301105:
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:60)
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301116:
+	java.util.RegularEnumSet.add(RegularEnumSet.java:141)
+	java.util.RegularEnumSet.add(RegularEnumSet.java:18)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:283)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+TRACE 300677:
+	org.lwjgl.opengl.GLContext.useContext(GLContext.java:374)
+	org.lwjgl.opengl.ContextGL.makeCurrent(ContextGL.java:195)
+	org.lwjgl.opengl.DrawableGL.makeCurrent(DrawableGL.java:110)
+	org.lwjgl.opengl.Display.makeCurrent(Display.java:703)
+TRACE 301122:
+	org.lwjgl.opengl.GL11.nglDisable(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glDisable(GL11.java:1011)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glDisable(ImmediateModeOGLRenderer.java:155)
+	org.newdawn.slick.opengl.renderer.DefaultLineStripRenderer.setAntiAlias(DefaultLineStripRenderer.java:27)
+TRACE 300793:
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:37)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:703)
+TRACE 300792:
+	com.zarkonnen.cyberpunk.WorldMap.tilesOfType(WorldMap.java:148)
+	com.zarkonnen.cyberpunk.WorldMap.randomOfType(WorldMap.java:157)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.install(PersonSpawner.java:72)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.installAll(PersonSpawner.java:105)
+TRACE 300873:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check(InteractionBehavior.java:118)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300874:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.Item.<init>(Item.java:12)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld.<init>(BuyFromOutsideWorld.java:48)
+TRACE 300791:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.<init>(InteractionBehavior.java:11)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.behave(InteractionBehavior.java:21)
+	com.zarkonnen.cyberpunk.Person.behave(Person.java:105)
+	com.zarkonnen.cyberpunk.behave.Job.addBasicNeeds(Job.java:645)
+TRACE 300790:
+	com.zarkonnen.cyberpunk.Person.<init>(Person.java:46)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.install(PersonSpawner.java:81)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.installAll(PersonSpawner.java:105)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:287)
+TRACE 300786:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.EnumMap.typeCheck(EnumMap.java:656)
+	java.util.EnumMap.put(EnumMap.java:241)
+	com.zarkonnen.cyberpunk.Person.<init>(Person.java:171)
+TRACE 300878:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Injured.check(InteractionBehavior.java:136)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300879:
+	com.zarkonnen.cyberpunk.interaction.Scavenge$F.make(Scavenge.java:52)
+	com.zarkonnen.cyberpunk.interaction.Scavenge$F.make(Scavenge.java:49)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300785:
+	java.util.Arrays.copyOfRange(Arrays.java:3209)
+	java.lang.String.<init>(String.java:215)
+	java.io.BufferedReader.readLine(BufferedReader.java:331)
+	java.io.BufferedReader.readLine(BufferedReader.java:362)
+TRACE 300881:
+	com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make(RemoveImplant.java:72)
+	com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make(RemoveImplant.java:69)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+TRACE 300882:
+	com.zarkonnen.cyberpunk.Person.getVisibleExhaustion(Person.java:286)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Exhausted.check(InteractionBehavior.java:154)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300784:
+	java.util.regex.Pattern$CharProperty.<init>(Pattern.java:3332)
+	java.util.regex.Pattern$BmpCharProperty.<init>(Pattern.java:3363)
+	java.util.regex.Pattern$BmpCharProperty.<init>(Pattern.java:3363)
+	java.util.regex.Pattern$Single.<init>(Pattern.java:3391)
+TRACE 300884:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:80)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300783:
+	java.util.regex.Matcher.<init>(Matcher.java:207)
+	java.util.regex.Pattern.matcher(Pattern.java:888)
+	java.util.regex.Pattern.split(Pattern.java:997)
+	java.lang.String.split(String.java:2292)
+TRACE 300886:
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:70)
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:63)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300782:
+	java.util.ArrayList.ensureCapacity(ArrayList.java:160)
+	java.util.ArrayList.add(ArrayList.java:351)
+	java.util.regex.Pattern.split(Pattern.java:1003)
+	java.lang.String.split(String.java:2292)
+TRACE 300888:
+	com.zarkonnen.cyberpunk.interaction.SellDataToOutsideWorld$F.make(SellDataToOutsideWorld.java:43)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300781:
+	com.zarkonnen.cyberpunk.Names.<clinit>(Names.java:21)
+	com.zarkonnen.cyberpunk.behave.Job.doInstall(Job.java:626)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.install(PersonSpawner.java:85)
+	com.zarkonnen.cyberpunk.behave.PersonSpawner.installAll(PersonSpawner.java:105)
+TRACE 300890:
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:50)
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason(MoveToHome.java:23)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+TRACE 300780:
+	java.util.ArrayList.add(ArrayList.java:352)
+	java.util.regex.Pattern.split(Pattern.java:1003)
+	java.lang.String.split(String.java:2292)
+	java.lang.String.split(String.java:2334)
+TRACE 300892:
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:67)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300192:
+	sun.security.provider.SHA.implCompress(SHA.java:110)
+	sun.security.provider.DigestBase.engineUpdate(DigestBase.java:122)
+	java.security.MessageDigest$Delegate.engineUpdate(MessageDigest.java:538)
+	java.security.MessageDigest.update(MessageDigest.java:283)
+TRACE 300778:
+	java.lang.ClassLoader.findLoadedClass0(ClassLoader.java:Unknown line)
+	java.lang.ClassLoader.findLoadedClass(ClassLoader.java:955)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:291)
+	sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:301)
+TRACE 301126:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:60)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+TRACE 300777:
+	com.zarkonnen.cyberpunk.WorldMap.tilesOfType(WorldMap.java:148)
+	com.zarkonnen.cyberpunk.ItemSpawner.install(ItemSpawner.java:101)
+	com.zarkonnen.cyberpunk.ItemSpawner.installAll(ItemSpawner.java:112)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:286)
+TRACE 301090:
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:31)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:678)
+TRACE 300898:
+	java.util.AbstractList.listIterator(AbstractList.java:284)
+	java.util.AbstractSequentialList.iterator(AbstractSequentialList.java:222)
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:224)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+TRACE 300564:
+	java.lang.String.toLowerCase(String.java:2440)
+	java.lang.String.toLowerCase(String.java:2496)
+	sun.font.Font2D.setStyle(Font2D.java:119)
+	sun.font.AppleNativeFont.<init>(AppleNativeFont.java:34)
+TRACE 300563:
+	apple.awt.CGraphicsEnvironment.registerFont(CGraphicsEnvironment.java:154)
+	apple.awt.CGraphicsEnvironment.loadNativeFonts(CGraphicsEnvironment.java:Unknown line)
+	apple.awt.CGraphicsEnvironment.access$000(CGraphicsEnvironment.java:18)
+	apple.awt.CGraphicsEnvironment$1.run(CGraphicsEnvironment.java:196)
+TRACE 300901:
+	com.zarkonnen.cyberpunk.Tile.observe(Tile.java:205)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:95)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300772:
+	java.util.Random.next(Random.java:135)
+	java.util.Random.nextDouble(Random.java:394)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:282)
+	com.zarkonnen.cyberpunk.GameState.<init>(GameState.java:16)
+TRACE 300903:
+	com.zarkonnen.cyberpunk.Person.bigBodyTick(Person.java:164)
+	com.zarkonnen.cyberpunk.Person.bodyTick(Person.java:141)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:101)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300904:
+	com.zarkonnen.cyberpunk.Person.bigBodyTick(Person.java:164)
+	com.zarkonnen.cyberpunk.Person.bodyTick(Person.java:141)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:101)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301091:
+	java.lang.System.currentTimeMillis(System.java:Unknown line)
+	org.newdawn.slick.Input.poll(Input.java:1175)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:656)
+	org.newdawn.slick.AppGameContainer.gameLoop(AppGameContainer.java:456)
+TRACE 301092:
+	com.zarkonnen.cyberpunk.interaction.BreakIn.getName(BreakIn.java:16)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.name(AbstractInteraction.java:60)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel$1.text(WorldScreen.java:307)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+TRACE 300907:
+	com.zarkonnen.cyberpunk.interaction.Rest.run(Rest.java:43)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301127:
+	java.lang.Object.hashCode(Object.java:Unknown line)
+	java.util.HashMap.get(HashMap.java:300)
+	sun.awt.AppContext.get(AppContext.java:621)
+	java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager(KeyboardFocusManager.java:180)
+TRACE 300771:
+	com.zarkonnen.cyberpunk.Tile.<init>(Tile.java:46)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:196)
+	com.zarkonnen.cyberpunk.GameState.<init>(GameState.java:16)
+	com.zarkonnen.cyberpunk.SetupScreen$1.run(SetupScreen.java:37)
+TRACE 300910:
+	java.nio.Buffer.<init>(Buffer.java:170)
+	java.nio.CharBuffer.<init>(CharBuffer.java:259)
+	java.nio.HeapCharBuffer.<init>(HeapCharBuffer.java:52)
+	java.nio.CharBuffer.wrap(CharBuffer.java:350)
+TRACE 300911:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:226)
+	com.zarkonnen.cyberpunk.Tile.inBusiness(Tile.java:82)
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:60)
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:57)
+TRACE 301094:
+	sun.misc.Unsafe.getIntVolatile(Unsafe.java:Unknown line)
+	sun.reflect.UnsafeQualifiedStaticIntegerFieldAccessorImpl.getInt(UnsafeQualifiedStaticIntegerFieldAccessorImpl.java:40)
+	java.lang.reflect.Field.getInt(Field.java:499)
+	com.zarkonnen.catengine.SlickEngine$MyInput.keyDown(SlickEngine.java:140)
+TRACE 301095:
+	sun.awt.AWTAutoShutdown.setToolkitBusy(AWTAutoShutdown.java:229)
+	sun.awt.AWTAutoShutdown.notifyToolkitThreadBusy(AWTAutoShutdown.java:118)
+TRACE 300690:
+	org.newdawn.slick.AngelCodeFont.<init>(AngelCodeFont.java:108)
+	org.newdawn.slick.Graphics$1.run(Graphics.java:147)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	org.newdawn.slick.Graphics.<init>(Graphics.java:144)
+TRACE 300770:
+	java.util.HashMap.<init>(HashMap.java:209)
+	com.zarkonnen.cyberpunk.Tile.<init>(Tile.java:45)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:183)
+	com.zarkonnen.cyberpunk.GameState.<init>(GameState.java:16)
+TRACE 300916:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300769:
+	java.util.EnumMap.<init>(EnumMap.java:113)
+	com.zarkonnen.cyberpunk.Tile.<init>(Tile.java:46)
+	com.zarkonnen.cyberpunk.WorldMap.<init>(WorldMap.java:183)
+	com.zarkonnen.cyberpunk.GameState.<init>(GameState.java:16)
+TRACE 300768:
+	java.io.File.<init>(File.java:303)
+	sun.misc.URLClassPath$FileLoader.getResource(URLClassPath.java:1012)
+	sun.misc.URLClassPath.getResource(URLClassPath.java:173)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:194)
+TRACE 300919:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:71)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:67)
+TRACE 300763:
+	sun.misc.Unsafe.getByte(Unsafe.java:Unknown line)
+	java.nio.DirectByteBuffer.get(DirectByteBuffer.java:248)
+	org.lwjgl.input.Mouse.isButtonDown(Mouse.java:401)
+	org.newdawn.slick.Input.anyMouseDown(Input.java:810)
+TRACE 300689:
+	org.newdawn.slick.GameContainer.setMusicVolume(GameContainer.java:406)
+	org.newdawn.slick.GameContainer.initSystem(GameContainer.java:787)
+	org.newdawn.slick.AppGameContainer.setup(AppGameContainer.java:421)
+	com.zarkonnen.catengine.SlickEngine$MyAppGameContainer.<init>(SlickEngine.java:90)
+TRACE 300762:
+	org.lwjgl.opengl.GL11.glEnd(GL11.java:692)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glEnd(ImmediateModeOGLRenderer.java:169)
+	org.newdawn.slick.Image.draw(Image.java:1009)
+	com.zarkonnen.catengine.SlickEngine$MyFrame.blit(SlickEngine.java:442)
+TRACE 300760:
+	java.util.regex.Pattern.compile(Pattern.java:1432)
+	java.util.regex.Pattern.<init>(Pattern.java:1133)
+	java.util.regex.Pattern.compile(Pattern.java:823)
+	java.util.regex.Pattern.matches(Pattern.java:928)
+TRACE 300924:
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+	com.zarkonnen.cyberpunk.interaction.MoveToSupplier.disabledReason(MoveToSupplier.java:23)
+TRACE 300925:
+	java.nio.Buffer.remaining(Buffer.java:363)
+	java.nio.HeapByteBuffer.put(HeapByteBuffer.java:181)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:65)
+	org.lwjgl.opengl.MacOSXDisplay.readMouse(MacOSXDisplay.java:345)
+TRACE 300926:
+	com.zarkonnen.cyberpunk.interaction.CheckOut$F.make(CheckOut.java:49)
+	com.zarkonnen.cyberpunk.interaction.CheckOut$F.make(CheckOut.java:46)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300927:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Food.check(InteractionBehavior.java:80)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300928:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason(BuySupply.java:27)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+TRACE 300929:
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:67)
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:63)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300688:
+	org.lwjgl.opengl.GL11.nglClear(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glClear(GL11.java:588)
+	org.lwjgl.opengl.DrawableGL.initContext(DrawableGL.java:97)
+	org.lwjgl.opengl.Display.initContext(Display.java:1032)
+TRACE 301099:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.addAll(ArrayList.java:474)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+TRACE 300759:
+	java.util.regex.Pattern.<init>(Pattern.java:1132)
+	java.util.regex.Pattern.compile(Pattern.java:823)
+	java.util.regex.Pattern.matches(Pattern.java:928)
+	java.lang.String.matches(String.java:2090)
+TRACE 300933:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.ArrayList.fastRemove(ArrayList.java:439)
+	java.util.ArrayList.remove(ArrayList.java:424)
+	com.zarkonnen.cyberpunk.interaction.Eat.run(Eat.java:34)
+TRACE 300934:
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:58)
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300935:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:72)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300936:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.interaction.MoveToWork.run(MoveToWork.java:36)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300937:
+	java.util.LinkedList.addBefore(LinkedList.java:778)
+	java.util.LinkedList.add(LinkedList.java:198)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:385)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+TRACE 300275:
+	sun.awt.resources.awt.getContents(awt.java:7)
+	java.util.ListResourceBundle.loadLookup(ListResourceBundle.java:171)
+	java.util.ListResourceBundle.handleGetObject(ListResourceBundle.java:106)
+	java.util.ResourceBundle.getObject(ResourceBundle.java:368)
+TRACE 300939:
+	com.zarkonnen.cyberpunk.Person.location(Person.java:318)
+	com.zarkonnen.cyberpunk.interaction.MoveToWork.disabledReason(MoveToWork.java:23)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+TRACE 300940:
+	java.util.RegularEnumSet$EnumSetIterator.hasNext(RegularEnumSet.java:77)
+	com.zarkonnen.cyberpunk.interaction.DoWork.produce(DoWork.java:124)
+	com.zarkonnen.cyberpunk.interaction.DoWork.run(DoWork.java:141)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+TRACE 300687:
+	java.nio.Bits.reserveMemory(Bits.java:612)
+	java.nio.DirectByteBuffer.<init>(DirectByteBuffer.java:97)
+	java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:288)
+	org.lwjgl.BufferUtils.createByteBuffer(BufferUtils.java:60)
+TRACE 300606:
+	sun.java2d.SurfaceData.<clinit>(SurfaceData.java:358)
+	apple.awt.CGraphicsConfig.createSurfaceData(CGraphicsConfig.java:318)
+	apple.awt.ComponentModel.createSurfaceData(ComponentModel.java:453)
+	apple.awt.ComponentModel.replaceSurfaceData(ComponentModel.java:503)
+TRACE 301101:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:228)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+TRACE 300656:
+	sun.java2d.loops.GraphicsPrimitiveMgr$1.compare(GraphicsPrimitiveMgr.java:60)
+	java.util.Arrays.mergeSort(Arrays.java:1293)
+	java.util.Arrays.mergeSort(Arrays.java:1281)
+	java.util.Arrays.mergeSort(Arrays.java:1282)
+TRACE 300945:
+	java.util.Collections.singletonList(Collections.java:3106)
+	com.zarkonnen.cyberpunk.interaction.Scavenge$F.make(Scavenge.java:52)
+	com.zarkonnen.cyberpunk.interaction.Scavenge$F.make(Scavenge.java:49)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300195:
+	java.math.BigInteger.squareToLen(BigInteger.java:1290)
+	java.math.BigInteger.oddModPow(BigInteger.java:1821)
+	java.math.BigInteger.modPow(BigInteger.java:1571)
+	sun.security.provider.DSA.generateV(DSA.java:374)
+TRACE 300745:
+	java.lang.Thread.currentThread(Thread.java:Unknown line)
+	org.lwjgl.opengl.GLContext.getCapabilitiesImpl(GLContext.java:132)
+	org.lwjgl.opengl.GLContext.getCapabilities(GLContext.java:122)
+	org.lwjgl.opengl.GL11.glVertex3f(GL11.java:2687)
+TRACE 300948:
+	java.lang.AbstractStringBuilder.stringSizeOfInt(AbstractStringBuilder.java:609)
+	java.lang.AbstractStringBuilder.append(AbstractStringBuilder.java:593)
+	java.lang.StringBuilder.append(StringBuilder.java:212)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:40)
+TRACE 300949:
+	java.util.EnumMap.containsKey(EnumMap.java:196)
+	com.zarkonnen.cyberpunk.interaction.DoWork.consume(DoWork.java:104)
+	com.zarkonnen.cyberpunk.interaction.DoWork.run(DoWork.java:140)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+TRACE 300950:
+	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:45)
+	java.lang.StringBuilder.<init>(StringBuilder.java:68)
+	com.zarkonnen.cyberpunk.interaction.MoveToType.run(MoveToType.java:39)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+TRACE 300951:
+	java.util.EnumMap.containsKey(EnumMap.java:196)
+	com.zarkonnen.cyberpunk.interaction.DoWork.disabledReason(DoWork.java:80)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+TRACE 300742:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.Arrays.copyOf(Arrays.java:2763)
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+TRACE 300953:
+	com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make(ImplantImplantAtClinic.java:57)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300954:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:223)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300955:
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:85)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:48)
+TRACE 300686:
+	java.nio.Buffer.position(Buffer.java:215)
+	java.nio.Buffer.<init>(Buffer.java:175)
+	java.nio.CharBuffer.<init>(CharBuffer.java:259)
+	java.nio.CharBuffer.<init>(CharBuffer.java:267)
+TRACE 300957:
+	java.util.AbstractList$Itr.hasNext(AbstractList.java:339)
+	java.util.AbstractCollection.toArray(AbstractCollection.java:126)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300958:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300559:
+	java.lang.Math.min(Math.java:863)
+	java.util.Arrays.copyOf(Arrays.java:2787)
+	java.lang.StringCoding.safeTrim(StringCoding.java:64)
+	java.lang.StringCoding.access$300(StringCoding.java:34)
+TRACE 300960:
+	java.util.AbstractCollection.toArray(AbstractCollection.java:119)
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300684:
+	sun.misc.Unsafe.getLong(Unsafe.java:Unknown line)
+	org.lwjgl.MemoryUtilSun$AccessorUnsafe.getAddress(MemoryUtilSun.java:70)
+	org.lwjgl.MemoryUtil.getAddress0(MemoryUtil.java:113)
+	org.lwjgl.MemoryUtil.getAddress(MemoryUtil.java:125)
+TRACE 300962:
+	com.zarkonnen.cyberpunk.interaction.Unlock$F.make(Unlock.java:56)
+	com.zarkonnen.cyberpunk.interaction.Unlock$F.make(Unlock.java:47)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300558:
+	java.lang.Object.hashCode(Object.java:Unknown line)
+	java.util.Hashtable.put(Hashtable.java:399)
+	sun.java2d.Disposer.addObjectRecord(Disposer.java:229)
+	sun.font.TrueTypeFont.<init>(TrueTypeFont.java:171)
+TRACE 300964:
+	com.zarkonnen.cyberpunk.interaction.DoWork.produce(DoWork.java:126)
+	com.zarkonnen.cyberpunk.interaction.DoWork.run(DoWork.java:141)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300965:
+	com.zarkonnen.cyberpunk.interaction.Wander$F.make(Wander.java:39)
+	com.zarkonnen.cyberpunk.interaction.Wander$F.make(Wander.java:35)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300966:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300967:
+	com.zarkonnen.cyberpunk.interaction.Rest.run(Rest.java:43)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300202:
+	sun.misc.CharacterDecoder.decodeBuffer(CharacterDecoder.java:138)
+	sun.misc.CharacterDecoder.decodeBuffer(CharacterDecoder.java:177)
+	sun.security.util.SignatureFileVerifier.verifyManifestHash(SignatureFileVerifier.java:277)
+	sun.security.util.SignatureFileVerifier.processImpl(SignatureFileVerifier.java:215)
+TRACE 300046:
+	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:45)
+	java.lang.StringBuilder.<init>(StringBuilder.java:80)
+	sun.security.util.ManifestDigester.<init>(ManifestDigester.java:114)
+	java.util.jar.JarVerifier.processEntry(JarVerifier.java:261)
+TRACE 300970:
+	com.zarkonnen.cyberpunk.interaction.DoWork.disabledReason(DoWork.java:87)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300971:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.add(ArrayList.java:351)
+	com.zarkonnen.cyberpunk.interaction.MoveToType$F.make(MoveToType.java:48)
+TRACE 300972:
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:49)
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:45)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300973:
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:49)
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:45)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300974:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.addAll(ArrayList.java:474)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300737:
+	apple.awt.CComponent._requestFocus(CComponent.java:Unknown line)
+	apple.awt.CComponent.requestFocus(CComponent.java:56)
+	java.awt.Component.requestFocusHelper(Component.java:7571)
+	java.awt.Component.requestFocusInWindow(Component.java:7454)
+TRACE 300679:
+	java.nio.CharBuffer.wrap(CharBuffer.java:443)
+	java.nio.CharBuffer.wrap(CharBuffer.java:464)
+	org.lwjgl.MemoryUtil.encode(MemoryUtil.java:243)
+	org.lwjgl.MemoryUtil.encodeASCII(MemoryUtil.java:202)
+TRACE 300977:
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:394)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:339)
+	com.zarkonnen.cyberpunk.Tile.towardsTileType(Tile.java:58)
+	com.zarkonnen.cyberpunk.interaction.MoveToType.disabledReason(MoveToType.java:25)
+TRACE 300734:
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:86)
+	java.awt.EventQueue.dispatchEvent(EventQueue.java:687)
+	java.awt.SentEvent.dispatch(SentEvent.java:55)
+TRACE 300979:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300733:
+	java.awt.Component.preferredSize(Component.java:2545)
+	java.awt.Component.getPreferredSize(Component.java:2529)
+	java.awt.BorderLayout.preferredLayoutSize(BorderLayout.java:702)
+	java.awt.Container.preferredSize(Container.java:1598)
+TRACE 300981:
+	com.zarkonnen.cyberpunk.interaction.Buy.disabledReason(Buy.java:25)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301106:
+	sun.misc.Unsafe.getInt(Unsafe.java:Unknown line)
+	java.nio.DirectIntBufferU.get(DirectIntBufferU.java:248)
+	org.lwjgl.input.Mouse.poll(Mouse.java:357)
+	org.lwjgl.opengl.Display.pollDevices(Display.java:670)
+TRACE 300983:
+	com.zarkonnen.cyberpunk.interaction.Lock$F.make(Lock.java:47)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 301107:
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:90)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:86)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.GameState.playerAction(GameState.java:25)
+TRACE 300985:
+	com.zarkonnen.cyberpunk.interaction.DoWork.run(DoWork.java:139)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300986:
+	com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason(BuySupply.java:27)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300987:
+	com.zarkonnen.cyberpunk.interaction.Lock.disabledReason(Lock.java:24)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300988:
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:53)
+	com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make(DeployGadget.java:45)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300989:
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:37)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:703)
+TRACE 301108:
+	com.zarkonnen.cyberpunk.Person.hugeTick(Person.java:158)
+	com.zarkonnen.cyberpunk.Person.bodyTick(Person.java:145)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:101)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300991:
+	com.zarkonnen.cyberpunk.interaction.BuyFoodAtRestaurantOrBar$F.get(BuyFoodAtRestaurantOrBar.java:51)
+	com.zarkonnen.cyberpunk.interaction.TileTypeFactory.make(TileTypeFactory.java:21)
+	com.zarkonnen.cyberpunk.interaction.TileTypeFactory.make(TileTypeFactory.java:9)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300992:
+	com.zarkonnen.cyberpunk.Person.allItems(Person.java:111)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:85)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300993:
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.run(MoveToHome.java:36)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300994:
+	java.util.ArrayList.<init>(ArrayList.java:112)
+	java.util.ArrayList.<init>(ArrayList.java:119)
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:55)
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:51)
+TRACE 301109:
+	java.util.HashMap$KeyIterator.next(HashMap.java:828)
+	org.newdawn.slick.Input.poll(Input.java:1165)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:656)
+	org.newdawn.slick.AppGameContainer.gameLoop(AppGameContainer.java:456)
+TRACE 300996:
+	java.util.Arrays.copyOf(Arrays.java:2734)
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.add(ArrayList.java:351)
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:226)
+TRACE 300997:
+	java.util.Collections.singletonList(Collections.java:3106)
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:67)
+	com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make(Gogglehack.java:63)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+TRACE 300446:
+	sun.net.www.protocol.jar.JarFileFactory.get(JarFileFactory.java:55)
+	sun.net.www.protocol.jar.JarURLConnection.connect(JarURLConnection.java:104)
+	sun.net.www.protocol.jar.JarURLConnection.getInputStream(JarURLConnection.java:132)
+	java.net.URL.openStream(URL.java:1010)
+TRACE 300999:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Not.check(InteractionBehavior.java:284)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301110:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+TRACE 301001:
+	com.zarkonnen.cyberpunk.Person.getName(Person.java:199)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:92)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301002:
+	java.nio.ByteBuffer.arrayOffset(ByteBuffer.java:969)
+	sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:202)
+	sun.nio.cs.StreamEncoder.implFlushBuffer(StreamEncoder.java:272)
+	sun.nio.cs.StreamEncoder.flushBuffer(StreamEncoder.java:85)
+TRACE 301003:
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor(AbstractInteraction.java:50)
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.run(MoveToHome.java:36)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 301004:
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:82)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 301005:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$Unobserved.check(InteractionBehavior.java:259)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300143:
+	java.lang.Class.forName0(Class.java:Unknown line)
+	java.lang.Class.forName(Class.java:171)
+	sun.security.x509.OIDMap$OIDInfo.getClazz(OIDMap.java:190)
+	sun.security.x509.OIDMap.getClass(OIDMap.java:273)
+TRACE 301007:
+	com.zarkonnen.cyberpunk.interaction.Mug$F.make(Mug.java:68)
+	com.zarkonnen.cyberpunk.interaction.Mug$F.make(Mug.java:64)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 301008:
+	java.util.ArrayList.addAll(ArrayList.java:472)
+	com.zarkonnen.cyberpunk.Person.allItems(Person.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:85)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300231:
+	java.nio.ByteBuffer.allocateDirect(ByteBuffer.java:288)
+	org.lwjgl.BufferUtils.createByteBuffer(BufferUtils.java:60)
+	org.lwjgl.LWJGLUtil.loadIcon(LWJGLUtil.java:285)
+	org.lwjgl.LWJGLUtil.<clinit>(LWJGLUtil.java:259)
+TRACE 301010:
+	com.zarkonnen.cyberpunk.interaction.BuySupply$F.make(BuySupply.java:51)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 301011:
+	java.util.ArrayList.ensureCapacity(ArrayList.java:167)
+	java.util.ArrayList.add(ArrayList.java:351)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:74)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:67)
+TRACE 301012:
+	java.lang.Object.clone(Object.java:Unknown line)
+	com.zarkonnen.cyberpunk.ItemType.values(ItemType.java:9)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:37)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+TRACE 301013:
+	com.zarkonnen.cyberpunk.interaction.SellToPerson.getItem(SellToPerson.java:53)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$IItemType.check(InteractionBehavior.java:64)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301111:
+	com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make(SellToBusiness.java:52)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+TRACE 301112:
+	com.zarkonnen.catengine.Condition$1.satisfied(Condition.java:9)
+	com.zarkonnen.catengine.SlickEngine$MyAppGameContainer.runUntil(SlickEngine.java:96)
+	com.zarkonnen.catengine.SlickEngine.runUntil(SlickEngine.java:109)
+	com.zarkonnen.cyberpunk.Cyberpunk.main(Cyberpunk.java:24)
+TRACE 301016:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.compact(HeapByteBuffer.java:204)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:67)
+	org.lwjgl.opengl.MacOSXDisplay.readMouse(MacOSXDisplay.java:345)
+TRACE 300412:
+	sun.font.FontManager.<clinit>(FontManager.java:71)
+	sun.java2d.SunGraphicsEnvironment.addDirFonts(SunGraphicsEnvironment.java:982)
+	sun.java2d.SunGraphicsEnvironment.registerFontsInDir(SunGraphicsEnvironment.java:862)
+	apple.awt.CGraphicsEnvironment.registerFontsInDir(CGraphicsEnvironment.java:145)
+TRACE 301018:
+	com.zarkonnen.cyberpunk.interaction.Attack$F.make(Attack.java:64)
+	com.zarkonnen.cyberpunk.interaction.Attack$F.make(Attack.java:60)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 301019:
+	com.zarkonnen.cyberpunk.Person.bigBodyTick(Person.java:164)
+	com.zarkonnen.cyberpunk.Person.bodyTick(Person.java:141)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:101)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300728:
+	apple.awt.ComponentModel._setVisible(ComponentModel.java:Unknown line)
+	apple.awt.ComponentModel.setVisible(ComponentModel.java:133)
+	apple.awt.ContainerModel.setVisible(ContainerModel.java:149)
+	apple.awt.CComponent.hide(CComponent.java:227)
+TRACE 301021:
+	com.zarkonnen.cyberpunk.Person.allItems(Person.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:85)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301113:
+	sun.misc.Unsafe.getInt(Unsafe.java:Unknown line)
+	java.nio.DirectIntBufferU.get(DirectIntBufferU.java:248)
+	org.lwjgl.input.Mouse.poll(Mouse.java:354)
+	org.lwjgl.opengl.Display.pollDevices(Display.java:670)
+TRACE 300673:
+	java.util.zip.Inflater.inflateBytes(Inflater.java:Unknown line)
+	java.util.zip.Inflater.inflate(Inflater.java:238)
+	java.util.zip.InflaterInputStream.read(InflaterInputStream.java:135)
+	sun.misc.Resource.getBytes(Resource.java:108)
+TRACE 301024:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:117)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 301114:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.nio.HeapByteBuffer.put(HeapByteBuffer.java:183)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:65)
+	org.lwjgl.opengl.KeyboardEventQueue.copyEvents(KeyboardEventQueue.java:283)
+TRACE 301026:
+	com.zarkonnen.cyberpunk.interaction.SearchForGadgets$F.make(SearchForGadgets.java:49)
+	com.zarkonnen.cyberpunk.interaction.SearchForGadgets$F.make(SearchForGadgets.java:46)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 301027:
+	java.lang.System.arraycopy(System.java:Unknown line)
+	java.util.ArrayList.fastRemove(ArrayList.java:439)
+	java.util.ArrayList.remove(ArrayList.java:424)
+	com.zarkonnen.cyberpunk.interaction.Buy.run(Buy.java:46)
+TRACE 301028:
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+	sun.misc.Launcher$ExtClassLoader.findClass(Launcher.java:229)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:306)
+TRACE 300411:
+	sun.java2d.SunGraphicsEnvironment.addDirFonts(SunGraphicsEnvironment.java:982)
+	sun.java2d.SunGraphicsEnvironment.registerFontsInDir(SunGraphicsEnvironment.java:862)
+	apple.awt.CGraphicsEnvironment.registerFontsInDir(CGraphicsEnvironment.java:145)
+	sun.java2d.SunGraphicsEnvironment$2.run(SunGraphicsEnvironment.java:226)
+TRACE 300725:
+	org.lwjgl.opengl.MacOSXContextImplementation.clearDrawable(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.releaseDrawable(MacOSXContextImplementation.java:83)
+	org.lwjgl.opengl.ContextGL.releaseDrawable(ContextGL.java:163)
+	org.lwjgl.opengl.Display.releaseDrawable(Display.java:325)
+TRACE 301031:
+	sun.misc.Unsafe.getByte(Unsafe.java:Unknown line)
+	java.nio.DirectByteBuffer.get(DirectByteBuffer.java:248)
+	org.lwjgl.input.Mouse.isButtonDown(Mouse.java:401)
+	org.newdawn.slick.Input.isMouseButtonDown(Input.java:800)
+TRACE 300724:
+	org.lwjgl.opengl.Display.getAvailableDisplayModes(Display.java:195)
+	org.newdawn.slick.AppGameContainer.setDisplayMode(AppGameContainer.java:151)
+	com.zarkonnen.catengine.SlickEngine$MyInput.setMode(SlickEngine.java:202)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:44)
+TRACE 301115:
+	org.newdawn.slick.Input.poll(Input.java:1289)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:656)
+	org.newdawn.slick.AppGameContainer.gameLoop(AppGameContainer.java:456)
+	com.zarkonnen.catengine.SlickEngine$MyAppGameContainer.runUntil(SlickEngine.java:97)
+TRACE 300723:
+	java.io.FileInputStream.readBytes(FileInputStream.java:Unknown line)
+	java.io.FileInputStream.read(FileInputStream.java:220)
+	sun.misc.Resource.getBytes(Resource.java:108)
+	java.net.URLClassLoader.defineClass(URLClassLoader.java:257)
+TRACE 300230:
+	java.util.Dictionary.<init>(Dictionary.java:38)
+	java.util.Hashtable.<init>(Hashtable.java:152)
+	java.util.Hashtable.<init>(Hashtable.java:183)
+	java.util.jar.JarVerifier.<init>(JarVerifier.java:80)
+TRACE 300229:
+	java.lang.String.replace(String.java:2054)
+	java.net.URLClassLoader$1.run(URLClassLoader.java:193)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	java.net.URLClassLoader.findClass(URLClassLoader.java:190)
+TRACE 300719:
+	java.util.regex.Pattern.closure(Pattern.java:2771)
+	java.util.regex.Pattern.sequence(Pattern.java:1889)
+	java.util.regex.Pattern.expr(Pattern.java:1752)
+	java.util.regex.Pattern.compile(Pattern.java:1460)
+TRACE 301038:
+	java.lang.Object.clone(Object.java:Unknown line)
+	com.zarkonnen.catengine.Hook$Type.values(Hook.java:6)
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:31)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+TRACE 300311:
+	java.io.FileDescriptor.incrementAndGetUseCount(FileDescriptor.java:153)
+	java.io.FileInputStream.<init>(FileInputStream.java:119)
+	java.awt.Toolkit$1.run(Toolkit.java:700)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300228:
+	java.lang.String.indexOf(String.java:1715)
+	sun.net.www.ParseUtil.canonizeString(ParseUtil.java:215)
+	sun.net.www.protocol.jar.Handler.parseURL(Handler.java:73)
+	java.net.URL.<init>(URL.java:596)
+TRACE 300118:
+	java.lang.Object.clone(Object.java:Unknown line)
+	sun.security.util.DerInputBuffer.dup(DerInputBuffer.java:38)
+	sun.security.util.DerValue.<init>(DerValue.java:261)
+	sun.security.util.DerInputStream.getDerValue(DerInputStream.java:400)
+TRACE 300161:
+	sun.security.x509.AVA.toRFC2253CanonicalString(AVA.java:986)
+	sun.security.x509.RDN.toRFC2253StringInternal(RDN.java:430)
+	sun.security.x509.RDN.toRFC2253String(RDN.java:409)
+	sun.security.x509.X500Name.getRFC2253CanonicalName(X500Name.java:714)
+TRACE 301043:
+	java.lang.AbstractStringBuilder.<init>(AbstractStringBuilder.java:45)
+	java.lang.StringBuilder.<init>(StringBuilder.java:68)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:46)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+TRACE 300713:
+	sun.reflect.Reflection.isSameClassPackage(Reflection.java:176)
+	sun.reflect.Reflection.isSameClassPackage(Reflection.java:153)
+	sun.reflect.Reflection.verifyMemberAccess(Reflection.java:95)
+	sun.reflect.Reflection.ensureMemberAccess(Reflection.java:64)
+TRACE 301045:
+	com.zarkonnen.catengine.Hooks.hit(Hooks.java:27)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:50)
+	com.zarkonnen.catengine.SlickEngine.update(SlickEngine.java:66)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:678)
+TRACE 301046:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:228)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:408)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 300712:
+	net.java.games.input.UsagePage.mapUsage(UsagePage.java:108)
+	net.java.games.input.OSXHIDDevice.createUsagePair(OSXHIDDevice.java:205)
+	net.java.games.input.OSXHIDDevice.createElementFromElementProperties(OSXHIDDevice.java:153)
+	net.java.games.input.OSXHIDDevice.addElements(OSXHIDDevice.java:168)
+TRACE 300683:
+	org.lwjgl.opengl.GLContext.getSupportedExtensions(GLContext.java:228)
+	org.lwjgl.opengl.ContextCapabilities.initAllStubs(ContextCapabilities.java:5278)
+	org.lwjgl.opengl.ContextCapabilities.<init>(ContextCapabilities.java:5676)
+	org.lwjgl.opengl.GLContext.useContext(GLContext.java:374)
+TRACE 300435:
+	apple.awt.CGraphicsEnvironment.createFontConfiguration(CGraphicsEnvironment.java:283)
+	sun.java2d.SunGraphicsEnvironment$2.run(SunGraphicsEnvironment.java:238)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+	sun.java2d.SunGraphicsEnvironment.<init>(SunGraphicsEnvironment.java:129)
+TRACE 301117:
+	java.nio.Buffer.limit(Buffer.java:246)
+	org.lwjgl.opengl.EventQueue.copyEvents(EventQueue.java:66)
+	org.lwjgl.opengl.KeyboardEventQueue.copyEvents(KeyboardEventQueue.java:283)
+	org.lwjgl.opengl.MacOSXDisplay.readKeyboard(MacOSXDisplay.java:391)
+TRACE 301051:
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel.buttons(WorldScreen.java:222)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:417)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+TRACE 301052:
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:362)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:703)
+TRACE 301118:
+	java.io.Writer.write(Writer.java:140)
+	java.io.PrintStream.write(PrintStream.java:475)
+	java.io.PrintStream.print(PrintStream.java:619)
+	java.io.PrintStream.println(PrintStream.java:756)
+TRACE 301054:
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:48)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:418)
+TRACE 300636:
+	apple.awt.ComponentModel.getGraphicsForSurface(ComponentModel.java:446)
+	apple.awt.ComponentModel.getGraphics(ComponentModel.java:465)
+	java.awt.Component.getGraphics(Component.java:2875)
+	sun.awt.RepaintArea.paint(RepaintArea.java:212)
+TRACE 300542:
+	sun.nio.ch.FileChannelImpl.<clinit>(FileChannelImpl.java:360)
+	java.io.RandomAccessFile.getChannel(RandomAccessFile.java:253)
+	sun.font.TrueTypeFont.open(TrueTypeFont.java:272)
+	sun.font.TrueTypeFont.verify(TrueTypeFont.java:458)
+TRACE 301057:
+	java.util.regex.Pattern.compile(Pattern.java:1451)
+	java.util.regex.Pattern.<init>(Pattern.java:1133)
+	java.util.regex.Pattern.compile(Pattern.java:823)
+	java.util.regex.Pattern.matches(Pattern.java:928)
+TRACE 300465:
+	sun.util.LocaleServiceProviderPool.<init>(LocaleServiceProviderPool.java:98)
+	sun.util.LocaleServiceProviderPool.getPool(LocaleServiceProviderPool.java:80)
+	sun.util.TimeZoneNameUtility.retrieveDisplayNames(TimeZoneNameUtility.java:86)
+	sun.util.TimeZoneNameUtility.retrieveDisplayNames(TimeZoneNameUtility.java:81)
+TRACE 300376:
+	java.lang.Thread.start0(Thread.java:Unknown line)
+	java.lang.Thread.start(Thread.java:673)
+	java.awt.EventQueue.initDispatchThread(EventQueue.java:950)
+	java.awt.EventQueue.postEventPrivate(EventQueue.java:260)
+TRACE 300022:
+	sun.misc.JarIndex.addToList(JarIndex.java:139)
+	sun.misc.JarIndex.read(JarIndex.java:307)
+	sun.misc.JarIndex.<init>(JarIndex.java:75)
+	sun.misc.JarIndex.getJarIndex(JarIndex.java:120)
+TRACE 300700:
+	sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:Unknown line)
+	sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	java.lang.reflect.Method.invoke(Method.java:597)
+TRACE 301119:
+	java.nio.Bits.getLongB(Bits.java:321)
+	java.nio.Bits.getLong(Bits.java:343)
+	java.nio.HeapByteBuffer.getLong(HeapByteBuffer.java:387)
+	org.lwjgl.input.Mouse.next(Mouse.java:470)
+TRACE 300699:
+	net.java.games.input.GenericDesktopUsage.<clinit>(GenericDesktopUsage.java:54)
+	java.lang.Class.forName0(Class.java:Unknown line)
+	java.lang.Class.forName(Class.java:171)
+	net.java.games.input.UsagePage.class$(UsagePage.java:51)
+TRACE 300697:
+	sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:293)
+	java.lang.ClassLoader.loadClass(ClassLoader.java:247)
+	java.lang.Class.forName0(Class.java:Unknown line)
+	java.lang.Class.forName(Class.java:171)
+TRACE 300696:
+	org.lwjgl.opengl.GL11.glLoadIdentity(GL11.java:1946)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.enterOrtho(ImmediateModeOGLRenderer.java:60)
+	org.newdawn.slick.GameContainer.enterOrtho(GameContainer.java:899)
+	org.newdawn.slick.GameContainer.enterOrtho(GameContainer.java:800)
+TRACE 300196:
+	java.math.BigInteger.squareToLen(BigInteger.java:1274)
+	java.math.BigInteger.oddModPow(BigInteger.java:1821)
+	java.math.BigInteger.modPow(BigInteger.java:1571)
+	sun.security.provider.DSA.generateV(DSA.java:374)
+TRACE 301067:
+	org.lwjgl.opengl.GL11.nglDisable(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glDisable(GL11.java:1011)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glDisable(ImmediateModeOGLRenderer.java:155)
+	org.newdawn.slick.Graphics.setAntiAlias(Graphics.java:1306)
+TRACE 301068:
+	org.lwjgl.input.Keyboard.poll(Keyboard.java:377)
+	org.lwjgl.opengl.Display.pollDevices(Display.java:675)
+	org.lwjgl.opengl.Display.processMessages(Display.java:599)
+	org.lwjgl.opengl.Display.update(Display.java:663)
+TRACE 301069:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons(WorldScreen.java:270)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:36)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:418)
+TRACE 300695:
+	java.io.BufferedReader.readLine(BufferedReader.java:288)
+	java.io.BufferedReader.readLine(BufferedReader.java:362)
+	org.newdawn.slick.AngelCodeFont.parseFnt(AngelCodeFont.java:227)
+	org.newdawn.slick.AngelCodeFont.<init>(AngelCodeFont.java:110)
+TRACE 301121:
+	com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason(BuySupply.java:27)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301072:
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text(WorldScreen.java:62)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:417)
+TRACE 300675:
+	org.lwjgl.opengl.MacOSXCanvasPeerInfo.initHandle(MacOSXCanvasPeerInfo.java:55)
+	org.lwjgl.opengl.MacOSXDisplayPeerInfo.doLockAndInitHandle(MacOSXDisplayPeerInfo.java:56)
+	org.lwjgl.opengl.PeerInfo.lockAndGetHandle(PeerInfo.java:85)
+	org.lwjgl.opengl.MacOSXContextImplementation.create(MacOSXContextImplementation.java:47)
+TRACE 300676:
+	org.lwjgl.opengl.MacOSXContextImplementation.nCreate(MacOSXContextImplementation.java:Unknown line)
+	org.lwjgl.opengl.MacOSXContextImplementation.create(MacOSXContextImplementation.java:49)
+	org.lwjgl.opengl.ContextGL.<init>(ContextGL.java:132)
+	org.lwjgl.opengl.Display.create(Display.java:847)
+TRACE 300694:
+	org.newdawn.slick.AngelCodeFont.parseFnt(AngelCodeFont.java:231)
+	org.newdawn.slick.AngelCodeFont.<init>(AngelCodeFont.java:110)
+	org.newdawn.slick.Graphics$1.run(Graphics.java:147)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300693:
+	java.util.zip.Inflater.inflateBytes(Inflater.java:Unknown line)
+	java.util.zip.Inflater.inflate(Inflater.java:238)
+	org.newdawn.slick.opengl.PNGDecoder.readChunkUnzip(PNGDecoder.java:884)
+	org.newdawn.slick.opengl.PNGDecoder.decode(PNGDecoder.java:293)
+TRACE 301077:
+	com.zarkonnen.catengine.SlickEngine$MyFrame.rect(SlickEngine.java:399)
+	com.zarkonnen.catengine.Draw.rect(Draw.java:76)
+	com.zarkonnen.cyberpunk.WorldScreen.render(WorldScreen.java:384)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+TRACE 301132:
+	java.lang.Object.notifyAll(Object.java:Unknown line)
+	java.awt.EventQueue.wakeup(EventQueue.java:1142)
+	java.awt.EventQueue.access$300(EventQueue.java:82)
+	java.awt.EventQueue$1.wakeup(EventQueue.java:203)
+TRACE 300350:
+	javax.imageio.spi.IIORegistry.registerStandardSpis(IIORegistry.java:164)
+	javax.imageio.spi.IIORegistry.<init>(IIORegistry.java:120)
+	javax.imageio.spi.IIORegistry.getDefaultInstance(IIORegistry.java:142)
+	apple.awt.CToolkit.registerDefaultServices(CToolkit.java:1340)
+TRACE 300818:
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$MoveTo.check(InteractionBehavior.java:100)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300819:
+	java.lang.Object.getClass(Object.java:Unknown line)
+	java.util.RegularEnumSet.contains(RegularEnumSet.java:123)
+	com.zarkonnen.cyberpunk.Person.willBuyForSelf(Person.java:181)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:62)
+TRACE 300817:
+	com.zarkonnen.cyberpunk.WorldMap.atMapEdge(WorldMap.java:136)
+	com.zarkonnen.cyberpunk.Tile.atMapEdge(Tile.java:68)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:86)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:82)
+TRACE 301080:
+	com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason(BuySupply.java:27)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 301081:
+	com.zarkonnen.cyberpunk.interaction.MoveToWork$F.make(MoveToWork.java:40)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+TRACE 300823:
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:72)
+	com.zarkonnen.cyberpunk.interaction.Buy$F.make(Buy.java:67)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300824:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300825:
+	com.zarkonnen.cyberpunk.Person.hasKeyFor(Person.java:66)
+	com.zarkonnen.cyberpunk.Person.willBuyForSelf(Person.java:180)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:62)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+TRACE 300816:
+	java.util.RegularEnumSet.contains(RegularEnumSet.java:121)
+	com.zarkonnen.cyberpunk.Person.willBuyForSelf(Person.java:181)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:62)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:56)
+TRACE 300827:
+	com.zarkonnen.cyberpunk.interaction.HarvestImplants$F.make(HarvestImplants.java:74)
+	com.zarkonnen.cyberpunk.interaction.HarvestImplants$F.make(HarvestImplants.java:71)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300815:
+	java.util.LinkedList.remove(LinkedList.java:787)
+	java.util.LinkedList.removeFirst(LinkedList.java:134)
+	java.util.LinkedList.pollFirst(LinkedList.java:559)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:374)
+TRACE 300829:
+	com.zarkonnen.cyberpunk.interaction.TileTypeFactory.make(TileTypeFactory.java:20)
+	com.zarkonnen.cyberpunk.interaction.TileTypeFactory.make(TileTypeFactory.java:9)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300830:
+	java.util.ArrayList.indexOf(ArrayList.java:210)
+	java.util.ArrayList.contains(ArrayList.java:199)
+	com.zarkonnen.cyberpunk.Person.willBuyForSelf(Person.java:181)
+	com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make(SellToPerson.java:62)
+TRACE 301082:
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.GameState.playerAction(GameState.java:25)
+TRACE 300810:
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:89)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+	com.zarkonnen.cyberpunk.Cyberpunk.input(Cyberpunk.java:48)
+TRACE 300809:
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:319)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason(MoveToHome.java:23)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+TRACE 300834:
+	java.lang.StringCoding$StringEncoder.encode(StringCoding.java:232)
+	java.lang.StringCoding.encode(StringCoding.java:272)
+	java.lang.String.getBytes(String.java:946)
+	java.io.UnixFileSystem.getBooleanAttributes0(UnixFileSystem.java:Unknown line)
+TRACE 300808:
+	java.lang.Object.hashCode(Object.java:Unknown line)
+	java.util.HashMap.removeEntryForKey(HashMap.java:548)
+	java.util.HashMap.remove(HashMap.java:538)
+	java.util.HashSet.remove(HashSet.java:216)
+TRACE 300807:
+	com.zarkonnen.cyberpunk.Tile.passable(Tile.java:237)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:377)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+TRACE 300837:
+	com.zarkonnen.cyberpunk.WorldMap.atMapEdge(WorldMap.java:136)
+	com.zarkonnen.cyberpunk.Tile.atMapEdge(Tile.java:68)
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:67)
+	com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make(SellToOutsideWorld.java:63)
+TRACE 300806:
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:224)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:113)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:84)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+TRACE 300839:
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld.<init>(BuyFromOutsideWorld.java:47)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:89)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:82)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300805:
+	java.util.HashMap.put(HashMap.java:370)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:399)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+TRACE 300841:
+	com.zarkonnen.cyberpunk.interaction.Scavenge.run(Scavenge.java:46)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:94)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300804:
+	com.zarkonnen.cyberpunk.Direction.values(Direction.java:5)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:376)
+	com.zarkonnen.cyberpunk.WorldMap.calcPathsFor(WorldMap.java:325)
+	com.zarkonnen.cyberpunk.Tile.towardsTile(Tile.java:51)
+TRACE 301083:
+	org.lwjgl.opengl.GL11.nglPointSize(GL11.java:Unknown line)
+	org.lwjgl.opengl.GL11.glPointSize(GL11.java:2096)
+	org.newdawn.slick.opengl.renderer.ImmediateModeOGLRenderer.glPointSize(ImmediateModeOGLRenderer.java:232)
+	org.newdawn.slick.Graphics.resetLineWidth(Graphics.java:1288)
+TRACE 300844:
+	com.zarkonnen.cyberpunk.WorldMap.hour(WorldMap.java:90)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior$TimeBetween.check(InteractionBehavior.java:246)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:15)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300845:
+	com.zarkonnen.cyberpunk.Tile.atMapEdge(Tile.java:68)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:86)
+	com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make(BuyFromOutsideWorld.java:82)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 300803:
+	java.util.LinkedList$Entry.<init>(LinkedList.java:770)
+	java.util.LinkedList.addBefore(LinkedList.java:778)
+	java.util.LinkedList.add(LinkedList.java:198)
+	com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards(WorldMap.java:385)
+TRACE 300847:
+	java.util.LinkedList.listIterator(LinkedList.java:667)
+	java.util.AbstractList.listIterator(AbstractList.java:284)
+	java.util.AbstractSequentialList.iterator(AbstractSequentialList.java:222)
+	com.zarkonnen.cyberpunk.Tile.people(Tile.java:224)
+TRACE 300848:
+	com.zarkonnen.cyberpunk.Person.bodyTick(Person.java:126)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:101)
+	com.zarkonnen.cyberpunk.WorldMap.tick(WorldMap.java:121)
+	com.zarkonnen.cyberpunk.PreSimScreen.input(PreSimScreen.java:24)
+TRACE 300849:
+	org.newdawn.slick.Image.draw(Image.java:996)
+	org.newdawn.slick.Image.draw(Image.java:905)
+	com.zarkonnen.catengine.SlickEngine$MyFrame.blit(SlickEngine.java:434)
+	com.zarkonnen.catengine.Draw.blit(Draw.java:71)
+TRACE 300802:
+	com.zarkonnen.cyberpunk.interaction.DoWork$F.make(DoWork.java:167)
+	com.zarkonnen.cyberpunk.interaction.DoWork$F.make(DoWork.java:164)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:112)
+TRACE 300427:
+	sun.awt.SunHints.<clinit>(SunHints.java:246)
+	java.awt.RenderingHints.<clinit>(RenderingHints.java:201)
+	java.awt.font.FontRenderContext.<init>(FontRenderContext.java:95)
+	sun.font.Font2D.<clinit>(Font2D.java:52)
+TRACE 300487:
+	java.awt.Component.move(Component.java:2036)
+	java.awt.Component.setLocation(Component.java:2026)
+	java.awt.Window.init(Window.java:401)
+	java.awt.Window.<init>(Window.java:433)
+TRACE 301123:
+	com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make(SellToBusiness.java:62)
+	com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make(SellToBusiness.java:52)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:82)
+	com.zarkonnen.cyberpunk.Tile.getInteractions(Tile.java:115)
+TRACE 300800:
+	java.io.UnixFileSystem.getBooleanAttributes0(UnixFileSystem.java:Unknown line)
+	java.io.UnixFileSystem.getBooleanAttributes(UnixFileSystem.java:228)
+	java.io.File.exists(File.java:733)
+	sun.misc.URLClassPath$FileLoader.getResource(URLClassPath.java:1015)
+TRACE 300855:
+	com.zarkonnen.cyberpunk.interaction.Rest.disabledReason(Rest.java:25)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300797:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:101)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 300096:
+	java.lang.String.equals(String.java:1017)
+	java.util.HashMap.get(HashMap.java:305)
+	java.security.Provider.getEngineName(Provider.java:982)
+	java.security.Provider.parseLegacyPut(Provider.java:620)
+TRACE 300668:
+	apple.awt.CToolkit.getDefaultKeyboardLocale(CToolkit.java:1048)
+	sun.awt.im.ExecutableInputMethodManager.getDefaultKeyboardLocale(InputMethodManager.java:578)
+	sun.awt.im.InputContext.<init>(InputContext.java:112)
+	sun.awt.im.InputMethodContext.<init>(InputMethodContext.java:72)
+TRACE 300026:
+	java.util.zip.ZipFile.open(ZipFile.java:Unknown line)
+	java.util.zip.ZipFile.<init>(ZipFile.java:128)
+	java.util.jar.JarFile.<init>(JarFile.java:136)
+	java.util.jar.JarFile.<init>(JarFile.java:73)
+TRACE 300219:
+	java.security.Policy.<clinit>(Policy.java:103)
+	java.io.FilePermission$1.run(FilePermission.java:186)
+	java.io.FilePermission$1.run(FilePermission.java:183)
+	java.security.AccessController.doPrivileged(AccessController.java:Unknown line)
+TRACE 300394:
+	java.awt.Component.<clinit>(Component.java:826)
+	org.lwjgl.opengl.MacOSXDisplay.init(MacOSXDisplay.java:201)
+	org.lwjgl.opengl.Display.<clinit>(Display.java:135)
+	org.newdawn.slick.AppGameContainer$1.run(AppGameContainer.java:37)
+TRACE 300206:
+	java.lang.String.indexOf(String.java:1769)
+	java.lang.String.indexOf(String.java:1733)
+	java.lang.String.indexOf(String.java:1715)
+	java.net.URLStreamHandler.parseURL(URLStreamHandler.java:250)
+TRACE 300796:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:101)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 301124:
+	com.zarkonnen.cyberpunk.WorldMap.timeOfDay(WorldMap.java:86)
+	com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text(WorldScreen.java:62)
+	com.zarkonnen.cyberpunk.DrawUtils.button(DrawUtils.java:37)
+	com.zarkonnen.cyberpunk.ButtonList.draw(ButtonList.java:41)
+TRACE 300795:
+	com.zarkonnen.cyberpunk.WorldMap.itemQuantity(WorldMap.java:101)
+	com.zarkonnen.cyberpunk.PreSimScreen.render(PreSimScreen.java:38)
+	com.zarkonnen.cyberpunk.Cyberpunk.render(Cyberpunk.java:65)
+	com.zarkonnen.catengine.SlickEngine.render(SlickEngine.java:73)
+TRACE 300866:
+	com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason(MoveToHome.java:20)
+	com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled(AbstractInteraction.java:79)
+	com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled(InteractionBehavior.java:17)
+	com.zarkonnen.cyberpunk.Person.tick(Person.java:90)
+TRACE 300523:
+	apple.awt.CWindow.initPeer(CWindow.java:210)
+	apple.awt.ComponentModel.initPeer(ComponentModel.java:66)
+	apple.awt.ContainerModel.initPeer(ContainerModel.java:29)
+	apple.awt.CWindow.initPeer(CWindow.java:158)
+TRACE 301087:
+	java.util.concurrent.atomic.AtomicInteger.get(AtomicInteger.java:61)
+	sun.awt.AppContext.getAppContext(AppContext.java:266)
+	java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager(KeyboardFocusManager.java:174)
+	java.awt.Component.hasFocus(Component.java:7910)
+TRACE 300869:
+	com.zarkonnen.cyberpunk.Tile.lockedFor(Tile.java:72)
+	com.zarkonnen.cyberpunk.interaction.BreakIn$F.make(BreakIn.java:43)
+	com.zarkonnen.cyberpunk.interaction.BreakIn$F.make(BreakIn.java:40)
+	com.zarkonnen.cyberpunk.interaction.Factories.make(Factories.java:74)
+TRACE 301125:
+	org.newdawn.slick.Input.poll(Input.java:1349)
+	org.newdawn.slick.GameContainer.updateAndRender(GameContainer.java:656)
+	org.newdawn.slick.AppGameContainer.gameLoop(AppGameContainer.java:456)
+	com.zarkonnen.catengine.SlickEngine$MyAppGameContainer.runUntil(SlickEngine.java:97)
+CPU SAMPLES BEGIN (total = 6871) Tue Mar 11 17:41:55 2014
+rank   self  accum   count trace method
+   1 46.18% 46.18%    3173 300746 org.lwjgl.opengl.MacOSXContextImplementation.nSwapBuffers
+   2 12.31% 58.49%     846 300755 org.lwjgl.opengl.GL11.nglBegin
+   3  5.88% 64.37%     404 300754 org.lwjgl.opengl.GL11.nglColor4f
+   4  2.93% 67.30%     201 300900 org.lwjgl.opengl.GL11.nglBegin
+   5  2.28% 69.58%     157 300826 com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled
+   6  2.01% 71.59%     138 300883 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+   7  1.88% 73.47%     129 300846 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+   8  1.83% 75.30%     126 300835 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+   9  0.89% 76.19%      61 300838 com.zarkonnen.cyberpunk.Tile.people
+  10  0.77% 76.96%      53 301030 org.lwjgl.opengl.GL11.nglVertex3f
+  11  0.71% 77.67%      49 300750 org.lwjgl.opengl.GL11.nglTexCoord2f
+  12  0.67% 78.34%      46 300764 java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager
+  13  0.65% 79.00%      45 300799 org.lwjgl.opengl.GL11.nglEnd
+  14  0.63% 79.62%      43 300880 java.lang.Object.getClass
+  15  0.61% 80.24%      42 300840 com.zarkonnen.cyberpunk.Tile.people
+  16  0.51% 80.75%      35 300752 java.lang.Thread.yield
+  17  0.48% 81.23%      33 300876 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+  18  0.47% 81.69%      32 300562 apple.awt.CGraphicsEnvironment.loadNativeFonts
+  19  0.47% 82.16%      32 301017 org.lwjgl.opengl.GL11.nglTranslatef
+  20  0.45% 82.61%      31 301029 org.lwjgl.opengl.GL11.nglTranslatef
+  21  0.42% 83.03%      29 300836 com.zarkonnen.cyberpunk.Person.tick
+  22  0.39% 83.42%      27 301076 com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled
+  23  0.35% 83.77%      24 300893 java.util.AbstractList$Itr.hasNext
+  24  0.35% 84.12%      24 300828 com.zarkonnen.cyberpunk.Tile.people
+  25  0.35% 84.47%      24 301131 apple.awt.CGraphicsDevice.exitFullScreen
+  26  0.32% 84.79%      22 301035 org.lwjgl.opengl.GL11.nglVertex2f
+  27  0.32% 85.11%      22 300875 com.zarkonnen.cyberpunk.interaction.Factories.make
+  28  0.28% 85.39%      19 300798 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+  29  0.28% 85.66%      19 301060 org.lwjgl.opengl.GL11.nglTexCoord2f
+  30  0.26% 85.93%      18 300909 org.lwjgl.opengl.GL11.nglVertex3f
+  31  0.26% 86.19%      18 301044 org.lwjgl.opengl.GL11.nglTexCoord2f
+  32  0.25% 86.44%      17 300761 org.lwjgl.opengl.GL11.nglVertex3f
+  33  0.23% 86.67%      16 300245 java.lang.ClassLoader$NativeLibrary.load
+  34  0.23% 86.90%      16 300852 java.lang.Object.getClass
+  35  0.22% 87.12%      15 300698 net.java.games.input.OSXHIDDevice.nGetDeviceProperties
+  36  0.20% 87.32%      14 300887 java.lang.Object.clone
+  37  0.20% 87.53%      14 300870 java.util.AbstractList$Itr.hasNext
+  38  0.19% 87.72%      13 300963 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+  39  0.19% 87.91%      13 300410 apple.awt.CGraphicsEnvironment.loadNativeDirFonts
+  40  0.19% 88.09%      13 300894 com.zarkonnen.cyberpunk.PreSimScreen.render
+  41  0.19% 88.28%      13 300714 org.lwjgl.opengl.GL11.nglClear
+  42  0.17% 88.46%      12 300813 java.util.HashMap.put
+  43  0.17% 88.63%      12 301049 org.lwjgl.opengl.GL11.nglTexCoord2f
+  44  0.16% 88.79%      11 301034 org.lwjgl.opengl.GL11.nglEnable
+  45  0.16% 88.95%      11 300814 com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards
+  46  0.16% 89.11%      11 301085 org.lwjgl.opengl.GL11.nglVertex3f
+  47  0.15% 89.26%      10 300854 com.zarkonnen.cyberpunk.interaction.Factories.make
+  48  0.13% 89.39%       9 300889 com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make
+  49  0.13% 89.52%       9 300811 java.util.HashMap.transfer
+  50  0.12% 89.64%       8 300959 com.zarkonnen.cyberpunk.interaction.Buy$F.make
+  51  0.12% 89.75%       8 301064 org.lwjgl.opengl.GL11.nglBindTexture
+  52  0.12% 89.87%       8 301041 java.lang.String.intern
+  53  0.12% 89.99%       8 301032 java.lang.System.currentTimeMillis
+  54  0.10% 90.09%       7 300832 com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make
+  55  0.10% 90.19%       7 300850 java.util.AbstractList.iterator
+  56  0.10% 90.29%       7 300856 java.util.ArrayList.addAll
+  57  0.10% 90.39%       7 301103 java.lang.Class.getClassLoader0
+  58  0.09% 90.48%       6 300877 com.zarkonnen.cyberpunk.interaction.RemoveImplantAtClinic$F.make
+  59  0.09% 90.57%       6 301065 com.zarkonnen.catengine.Hooks.hit
+  60  0.09% 90.66%       6 301059 java.lang.Object.getClass
+  61  0.09% 90.74%       6 300978 com.zarkonnen.cyberpunk.interaction.Buy.getItem
+  62  0.09% 90.83%       6 301039 org.lwjgl.opengl.GL11.nglEnd
+  63  0.09% 90.92%       6 300226 java.lang.ClassLoader.defineClass1
+  64  0.09% 91.01%       6 300788 com.zarkonnen.cyberpunk.WorldMap.tilesOfType
+  65  0.09% 91.09%       6 300896 com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards
+  66  0.09% 91.18%       6 300872 com.zarkonnen.cyberpunk.interaction.Stun$F.make
+  67  0.09% 91.27%       6 300576 apple.awt.ComponentModel._setBounds
+  68  0.09% 91.35%       6 301056 sun.misc.Unsafe.copyMemory
+  69  0.07% 91.43%       5 301036 java.lang.Thread.currentThread
+  70  0.07% 91.50%       5 301061 sun.reflect.Reflection.getCallerClass
+  71  0.07% 91.57%       5 300605 apple.awt.CWindow._setVisible
+  72  0.07% 91.65%       5 300885 java.util.AbstractList.iterator
+  73  0.07% 91.72%       5 300918 com.zarkonnen.cyberpunk.interaction.FirstAid$F.make
+  74  0.07% 91.79%       5 300917 com.zarkonnen.cyberpunk.interaction.BlackmailForItem$F.make
+  75  0.07% 91.86%       5 300932 com.zarkonnen.cyberpunk.Tile.getInteractions
+  76  0.07% 91.94%       5 301098 com.zarkonnen.cyberpunk.Person.tick
+  77  0.07% 92.01%       5 300902 java.io.FileOutputStream.writeBytes
+  78  0.07% 92.08%       5 300628 apple.awt.CGlobalCursorManager.findHeavyweightUnderCursor
+  79  0.06% 92.14%       4 300975 com.zarkonnen.cyberpunk.interaction.Wander.run
+  80  0.06% 92.20%       4 300944 com.zarkonnen.cyberpunk.interaction.BlackmailForMoney$F.make
+  81  0.06% 92.26%       4 301055 com.zarkonnen.cyberpunk.interaction.Factories.make
+  82  0.06% 92.32%       4 300891 java.lang.System.currentTimeMillis
+  83  0.06% 92.37%       4 300942 com.zarkonnen.cyberpunk.interaction.Factories.make
+  84  0.06% 92.43%       4 301075 com.zarkonnen.cyberpunk.interaction.MoveToWork$F.make
+  85  0.06% 92.49%       4 301070 sun.misc.Unsafe.getByte
+  86  0.06% 92.55%       4 300637 apple.awt.CComponent._requestFocus
+  87  0.06% 92.61%       4 301037 org.lwjgl.opengl.GL11.nglDisable
+  88  0.06% 92.66%       4 300863 com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make
+  89  0.06% 92.72%       4 300833 java.util.AbstractCollection.toArray
+  90  0.06% 92.78%       4 300922 com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make
+  91  0.06% 92.84%       4 300969 com.zarkonnen.cyberpunk.interaction.Factories.make
+  92  0.06% 92.90%       4 300753 java.util.regex.Pattern$BitClass.<init>
+  93  0.06% 92.96%       4 300736 org.lwjgl.opengl.MacOSXContextImplementation.setView
+  94  0.04% 93.00%       3 300842 java.util.Arrays.copyOf
+  95  0.04% 93.04%       3 300968 com.zarkonnen.cyberpunk.Tile.people
+  96  0.04% 93.09%       3 300980 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+  97  0.04% 93.13%       3 300952 java.util.ArrayList.addAll
+  98  0.04% 93.17%       3 300744 apple.awt.CGraphicsDevice.enterFullScreen
+  99  0.04% 93.22%       3 300947 com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make
+ 100  0.04% 93.26%       3 300998 com.zarkonnen.cyberpunk.interaction.Rest.run
+ 101  0.04% 93.31%       3 300747 org.lwjgl.opengl.MacOSXContextImplementation.clearDrawable
+ 102  0.04% 93.35%       3 301100 java.lang.System.arraycopy
+ 103  0.04% 93.39%       3 301006 java.util.ArrayList.size
+ 104  0.04% 93.44%       3 301097 java.lang.System.arraycopy
+ 105  0.04% 93.48%       3 301009 java.util.ArrayList.contains
+ 106  0.04% 93.52%       3 301020 com.zarkonnen.cyberpunk.behave.InteractionBehavior.enabled
+ 107  0.04% 93.57%       3 300938 java.lang.System.arraycopy
+ 108  0.04% 93.61%       3 300923 com.zarkonnen.cyberpunk.Tile.people
+ 109  0.04% 93.65%       3 300920 com.zarkonnen.cyberpunk.interaction.Lock$F.make
+ 110  0.04% 93.70%       3 301096 com.zarkonnen.cyberpunk.WorldScreen$InventoryModel.buttons
+ 111  0.04% 93.74%       3 301040 org.lwjgl.opengl.GL11.nglVertex2f
+ 112  0.04% 93.79%       3 301104 java.lang.Thread.sleep
+ 113  0.04% 93.83%       3 300915 java.util.Arrays.copyOf
+ 114  0.04% 93.87%       3 301047 java.lang.System.arraycopy
+ 115  0.04% 93.92%       3 301079 java.lang.System.arraycopy
+ 116  0.04% 93.96%       3 300899 com.zarkonnen.cyberpunk.interaction.Loot$F.make
+ 117  0.04% 94.00%       3 301058 sun.misc.Unsafe.putInt
+ 118  0.04% 94.05%       3 301063 com.zarkonnen.cyberpunk.Cyberpunk.input
+ 119  0.04% 94.09%       3 300820 java.lang.AbstractStringBuilder.<init>
+ 120  0.04% 94.13%       3 300867 com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make
+ 121  0.04% 94.18%       3 300865 java.util.ArrayList.ensureCapacity
+ 122  0.03% 94.21%       2 300851 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check
+ 123  0.03% 94.24%       2 300685 sun.misc.Unsafe.putByte
+ 124  0.03% 94.27%       2 300501 apple.awt.CToolkit.createFrame
+ 125  0.03% 94.29%       2 300469 org.lwjgl.opengl.MacOSXPeerInfo.nChoosePixelFormat
+ 126  0.03% 94.32%       2 300720 java.util.zip.ZipFile.getEntry
+ 127  0.03% 94.35%       2 300735 apple.awt.ContainerModel._endValidate
+ 128  0.03% 94.38%       2 300748 org.lwjgl.opengl.MacOSXContextImplementation.setView
+ 129  0.03% 94.41%       2 300749 java.lang.Thread.currentThread
+ 130  0.03% 94.44%       2 300751 java.lang.Object.clone
+ 131  0.03% 94.47%       2 300364 sun.nio.cs.UTF_8$Encoder.encodeArrayLoop
+ 132  0.03% 94.50%       2 300767 java.lang.AbstractStringBuilder.<init>
+ 133  0.03% 94.53%       2 300773 java.util.Arrays.copyOf
+ 134  0.03% 94.56%       2 300086 java.lang.ClassLoader.findBootstrapClass
+ 135  0.03% 94.59%       2 300787 com.zarkonnen.cyberpunk.WorldMap.tilesOfType
+ 136  0.03% 94.62%       2 300789 java.lang.System.arraycopy
+ 137  0.03% 94.64%       2 300812 java.util.HashMap.resize
+ 138  0.03% 94.67%       2 300821 java.lang.Object.getClass
+ 139  0.03% 94.70%       2 300822 com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make
+ 140  0.03% 94.73%       2 300831 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Injured.check
+ 141  0.03% 94.76%       2 300843 java.util.HashMap.containsKey
+ 142  0.03% 94.79%       2 300853 com.zarkonnen.cyberpunk.interaction.FirstAid$F.make
+ 143  0.03% 94.82%       2 300525 apple.awt.CWindow.createNativeWindow
+ 144  0.03% 94.85%       2 300864 java.lang.System.arraycopy
+ 145  0.03% 94.88%       2 300868 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Injured.check
+ 146  0.03% 94.91%       2 300871 java.util.ArrayList.addAll
+ 147  0.03% 94.94%       2 300895 com.zarkonnen.cyberpunk.WorldMap.calcPathsFor
+ 148  0.03% 94.96%       2 300897 java.util.HashMap.addEntry
+ 149  0.03% 94.99%       2 300905 com.zarkonnen.cyberpunk.interaction.SellToPerson$F.make
+ 150  0.03% 95.02%       2 300906 java.util.Arrays.copyOf
+ 151  0.03% 95.05%       2 300908 com.zarkonnen.cyberpunk.interaction.MoveToHome.run
+ 152  0.03% 95.08%       2 300912 java.util.EnumMap.isValidKey
+ 153  0.03% 95.11%       2 300913 com.zarkonnen.cyberpunk.behave.InteractionBehavior$UnobservedExceptVictim.check
+ 154  0.03% 95.14%       2 300914 com.zarkonnen.cyberpunk.TileType.values
+ 155  0.03% 95.17%       2 300921 java.util.AbstractList$Itr.hasNext
+ 156  0.03% 95.20%       2 300930 com.zarkonnen.cyberpunk.interaction.BuySupply$F.make
+ 157  0.03% 95.23%       2 300931 com.zarkonnen.cyberpunk.interaction.Buy.getItem
+ 158  0.03% 95.26%       2 300941 java.util.AbstractList.listIterator
+ 159  0.03% 95.28%       2 300943 java.util.Arrays.copyOf
+ 160  0.03% 95.31%       2 300946 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Poor.check
+ 161  0.03% 95.34%       2 300956 com.zarkonnen.cyberpunk.interaction.Unlock.disabledReason
+ 162  0.03% 95.37%       2 300961 java.util.AbstractList$Itr.hasNext
+ 163  0.03% 95.40%       2 300976 com.zarkonnen.cyberpunk.interaction.Lock$F.make
+ 164  0.03% 95.43%       2 300982 com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make
+ 165  0.03% 95.46%       2 300984 java.util.ArrayList.<init>
+ 166  0.03% 95.49%       2 300990 com.zarkonnen.cyberpunk.interaction.Unlock$F.make
+ 167  0.03% 95.52%       2 300995 com.zarkonnen.cyberpunk.interaction.MoveToType$F.make
+ 168  0.03% 95.55%       2 301000 com.zarkonnen.cyberpunk.interaction.Factories.make
+ 169  0.03% 95.58%       2 301014 java.util.ArrayList.addAll
+ 170  0.03% 95.60%       2 301015 com.zarkonnen.cyberpunk.Tile.getInteractions
+ 171  0.03% 95.63%       2 301022 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.enabled
+ 172  0.03% 95.66%       2 301025 java.util.AbstractList.iterator
+ 173  0.03% 95.69%       2 301033 java.awt.KeyboardFocusManager.getFocusOwner
+ 174  0.03% 95.72%       2 301048 com.zarkonnen.cyberpunk.DrawUtils.button
+ 175  0.03% 95.75%       2 301050 com.zarkonnen.cyberpunk.WorldScreen$InteractionModel.buttons
+ 176  0.03% 95.78%       2 301053 org.newdawn.slick.Image.draw
+ 177  0.03% 95.81%       2 301062 sun.reflect.Reflection.getClassAccessFlags
+ 178  0.03% 95.84%       2 301066 com.zarkonnen.catengine.SlickEngine$MyInput.cursor
+ 179  0.03% 95.87%       2 301071 org.lwjgl.opengl.GL11.nglVertex2f
+ 180  0.03% 95.90%       2 301078 java.util.regex.Pattern.compile
+ 181  0.03% 95.92%       2 301084 org.lwjgl.opengl.GL11.nglLineWidth
+ 182  0.03% 95.95%       2 301086 com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text
+ 183  0.03% 95.98%       2 301088 org.newdawn.slick.Input.isMouseButtonDown
+ 184  0.03% 96.01%       2 301089 com.zarkonnen.catengine.SlickEngine$MyInput.keyDown
+ 185  0.03% 96.04%       2 301093 org.lwjgl.opengl.GL11.nglLoadIdentity
+ 186  0.03% 96.07%       2 301102 com.zarkonnen.cyberpunk.WorldMap.timeOfDay
+ 187  0.03% 96.10%       2 301105 com.zarkonnen.cyberpunk.interaction.BuySupply$F.make
+ 188  0.03% 96.13%       2 301116 java.util.RegularEnumSet.add
+ 189  0.03% 96.16%       2 300677 org.lwjgl.opengl.GLContext.useContext
+ 190  0.03% 96.19%       2 301122 org.lwjgl.opengl.GL11.nglDisable
+ 191  0.01% 96.20%       1 300793 com.zarkonnen.cyberpunk.PreSimScreen.render
+ 192  0.01% 96.22%       1 300792 com.zarkonnen.cyberpunk.WorldMap.tilesOfType
+ 193  0.01% 96.23%       1 300873 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Hungry.check
+ 194  0.01% 96.25%       1 300874 java.util.ArrayList.<init>
+ 195  0.01% 96.26%       1 300791 com.zarkonnen.cyberpunk.behave.InteractionBehavior.<init>
+ 196  0.01% 96.27%       1 300790 com.zarkonnen.cyberpunk.Person.<init>
+ 197  0.01% 96.29%       1 300786 java.lang.Object.getClass
+ 198  0.01% 96.30%       1 300878 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+ 199  0.01% 96.32%       1 300879 com.zarkonnen.cyberpunk.interaction.Scavenge$F.make
+ 200  0.01% 96.33%       1 300785 java.util.Arrays.copyOfRange
+ 201  0.01% 96.35%       1 300881 com.zarkonnen.cyberpunk.interaction.RemoveImplant$F.make
+ 202  0.01% 96.36%       1 300882 com.zarkonnen.cyberpunk.Person.getVisibleExhaustion
+ 203  0.01% 96.38%       1 300784 java.util.regex.Pattern$CharProperty.<init>
+ 204  0.01% 96.39%       1 300884 com.zarkonnen.cyberpunk.interaction.Factories.make
+ 205  0.01% 96.41%       1 300783 java.util.regex.Matcher.<init>
+ 206  0.01% 96.42%       1 300886 com.zarkonnen.cyberpunk.interaction.SellToOutsideWorld$F.make
+ 207  0.01% 96.43%       1 300782 java.util.ArrayList.ensureCapacity
+ 208  0.01% 96.45%       1 300888 com.zarkonnen.cyberpunk.interaction.SellDataToOutsideWorld$F.make
+ 209  0.01% 96.46%       1 300781 com.zarkonnen.cyberpunk.Names.<clinit>
+ 210  0.01% 96.48%       1 300890 com.zarkonnen.cyberpunk.Tile.towardsTile
+ 211  0.01% 96.49%       1 300780 java.util.ArrayList.add
+ 212  0.01% 96.51%       1 300892 com.zarkonnen.cyberpunk.interaction.Buy$F.make
+ 213  0.01% 96.52%       1 300192 sun.security.provider.SHA.implCompress
+ 214  0.01% 96.54%       1 300778 java.lang.ClassLoader.findLoadedClass0
+ 215  0.01% 96.55%       1 301126 java.util.ArrayList.<init>
+ 216  0.01% 96.57%       1 300777 com.zarkonnen.cyberpunk.WorldMap.tilesOfType
+ 217  0.01% 96.58%       1 301090 com.zarkonnen.catengine.Hooks.hit
+ 218  0.01% 96.59%       1 300898 java.util.AbstractList.listIterator
+ 219  0.01% 96.61%       1 300564 java.lang.String.toLowerCase
+ 220  0.01% 96.62%       1 300563 apple.awt.CGraphicsEnvironment.registerFont
+ 221  0.01% 96.64%       1 300901 com.zarkonnen.cyberpunk.Tile.observe
+ 222  0.01% 96.65%       1 300772 java.util.Random.next
+ 223  0.01% 96.67%       1 300903 com.zarkonnen.cyberpunk.Person.bigBodyTick
+ 224  0.01% 96.68%       1 300904 com.zarkonnen.cyberpunk.Person.bigBodyTick
+ 225  0.01% 96.70%       1 301091 java.lang.System.currentTimeMillis
+ 226  0.01% 96.71%       1 301092 com.zarkonnen.cyberpunk.interaction.BreakIn.getName
+ 227  0.01% 96.73%       1 300907 com.zarkonnen.cyberpunk.interaction.Rest.run
+ 228  0.01% 96.74%       1 301127 java.lang.Object.hashCode
+ 229  0.01% 96.75%       1 300771 com.zarkonnen.cyberpunk.Tile.<init>
+ 230  0.01% 96.77%       1 300910 java.nio.Buffer.<init>
+ 231  0.01% 96.78%       1 300911 com.zarkonnen.cyberpunk.Tile.people
+ 232  0.01% 96.80%       1 301094 sun.misc.Unsafe.getIntVolatile
+ 233  0.01% 96.81%       1 301095 sun.awt.AWTAutoShutdown.setToolkitBusy
+ 234  0.01% 96.83%       1 300690 org.newdawn.slick.AngelCodeFont.<init>
+ 235  0.01% 96.84%       1 300770 java.util.HashMap.<init>
+ 236  0.01% 96.86%       1 300916 java.util.ArrayList.addAll
+ 237  0.01% 96.87%       1 300769 java.util.EnumMap.<init>
+ 238  0.01% 96.89%       1 300768 java.io.File.<init>
+ 239  0.01% 96.90%       1 300919 java.util.ArrayList.<init>
+ 240  0.01% 96.91%       1 300763 sun.misc.Unsafe.getByte
+ 241  0.01% 96.93%       1 300689 org.newdawn.slick.GameContainer.setMusicVolume
+ 242  0.01% 96.94%       1 300762 org.lwjgl.opengl.GL11.glEnd
+ 243  0.01% 96.96%       1 300760 java.util.regex.Pattern.compile
+ 244  0.01% 96.97%       1 300924 com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards
+ 245  0.01% 96.99%       1 300925 java.nio.Buffer.remaining
+ 246  0.01% 97.00%       1 300926 com.zarkonnen.cyberpunk.interaction.CheckOut$F.make
+ 247  0.01% 97.02%       1 300927 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Food.check
+ 248  0.01% 97.03%       1 300928 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+ 249  0.01% 97.05%       1 300929 com.zarkonnen.cyberpunk.interaction.Gogglehack$F.make
+ 250  0.01% 97.06%       1 300688 org.lwjgl.opengl.GL11.nglClear
+ 251  0.01% 97.07%       1 301099 java.util.Arrays.copyOf
+ 252  0.01% 97.09%       1 300759 java.util.regex.Pattern.<init>
+ 253  0.01% 97.10%       1 300933 java.lang.System.arraycopy
+ 254  0.01% 97.12%       1 300934 com.zarkonnen.cyberpunk.interaction.BuySupply$F.make
+ 255  0.01% 97.13%       1 300935 java.util.ArrayList.<init>
+ 256  0.01% 97.15%       1 300936 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+ 257  0.01% 97.16%       1 300937 java.util.LinkedList.addBefore
+ 258  0.01% 97.18%       1 300275 sun.awt.resources.awt.getContents
+ 259  0.01% 97.19%       1 300939 com.zarkonnen.cyberpunk.Person.location
+ 260  0.01% 97.21%       1 300940 java.util.RegularEnumSet$EnumSetIterator.hasNext
+ 261  0.01% 97.22%       1 300687 java.nio.Bits.reserveMemory
+ 262  0.01% 97.23%       1 300606 sun.java2d.SurfaceData.<clinit>
+ 263  0.01% 97.25%       1 301101 com.zarkonnen.cyberpunk.Tile.people
+ 264  0.01% 97.26%       1 300656 sun.java2d.loops.GraphicsPrimitiveMgr$1.compare
+ 265  0.01% 97.28%       1 300945 java.util.Collections.singletonList
+ 266  0.01% 97.29%       1 300195 java.math.BigInteger.squareToLen
+ 267  0.01% 97.31%       1 300745 java.lang.Thread.currentThread
+ 268  0.01% 97.32%       1 300948 java.lang.AbstractStringBuilder.stringSizeOfInt
+ 269  0.01% 97.34%       1 300949 java.util.EnumMap.containsKey
+ 270  0.01% 97.35%       1 300950 java.lang.AbstractStringBuilder.<init>
+ 271  0.01% 97.37%       1 300951 java.util.EnumMap.containsKey
+ 272  0.01% 97.38%       1 300742 java.lang.System.arraycopy
+ 273  0.01% 97.39%       1 300953 com.zarkonnen.cyberpunk.interaction.ImplantImplantAtClinic$F.make
+ 274  0.01% 97.41%       1 300954 com.zarkonnen.cyberpunk.Tile.people
+ 275  0.01% 97.42%       1 300955 com.zarkonnen.cyberpunk.Person.tick
+ 276  0.01% 97.44%       1 300686 java.nio.Buffer.position
+ 277  0.01% 97.45%       1 300957 java.util.AbstractList$Itr.hasNext
+ 278  0.01% 97.47%       1 300958 com.zarkonnen.cyberpunk.interaction.Factories.make
+ 279  0.01% 97.48%       1 300559 java.lang.Math.min
+ 280  0.01% 97.50%       1 300960 java.util.AbstractCollection.toArray
+ 281  0.01% 97.51%       1 300684 sun.misc.Unsafe.getLong
+ 282  0.01% 97.53%       1 300962 com.zarkonnen.cyberpunk.interaction.Unlock$F.make
+ 283  0.01% 97.54%       1 300558 java.lang.Object.hashCode
+ 284  0.01% 97.55%       1 300964 com.zarkonnen.cyberpunk.interaction.DoWork.produce
+ 285  0.01% 97.57%       1 300965 com.zarkonnen.cyberpunk.interaction.Wander$F.make
+ 286  0.01% 97.58%       1 300966 java.util.ArrayList.addAll
+ 287  0.01% 97.60%       1 300967 com.zarkonnen.cyberpunk.interaction.Rest.run
+ 288  0.01% 97.61%       1 300202 sun.misc.CharacterDecoder.decodeBuffer
+ 289  0.01% 97.63%       1 300046 java.lang.AbstractStringBuilder.<init>
+ 290  0.01% 97.64%       1 300970 com.zarkonnen.cyberpunk.interaction.DoWork.disabledReason
+ 291  0.01% 97.66%       1 300971 java.util.Arrays.copyOf
+ 292  0.01% 97.67%       1 300972 com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make
+ 293  0.01% 97.69%       1 300973 com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make
+ 294  0.01% 97.70%       1 300974 java.util.Arrays.copyOf
+ 295  0.01% 97.72%       1 300737 apple.awt.CComponent._requestFocus
+ 296  0.01% 97.73%       1 300679 java.nio.CharBuffer.wrap
+ 297  0.01% 97.74%       1 300977 com.zarkonnen.cyberpunk.WorldMap.floodFillAndSetTowards
+ 298  0.01% 97.76%       1 300734 java.security.AccessController.doPrivileged
+ 299  0.01% 97.77%       1 300979 java.util.ArrayList.addAll
+ 300  0.01% 97.79%       1 300733 java.awt.Component.preferredSize
+ 301  0.01% 97.80%       1 300981 com.zarkonnen.cyberpunk.interaction.Buy.disabledReason
+ 302  0.01% 97.82%       1 301106 sun.misc.Unsafe.getInt
+ 303  0.01% 97.83%       1 300983 com.zarkonnen.cyberpunk.interaction.Lock$F.make
+ 304  0.01% 97.85%       1 301107 com.zarkonnen.cyberpunk.interaction.Factories.make
+ 305  0.01% 97.86%       1 300985 com.zarkonnen.cyberpunk.interaction.DoWork.run
+ 306  0.01% 97.88%       1 300986 com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason
+ 307  0.01% 97.89%       1 300987 com.zarkonnen.cyberpunk.interaction.Lock.disabledReason
+ 308  0.01% 97.90%       1 300988 com.zarkonnen.cyberpunk.interaction.DeployGadget$F.make
+ 309  0.01% 97.92%       1 300989 com.zarkonnen.cyberpunk.PreSimScreen.render
+ 310  0.01% 97.93%       1 301108 com.zarkonnen.cyberpunk.Person.hugeTick
+ 311  0.01% 97.95%       1 300991 com.zarkonnen.cyberpunk.interaction.BuyFoodAtRestaurantOrBar$F.get
+ 312  0.01% 97.96%       1 300992 com.zarkonnen.cyberpunk.Person.allItems
+ 313  0.01% 97.98%       1 300993 com.zarkonnen.cyberpunk.interaction.MoveToHome.run
+ 314  0.01% 97.99%       1 300994 java.util.ArrayList.<init>
+ 315  0.01% 98.01%       1 301109 java.util.HashMap$KeyIterator.next
+ 316  0.01% 98.02%       1 300996 java.util.Arrays.copyOf
+ 317  0.01% 98.04%       1 300997 java.util.Collections.singletonList
+ 318  0.01% 98.05%       1 300446 sun.net.www.protocol.jar.JarFileFactory.get
+ 319  0.01% 98.06%       1 300999 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Not.check
+ 320  0.01% 98.08%       1 301110 java.util.ArrayList.addAll
+ 321  0.01% 98.09%       1 301001 com.zarkonnen.cyberpunk.Person.getName
+ 322  0.01% 98.11%       1 301002 java.nio.ByteBuffer.arrayOffset
+ 323  0.01% 98.12%       1 301003 com.zarkonnen.cyberpunk.interaction.AbstractInteraction.actor
+ 324  0.01% 98.14%       1 301004 com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld$F.make
+ 325  0.01% 98.15%       1 301005 com.zarkonnen.cyberpunk.behave.InteractionBehavior$Unobserved.check
+ 326  0.01% 98.17%       1 300143 java.lang.Class.forName0
+ 327  0.01% 98.18%       1 301007 com.zarkonnen.cyberpunk.interaction.Mug$F.make
+ 328  0.01% 98.20%       1 301008 java.util.ArrayList.addAll
+ 329  0.01% 98.21%       1 300231 java.nio.ByteBuffer.allocateDirect
+ 330  0.01% 98.22%       1 301010 com.zarkonnen.cyberpunk.interaction.BuySupply$F.make
+ 331  0.01% 98.24%       1 301011 java.util.ArrayList.ensureCapacity
+ 332  0.01% 98.25%       1 301012 java.lang.Object.clone
+ 333  0.01% 98.27%       1 301013 com.zarkonnen.cyberpunk.interaction.SellToPerson.getItem
+ 334  0.01% 98.28%       1 301111 com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make
+ 335  0.01% 98.30%       1 301112 com.zarkonnen.catengine.Condition$1.satisfied
+ 336  0.01% 98.31%       1 301016 java.lang.System.arraycopy
+ 337  0.01% 98.33%       1 300412 sun.font.FontManager.<clinit>
+ 338  0.01% 98.34%       1 301018 com.zarkonnen.cyberpunk.interaction.Attack$F.make
+ 339  0.01% 98.36%       1 301019 com.zarkonnen.cyberpunk.Person.bigBodyTick
+ 340  0.01% 98.37%       1 300728 apple.awt.ComponentModel._setVisible
+ 341  0.01% 98.38%       1 301021 com.zarkonnen.cyberpunk.Person.allItems
+ 342  0.01% 98.40%       1 301113 sun.misc.Unsafe.getInt
+ 343  0.01% 98.41%       1 300673 java.util.zip.Inflater.inflateBytes
+ 344  0.01% 98.43%       1 301024 com.zarkonnen.cyberpunk.Tile.getInteractions
+ 345  0.01% 98.44%       1 301114 java.lang.System.arraycopy
+ 346  0.01% 98.46%       1 301026 com.zarkonnen.cyberpunk.interaction.SearchForGadgets$F.make
+ 347  0.01% 98.47%       1 301027 java.lang.System.arraycopy
+ 348  0.01% 98.49%       1 301028 java.security.AccessController.doPrivileged
+ 349  0.01% 98.50%       1 300411 sun.java2d.SunGraphicsEnvironment.addDirFonts
+ 350  0.01% 98.52%       1 300725 org.lwjgl.opengl.MacOSXContextImplementation.clearDrawable
+ 351  0.01% 98.53%       1 301031 sun.misc.Unsafe.getByte
+ 352  0.01% 98.54%       1 300724 org.lwjgl.opengl.Display.getAvailableDisplayModes
+ 353  0.01% 98.56%       1 301115 org.newdawn.slick.Input.poll
+ 354  0.01% 98.57%       1 300723 java.io.FileInputStream.readBytes
+ 355  0.01% 98.59%       1 300230 java.util.Dictionary.<init>
+ 356  0.01% 98.60%       1 300229 java.lang.String.replace
+ 357  0.01% 98.62%       1 300719 java.util.regex.Pattern.closure
+ 358  0.01% 98.63%       1 301038 java.lang.Object.clone
+ 359  0.01% 98.65%       1 300311 java.io.FileDescriptor.incrementAndGetUseCount
+ 360  0.01% 98.66%       1 300228 java.lang.String.indexOf
+ 361  0.01% 98.68%       1 300118 java.lang.Object.clone
+ 362  0.01% 98.69%       1 300161 sun.security.x509.AVA.toRFC2253CanonicalString
+ 363  0.01% 98.70%       1 301043 java.lang.AbstractStringBuilder.<init>
+ 364  0.01% 98.72%       1 300713 sun.reflect.Reflection.isSameClassPackage
+ 365  0.01% 98.73%       1 301045 com.zarkonnen.catengine.Hooks.hit
+ 366  0.01% 98.75%       1 301046 com.zarkonnen.cyberpunk.Tile.people
+ 367  0.01% 98.76%       1 300712 net.java.games.input.UsagePage.mapUsage
+ 368  0.01% 98.78%       1 300683 org.lwjgl.opengl.GLContext.getSupportedExtensions
+ 369  0.01% 98.79%       1 300435 apple.awt.CGraphicsEnvironment.createFontConfiguration
+ 370  0.01% 98.81%       1 301117 java.nio.Buffer.limit
+ 371  0.01% 98.82%       1 301051 com.zarkonnen.cyberpunk.WorldScreen$InventoryModel.buttons
+ 372  0.01% 98.84%       1 301052 com.zarkonnen.cyberpunk.WorldScreen.render
+ 373  0.01% 98.85%       1 301118 java.io.Writer.write
+ 374  0.01% 98.86%       1 301054 com.zarkonnen.cyberpunk.DrawUtils.button
+ 375  0.01% 98.88%       1 300636 apple.awt.ComponentModel.getGraphicsForSurface
+ 376  0.01% 98.89%       1 300542 sun.nio.ch.FileChannelImpl.<clinit>
+ 377  0.01% 98.91%       1 301057 java.util.regex.Pattern.compile
+ 378  0.01% 98.92%       1 300465 sun.util.LocaleServiceProviderPool.<init>
+ 379  0.01% 98.94%       1 300376 java.lang.Thread.start0
+ 380  0.01% 98.95%       1 300022 sun.misc.JarIndex.addToList
+ 381  0.01% 98.97%       1 300700 sun.reflect.NativeMethodAccessorImpl.invoke0
+ 382  0.01% 98.98%       1 301119 java.nio.Bits.getLongB
+ 383  0.01% 99.00%       1 300699 net.java.games.input.GenericDesktopUsage.<clinit>
+ 384  0.01% 99.01%       1 300697 sun.misc.Launcher$AppClassLoader.loadClass
+ 385  0.01% 99.02%       1 300696 org.lwjgl.opengl.GL11.glLoadIdentity
+ 386  0.01% 99.04%       1 300196 java.math.BigInteger.squareToLen
+ 387  0.01% 99.05%       1 301067 org.lwjgl.opengl.GL11.nglDisable
+ 388  0.01% 99.07%       1 301068 org.lwjgl.input.Keyboard.poll
+ 389  0.01% 99.08%       1 301069 com.zarkonnen.cyberpunk.Tile.getInteractions
+ 390  0.01% 99.10%       1 300695 java.io.BufferedReader.readLine
+ 391  0.01% 99.11%       1 301121 com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason
+ 392  0.01% 99.13%       1 301072 com.zarkonnen.cyberpunk.WorldScreen$InventoryModel$1.text
+ 393  0.01% 99.14%       1 300675 org.lwjgl.opengl.MacOSXCanvasPeerInfo.initHandle
+ 394  0.01% 99.16%       1 300676 org.lwjgl.opengl.MacOSXContextImplementation.nCreate
+ 395  0.01% 99.17%       1 300694 org.newdawn.slick.AngelCodeFont.parseFnt
+ 396  0.01% 99.18%       1 300693 java.util.zip.Inflater.inflateBytes
+ 397  0.01% 99.20%       1 301077 com.zarkonnen.catengine.SlickEngine$MyFrame.rect
+ 398  0.01% 99.21%       1 301132 java.lang.Object.notifyAll
+ 399  0.01% 99.23%       1 300350 javax.imageio.spi.IIORegistry.registerStandardSpis
+ 400  0.01% 99.24%       1 300818 com.zarkonnen.cyberpunk.behave.InteractionBehavior$MoveTo.check
+ 401  0.01% 99.26%       1 300819 java.lang.Object.getClass
+ 402  0.01% 99.27%       1 300817 com.zarkonnen.cyberpunk.WorldMap.atMapEdge
+ 403  0.01% 99.29%       1 301080 com.zarkonnen.cyberpunk.interaction.BuySupply.disabledReason
+ 404  0.01% 99.30%       1 301081 com.zarkonnen.cyberpunk.interaction.MoveToWork$F.make
+ 405  0.01% 99.32%       1 300823 com.zarkonnen.cyberpunk.interaction.Buy$F.make
+ 406  0.01% 99.33%       1 300824 com.zarkonnen.cyberpunk.Tile.getInteractions
+ 407  0.01% 99.35%       1 300825 com.zarkonnen.cyberpunk.Person.hasKeyFor
+ 408  0.01% 99.36%       1 300816 java.util.RegularEnumSet.contains
+ 409  0.01% 99.37%       1 300827 com.zarkonnen.cyberpunk.interaction.HarvestImplants$F.make
+ 410  0.01% 99.39%       1 300815 java.util.LinkedList.remove
+ 411  0.01% 99.40%       1 300829 com.zarkonnen.cyberpunk.interaction.TileTypeFactory.make
+ 412  0.01% 99.42%       1 300830 java.util.ArrayList.indexOf
+ 413  0.01% 99.43%       1 301082 com.zarkonnen.cyberpunk.Tile.getInteractions
+ 414  0.01% 99.45%       1 300810 com.zarkonnen.cyberpunk.Person.tick
+ 415  0.01% 99.46%       1 300809 com.zarkonnen.cyberpunk.WorldMap.calcPathsFor
+ 416  0.01% 99.48%       1 300834 java.lang.StringCoding$StringEncoder.encode
+ 417  0.01% 99.49%       1 300808 java.lang.Object.hashCode
+ 418  0.01% 99.51%       1 300807 com.zarkonnen.cyberpunk.Tile.passable
+ 419  0.01% 99.52%       1 300837 com.zarkonnen.cyberpunk.WorldMap.atMapEdge
+ 420  0.01% 99.53%       1 300806 com.zarkonnen.cyberpunk.Tile.people
+ 421  0.01% 99.55%       1 300839 com.zarkonnen.cyberpunk.interaction.BuyFromOutsideWorld.<init>
+ 422  0.01% 99.56%       1 300805 java.util.HashMap.put
+ 423  0.01% 99.58%       1 300841 com.zarkonnen.cyberpunk.interaction.Scavenge.run
+ 424  0.01% 99.59%       1 300804 com.zarkonnen.cyberpunk.Direction.values
+ 425  0.01% 99.61%       1 301083 org.lwjgl.opengl.GL11.nglPointSize
+ 426  0.01% 99.62%       1 300844 com.zarkonnen.cyberpunk.WorldMap.hour
+ 427  0.01% 99.64%       1 300845 com.zarkonnen.cyberpunk.Tile.atMapEdge
+ 428  0.01% 99.65%       1 300803 java.util.LinkedList$Entry.<init>
+ 429  0.01% 99.67%       1 300847 java.util.LinkedList.listIterator
+ 430  0.01% 99.68%       1 300848 com.zarkonnen.cyberpunk.Person.bodyTick
+ 431  0.01% 99.69%       1 300849 org.newdawn.slick.Image.draw
+ 432  0.01% 99.71%       1 300802 com.zarkonnen.cyberpunk.interaction.DoWork$F.make
+ 433  0.01% 99.72%       1 300427 sun.awt.SunHints.<clinit>
+ 434  0.01% 99.74%       1 300487 java.awt.Component.move
+ 435  0.01% 99.75%       1 301123 com.zarkonnen.cyberpunk.interaction.SellToBusiness$F.make
+ 436  0.01% 99.77%       1 300800 java.io.UnixFileSystem.getBooleanAttributes0
+ 437  0.01% 99.78%       1 300855 com.zarkonnen.cyberpunk.interaction.Rest.disabledReason
+ 438  0.01% 99.80%       1 300797 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+ 439  0.01% 99.81%       1 300096 java.lang.String.equals
+ 440  0.01% 99.83%       1 300668 apple.awt.CToolkit.getDefaultKeyboardLocale
+ 441  0.01% 99.84%       1 300026 java.util.zip.ZipFile.open
+ 442  0.01% 99.85%       1 300219 java.security.Policy.<clinit>
+ 443  0.01% 99.87%       1 300394 java.awt.Component.<clinit>
+ 444  0.01% 99.88%       1 300206 java.lang.String.indexOf
+ 445  0.01% 99.90%       1 300796 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+ 446  0.01% 99.91%       1 301124 com.zarkonnen.cyberpunk.WorldMap.timeOfDay
+ 447  0.01% 99.93%       1 300795 com.zarkonnen.cyberpunk.WorldMap.itemQuantity
+ 448  0.01% 99.94%       1 300866 com.zarkonnen.cyberpunk.interaction.MoveToHome.disabledReason
+ 449  0.01% 99.96%       1 300523 apple.awt.CWindow.initPeer
+ 450  0.01% 99.97%       1 301087 java.util.concurrent.atomic.AtomicInteger.get
+ 451  0.01% 99.99%       1 300869 com.zarkonnen.cyberpunk.Tile.lockedFor
+ 452  0.01% 100.00%       1 301125 org.newdawn.slick.Input.poll
+CPU SAMPLES END

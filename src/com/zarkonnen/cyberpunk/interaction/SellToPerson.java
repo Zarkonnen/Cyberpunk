@@ -1,6 +1,7 @@
 package com.zarkonnen.cyberpunk.interaction;
 
 import com.zarkonnen.cyberpunk.Item;
+import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,11 +17,14 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 	
 	@Override
 	public String getName() {
-		return "Sell " + item.getName() + " to " + target().getName() + " for $" + item.type.value;
+		return "Sell " + item.getName() + " ($" + item.type.value + ")";
 	}
 
 	@Override
 	public String disabledReason() {
+		if (target().money < item.type.value) {
+			return "They can't afford it.";
+		}
 		if (actor().reputation < target().minDealRep) {
 			return "They refuse to do business with you.";
 		}
@@ -29,7 +33,7 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 
 	@Override
 	public String getDescription() {
-		return "Engage in commercial transactions.";
+		return "Sell " + item.getName() + " to " + target().getName() + " for $" + item.type.value;
 	}
 
 	@Override
@@ -38,10 +42,10 @@ public class SellToPerson extends AbstractInteraction<Person> implements ItemInt
 		actor().money += item.type.value;
 		target().money -= item.type.value;
 		target().inventory.add(item);
-		if (!item.type.data) {
+		if (!item.type.data || item.type == ItemType.VALUABLE_DATA || item.type == ItemType.GENETIC_CODE || item.type == ItemType.BLACKMAIL_MATERIAL) {
 			actor().inventory.remove(item);
 		}
-		return "You sell the " + item.getName() + ".";
+		return null;//"You sell the " + item.getName() + ".";
 	}
 
 	@Override

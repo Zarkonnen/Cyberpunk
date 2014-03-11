@@ -17,7 +17,7 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 	
 	@Override
 	public String getName() {
-		return "Buy " + item.getName() + " from " + target().getName() + " for $" + item.type.value;
+		return "Buy " + item.getName() + " ($" + item.type.value + ")";
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 
 	@Override
 	public String getDescription() {
-		return "Engage in commerce!";
+		return "Buy " + item.getName() + " from " + target().getName() + " for $" + item.type.value;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 				}
 			}
 		}
-		return "You buy the " + item.getName() + ".";
+		return null;//"You buy the " + item.getName() + ".";
 	}
 
 	@Override

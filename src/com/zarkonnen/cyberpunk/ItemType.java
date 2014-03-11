@@ -142,7 +142,7 @@ public enum ItemType implements Serializable {
 	VALUABLE_DATA(
 		"Valuable Data", /* name */ 
 		"Rows and rows of numbers. You don't care what they are, only what someone might pay you for them.", /* description */ 
-		2000, /* value */ 
+		500, /* value */ 
 		false, /* key */ 
 		true, /* data */ 
 		false, /* implant */ 
@@ -714,7 +714,7 @@ public enum ItemType implements Serializable {
 	VEGETABLES(
 		"Vegetables", /* name */ 
 		"Fresh food from the farm.", /* description */ 
-		5, /* value */ 
+		10, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
@@ -900,7 +900,7 @@ public enum ItemType implements Serializable {
 		0, /* decrypt */ 
 		0, /* medicine */ 
 		0, /* food */ 
-		50, /* stun */ 
+		0, /* stun */ 
 		0, /* exhaustionModifier */ 
 		0, /* exhaustionGainModifier */ 
 		0, /* exhaustionLossModifier */ 
@@ -1066,7 +1066,7 @@ public enum ItemType implements Serializable {
 	ART(
 		"Art", /* name */ 
 		"Is it art? Well, there are art collectors who'd kill for it.", /* description */ 
-		2000, /* value */ 
+		800, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
@@ -1110,7 +1110,7 @@ public enum ItemType implements Serializable {
 	DESIGNER_CLOTHES(
 		"Designer Clothes", /* name */ 
 		"Fashionable, ugly clothing.", /* description */ 
-		250, /* value */ 
+		150, /* value */ 
 		false, /* key */ 
 		false, /* data */ 
 		false, /* implant */ 
@@ -1132,7 +1132,7 @@ public enum ItemType implements Serializable {
 	GENETIC_CODE(
 		"Genetic Code", /* name */ 
 		"The valuable results of extensive research.", /* description */ 
-		1500, /* value */ 
+		700, /* value */ 
 		false, /* key */ 
 		true, /* data */ 
 		false, /* implant */ 

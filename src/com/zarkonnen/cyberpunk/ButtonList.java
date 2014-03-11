@@ -18,7 +18,7 @@ public class ButtonList {
 		Pt cursor = in.cursor();
 		if (cursor != null && cursor.x >= x && cursor.y >= y && cursor.x < x + w && cursor.y < y + h) {
 			scroll += in.scrollAmount() / 10;
-			if (scroll < 0) { scroll = 0; }
+			//if (scroll < 0) { scroll = 0; }
 		}
 	}
 	
@@ -30,23 +30,27 @@ public class ButtonList {
 		h -= PADDING * 2;
 		int top = y;
 		int bottom = y + h;
-		button(d, "^", null, x, y, w, new Runnable() {
-			@Override
-			public void run() {
-				scroll = scroll + 5;
-			}
-		}, true, true);
 		
 		y += BUTTON_H + MARGIN_Y + scroll;
 		
 		for (Button b : model.buttons()) {
-			if (y < top + BUTTON_H) { continue; }
+			if (y < top + BUTTON_H) { 
+				y += BUTTON_H + MARGIN_Y;
+				continue;
+			}
 			button(d, x, y, w, b);
 			y += BUTTON_H + MARGIN_Y;
 			if (y + BUTTON_H + MARGIN_Y + BUTTON_H > bottom) {
 				break;
 			}
 		}
+		
+		button(d, "^", null, x, top, w, new Runnable() {
+			@Override
+			public void run() {
+				scroll = scroll + 5;
+			}
+		}, true, true);
 		
 		button(d, "v", null, x, bottom - BUTTON_H, w, new Runnable() {
 			@Override

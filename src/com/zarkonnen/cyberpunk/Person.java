@@ -14,9 +14,9 @@ import java.util.Random;
 public class Person implements Serializable, HasName {
 	public static final int BASE_EXHAUSTION = 20;
 	public static final int EX_WIRED = 20; public static final double EX_WIRED_MULT = 1.2;
-	public static final int EX_TIRED = 40; public static final double EX_TIRED_MULT = 0.9;
-	public static final int EX_VERY_TIRED = 60; public static final double EX_VERY_TIRED_MULT = 0.8;
-	public static final int EX_EXHAUSTED = 80; public static final double EX_EXHAUSTED_MULT = 0.6;
+	public static final int EX_TIRED = 50; public static final double EX_TIRED_MULT = 0.9;
+	public static final int EX_VERY_TIRED = 70; public static final double EX_VERY_TIRED_MULT = 0.8;
+	public static final int EX_EXHAUSTED = 90; public static final double EX_EXHAUSTED_MULT = 0.6;
 	public static final int H_BRUISED = 80; public static final double H_BRUISED_MULT = 1.0;
 	public static final int H_INJURED = 60; public static final double H_INJURED_MULT = 0.9;
 	public static final int H_BADLY_INJURED = 40; public static final double H_BADLY_INJURED_MULT = 0.8;
@@ -40,6 +40,8 @@ public class Person implements Serializable, HasName {
 	public boolean dead = false;
 	public boolean isPlayer;
 	public int bigTickCounter = 0;
+	public int hugeTickCounter = 0;
+	public String name = "Bob";
 	
 	private final EnumMap<Skill, Integer> skills = new EnumMap<Skill, Integer>(Skill.class);
 	public final ArrayList<Item> inventory = new ArrayList<Item>();
@@ -58,6 +60,13 @@ public class Person implements Serializable, HasName {
 	
 	public void setApproximateSkill(Skill skill, int amt, Random r) {
 		skills.put(skill, (int) (amt * (0.5 + r.nextDouble())));
+	}
+
+	public boolean hasKeyFor(Tile t) {
+		for (Item it : inventory) {
+			if (it.keyFor == t) { return true; }
+		}
+		return false;
 	}
 	
 	public static class Drug {
@@ -79,7 +88,9 @@ public class Person implements Serializable, HasName {
 			lp: for (InteractionBehavior b : behaviors) {
 				for (Interaction i : l) {
 					if (b.enabled(i)) {
-						//System.out.println(getName() + ": " + i.name());
+						if (description.contains("trader")) {
+							System.out.println(getName() + ": " + i.name());
+						}
 						i.run();
 						location.observe(i);
 						break lp;
@@ -103,6 +114,14 @@ public class Person implements Serializable, HasName {
 		return l;
 	}
 	
+	public int itemCount(ItemType t) {
+		int q = 0;
+		for (Item item : inventory) {
+			if (item.type == t) { q++; }
+		}
+		return q;
+	}
+	
 	public boolean bodyTick() {
 		for (Iterator<Drug> it = drugsTaken.iterator(); it.hasNext();) {
 			Drug d = it.next();
@@ -122,14 +141,27 @@ public class Person implements Serializable, HasName {
 			bigBodyTick();
 			bigTickCounter = 0;
 		}
+		if (hugeTickCounter++ == 12 * 6) {
+			hugeTick();
+			hugeTickCounter = 0;
+		}
 		if (unconscious()) {
 			exhaustion--;
+		}
+		if (dead) {
+			System.out.println(getName() + " has died!");
 		}
 		return dead;
 	}
 	
+	private void hugeTick() {
+		if (reputation < 80) {
+			reputation++;
+		}
+	}
+	
 	private void bigBodyTick() {
-		hunger += 3;
+		hunger += 5;
 		health = Math.min(100, health + 1);
 	}
 	
@@ -145,11 +177,13 @@ public class Person implements Serializable, HasName {
 	}
 	
 	public boolean willBuyForSelf(Item it) {
-		return !inventory.contains(it) && buyForSelf.contains(it.type);
+		if (it.keyFor != null && hasKeyFor(it.keyFor)) { return false; }
+		return money >= it.type.value && !inventory.contains(it) && buyForSelf.contains(it.type);
 	}
 	
 	public boolean willBuyForWork(Item it) {
 		if (workplace == null) { return false; }
+		if (it.keyFor != null) { return false; }
 		for (Tile.HiddenItem hi : workplace.hiddenItems) {
 			if (hi.item == it) { return false; }
 		}
@@ -162,11 +196,21 @@ public class Person implements Serializable, HasName {
 	
 	@Override
 	public String getName() {
-		return "a " + description;
+		return /*itemCount(ItemType.VEGETABLES) + " " + */name + ", " + description;
 	}
 	
 	public String description() {
-		return "A " + description + ".";
+		String desc = "A " + description + ".";
+		if (health <= 0) {
+			desc += " They appear to have been knocked out.";
+		}
+		if (exhaustion >= 100) {
+			desc += " They appear to be faint with exhaustion.";
+		}
+		if (stunned > 0) {
+			desc += " They appear to have been stunned.";
+		}
+		return desc;
 	}
 	
 	public int getSkill(Skill sk) {

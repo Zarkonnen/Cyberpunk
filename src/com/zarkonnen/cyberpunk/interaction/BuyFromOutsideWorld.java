@@ -88,6 +88,7 @@ public class BuyFromOutsideWorld extends AbstractInteraction<Tile> implements It
 			for (ItemType good : BUYABLES) {
 				l.add(new BuyFromOutsideWorld(actor, t, good));
 			}
+			Collections.shuffle(l, t.map.r);
 			return l;
 		}
 	}

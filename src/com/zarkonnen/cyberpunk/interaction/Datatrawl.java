@@ -1,5 +1,6 @@
 package com.zarkonnen.cyberpunk.interaction;
 
+import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
 import com.zarkonnen.cyberpunk.Skill;
 import com.zarkonnen.cyberpunk.StringList;
@@ -32,12 +33,20 @@ public class Datatrawl extends AbstractInteraction<Tile> {
 	@Override
 	public String run() {
 		exhaust(3);
+		decreaseRep(8);
 		StringList found = new StringList();
 		for (Iterator<Tile.HiddenItem> it = target().hiddenItems.iterator(); it.hasNext();) {
 			Tile.HiddenItem hiddenItem = it.next();
 			if (actor().getSkill(Skill.HACKING) > hiddenItem.hidingScore && hiddenItem.item.type.data) {
-				actor().inventory.add(hiddenItem.item);
-				found.add(hiddenItem.item);
+				if (hiddenItem.item.type == ItemType.VALUABLE_DATA || hiddenItem.item.type == ItemType.PASSWORD || hiddenItem.item.type == ItemType.BLACKMAIL_MATERIAL || hiddenItem.item.type == ItemType.BOOTLEG_ENTERTAINMENT || hiddenItem.item.type == ItemType.AMATEUR_SEX_VID) {
+					if (!actor().inventory.contains(hiddenItem.item)) {
+						actor().inventory.add(hiddenItem.item);
+						found.add(hiddenItem.item);
+					}
+				} else if (!actor().hasItem(hiddenItem.item.type)) {
+					actor().inventory.add(hiddenItem.item);
+					found.add(hiddenItem.item);
+				}
 			}
 		}
 		

@@ -1,7 +1,7 @@
 package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.cyberpunk.behave.Job;
-import com.zarkonnen.cyberpunk.behave.Spawner;
+import com.zarkonnen.cyberpunk.behave.PersonSpawner;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,13 +39,32 @@ public final class WorldMap implements Serializable {
 		TileType.SLUM_BARGE,
 		TileType.WAREHOUSE_BARGE
 	};
-	public static final TileType[] ROOFTOPS = {
+	public static final TileType[] ROOFTOPS_AND_BARGES = {
 		TileType.ROOFTOP,
 		TileType.ROOFTOP_FARM,
 		TileType.ROOFTOP_SLUM,
 		TileType.MARKET,
 		TileType.BROTHEL,
-		TileType.SWEATSHOP
+		TileType.SWEATSHOP,
+		TileType.SLUM_BARGE,
+		TileType.WAREHOUSE_BARGE
+	};
+	public static final TileType[] BRIDGES = {
+		TileType.BRIDGE_NS,
+		TileType.BRIDGE_EW,
+	};
+	public static final TileType[] ROOFTOPS_DOCKS_AND_BRIDGES = {
+		TileType.ROOFTOP,
+		TileType.ROOFTOP_FARM,
+		TileType.ROOFTOP_SLUM,
+		TileType.MARKET,
+		TileType.BROTHEL,
+		TileType.SWEATSHOP,
+		TileType.BRIDGE_NS,
+		TileType.BRIDGE_EW,
+		TileType.DOCK,
+		TileType.SLUM_BARGE,
+		TileType.WAREHOUSE_BARGE
 	};
 	public static final TileType[] TOWER_ROOFTOPS = {
 		TileType.HELIPAD,
@@ -71,6 +90,31 @@ public final class WorldMap implements Serializable {
 		return (time % DAY_LENGTH) / 6;
 	}
 	
+	public int itemQuantity(ItemType t) {
+		int q = 0;
+		for (Person p : people) {
+			for (Item item : p.inventory) {
+				if (item.type == t) { q++; }
+			}
+		}
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			for (Tile.HiddenItem hitem : map[z][y][x].hiddenItems) {
+				if (hitem.item.type == t) { q++; }
+			}
+		}}}
+		return q;
+	}
+	
+	public int totalItemsQuantity() {
+		int q = 0;
+		for (Person p : people) { q += p.inventory.size(); }
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			q += map[z][y][x].inventory.size() + map[z][y][x].gadgets.size() + map[z][y][x].hiddenItems.size();
+		}}}
+
+		return q;
+	}
+	
 	public void tick() {
 		time++;
 		for (Iterator<Person> it = people.iterator(); it.hasNext();) {
@@ -89,7 +133,7 @@ public final class WorldMap implements Serializable {
 	}
 	
 	public boolean atMapEdge(int x, int y) {
-		return (x == 0 || x == map[0][0].length - 1) && (y == 0 || y == map[0].length - 1);
+		return (x == 0 || x == map[0][0].length - 1) || (y == 0 || y == map[0].length - 1);
 	}
 	
 	public Tile at(int x, int y, int z) {
@@ -144,10 +188,10 @@ public final class WorldMap implements Serializable {
 		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			int roll = r.nextInt(100);
 			TileType tt = TileType.WATER;
-			if (roll < 5) {
+			if (roll < 10) {
 				tt = r(BARGES);
 			} else if (roll < 20) {
-				tt = r(ROOFTOPS);
+				tt = r(ROOFTOPS_AND_BARGES);
 			}
 			map[ground][y][x] = new Tile(this, tt, x, y, ground);
 		}}
@@ -155,8 +199,8 @@ public final class WorldMap implements Serializable {
 		// NS Bridges
 		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			if (typeAt(TileType.WATER, x, y, ground) &&
-				typeAt(ROOFTOPS, x, y - 1, ground) &&
-				typeAt(ROOFTOPS, x, y + 1, ground))
+				typeAt(ROOFTOPS_AND_BARGES, x, y - 1, ground) &&
+				typeAt(ROOFTOPS_AND_BARGES, x, y + 1, ground))
 			{
 				map[ground][y][x] = new Tile(this, TileType.BRIDGE_NS, x, y, ground);
 			}
@@ -165,12 +209,24 @@ public final class WorldMap implements Serializable {
 		// EW Bridges
 		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
 			if (typeAt(TileType.WATER, x, y, ground) &&
-				typeAt(ROOFTOPS, x - 1, y, ground) &&
-				typeAt(ROOFTOPS, x + 1, y, ground))
+				typeAt(ROOFTOPS_AND_BARGES, x - 1, y, ground) &&
+				typeAt(ROOFTOPS_AND_BARGES, x + 1, y, ground))
 			{
 				map[ground][y][x] = new Tile(this, TileType.BRIDGE_EW, x, y, ground);
 			}
 		}}
+		
+		// Bridge cross
+		for (int x = 0; x < xS; x++) {
+			if (typeAt(TileType.WATER, x, yS / 2, ground)) {
+				map[ground][yS / 2][x] = new Tile(this, TileType.BRIDGE_EW, x, yS / 2, ground);
+			}
+		}
+		for (int y = 0; y < yS; y++) {
+			if (typeAt(TileType.WATER, xS / 2, y, ground)) {
+				map[ground][y][xS / 2] = new Tile(this, TileType.BRIDGE_NS, xS / 2, y, ground);
+			}
+		}
 		
 		towerX = 2 + r.nextInt(xS - 4 - 5);
 		towerY = 2 + r.nextInt(yS - 4 - 5);
@@ -189,19 +245,55 @@ public final class WorldMap implements Serializable {
 					tt = TileType.STAIRWELL;
 				}
 				map[z][y][x] = new Tile(this, tt, x, y, z);
-				map[z][y][x].hiddenItems.add(new Tile.HiddenItem(r.nextInt(30), new Item(ItemType.RAM)));
-				map[z][y][x].hiddenItems.add(new Tile.HiddenItem(r.nextInt(10), new Item(ItemType.SNACKS)));
 			}}
 		}
 		
-		Spawner.installAll(this);
+		// Docks
+		for (int y = towerY - 1; y < towerY + 6; y++) {for (int x = towerX - 1; x < towerX + 6; x++) {
+			if (typeAt(TileType.WATER, x, y, ground) && r.nextInt(3) == 0) {
+				map[ground][y][x] = new Tile(this, TileType.DOCK, x, y, ground);
+			}
+		}}
+		
+		// Bridge x-ings are slums
+		for (int y = 0; y < yS; y++) { for (int x = 0; x < xS; x++) {
+			if (typeAt(BRIDGES, x, y, ground)) {
+				if (
+					(typeAt(ROOFTOPS_DOCKS_AND_BRIDGES, x - 1, y, ground) || typeAt(ROOFTOPS_DOCKS_AND_BRIDGES, x + 1, y, ground)) &&
+					(typeAt(ROOFTOPS_DOCKS_AND_BRIDGES, x, y - 1, ground) || typeAt(ROOFTOPS_DOCKS_AND_BRIDGES, x, y + 1, ground))
+				) {
+					map[ground][y][x] = new Tile(this, TileType.ROOFTOP_SLUM, x, y, ground);
+				}
+			}
+		}}
+		
+		// Use flood fill to turn disconnected stuff back into water.
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			map[z][y][x].pathDist = Integer.MAX_VALUE;
+		}}}
+		at(towerX, towerY, ground).pathDist = 0;
+		LinkedList<Tile> q = new LinkedList<Tile>();
+		q.add(at(towerX, towerY, ground));
+		floodFillAndKillDisconnecteds(q, ground);
+		
+		// Locking
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			map[z][y][x].locked = map[z][y][x].type.locked > 0;
+			map[z][y][x].hackInResistance = (int) ((0.5 + r.nextDouble()) * map[z][y][x].type.locked);
+			map[z][y][x].breakInResistance = (int) ((0.5 + r.nextDouble()) * map[z][y][x].type.locked);
+		}}}
+		
+		ItemSpawner.installAll(this);
+		PersonSpawner.installAll(this);
 		
 		// DO THIS LAST
 		calcPathsTowardsEdge();		
 	}
 	
 	public Person makePlayer(CharacterClass playerCC) {
-		Person player = new Person(at(towerX + 2, towerY + 2, map.length - 1));
+		Tile homeT = tilesOfType(TileType.APARTMENT).get(0);
+		Person player = new Person(homeT);
+		player.home = homeT;
 		playerCC.install(player, r);
 		people.add(player);
 		player.isPlayer = true;
@@ -211,7 +303,12 @@ public final class WorldMap implements Serializable {
 	private void calcPathsTowardsEdge() {
 		LinkedList<Tile> q = new LinkedList<Tile>();
 		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
-			map[z][y][x].pathDist = atMapEdge(x, y) && z == map.length - 1 ? 0 : Integer.MAX_VALUE;
+			if (atMapEdge(x, y) && z == map.length - 1) {
+				q.add(map[z][y][x]);
+				map[z][y][x].pathDist = 0;
+			} else {
+				map[z][y][x].pathDist = Integer.MAX_VALUE;
+			}
 			map[z][y][x].bestPath = null;
 		}}}
 		floodFillAndSetTowards(q, null, null);
@@ -240,6 +337,34 @@ public final class WorldMap implements Serializable {
 			}
 		}}}
 		floodFillAndSetTowards(q, tt, null);
+	}
+	
+	private void floodFillAndKillDisconnecteds(LinkedList<Tile> q, int ground) {
+		HashSet<Tile> qs = new HashSet<Tile>();
+		qs.addAll(q);
+		while (!q.isEmpty()) {
+			Tile t = q.pollFirst();
+			qs.remove(t);
+			for (Direction dir : Direction.values()) {
+				if (t.passable(dir)) {
+					Tile t2 = t.in(dir);
+					int newDist = t.pathDist + 1;
+					if (t2.pathDist > newDist) {
+						t2.pathDist = newDist;
+						if (!qs.contains(t2)) {
+							qs.add(t2);
+							q.add(t2);
+						}
+					}
+				}
+			}
+		}
+		
+		for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			if (map[ground][y][x].pathDist == Integer.MAX_VALUE) {
+				map[ground][y][x] = new Tile(this, TileType.WATER, x, y, ground);
+			}
+		}}
 	}
 	
 	private void floodFillAndSetTowards(LinkedList<Tile> q, TileType forType, Tile forTile) {

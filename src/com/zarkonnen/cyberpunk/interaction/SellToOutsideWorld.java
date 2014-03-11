@@ -52,7 +52,7 @@ public class SellToOutsideWorld extends AbstractInteraction<Tile> implements Ite
 		exhaust(3);
 		actor().inventory.remove(item);
 		actor().money += item.type.value * MULT;
-		return "Sell buy: " + item.getName();
+		return "Sell: " + item.getName();
 	}
 
 	@Override

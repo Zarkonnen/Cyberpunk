@@ -45,7 +45,7 @@ public class Attack extends AbstractInteraction<Person> {
 				return "You attack " + target().getName() + " and wound them.";
 			}
 		} else {
-			actor().health -= result;
+			actor().health += result;
 			decreaseRep(10);
 			if (actor().unconscious()) {
 				target().messages.add(actor().getName() + " attempts to attack you, but you fend them off, knocking them out in the process.");
