@@ -2,6 +2,7 @@ package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.catengine.Draw;
 import com.zarkonnen.catengine.Input;
+import com.zarkonnen.catengine.util.Clr;
 import com.zarkonnen.catengine.util.Pt;
 import com.zarkonnen.catengine.util.ScreenMode;
 import java.io.File;
@@ -12,6 +13,9 @@ import java.io.ObjectOutputStream;
 import java.util.Random;
 
 public class SplashScreen implements Screen {
+	public static final Clr BG_BRIGHTER = DrawUtils.BG.mix(0.15, Clr.WHITE);
+	public static final Clr BG_BRIGHTERER = DrawUtils.BG.mix(0.25, Clr.WHITE);
+	
 	public static final String GAME_NAME = "GRIM MEATHOOK FUTURE SIMULATOR";
 	public static final String GAME_CREDITS = "A Cyberpunkjam 2014 game by Rachel Knowler and David Stark.";
 	
@@ -67,7 +71,7 @@ public class SplashScreen implements Screen {
 			}
 			heat--;
 		}
-		if (tick++ >= 250 || in.mouseDown() != null) {
+		if (tick++ >= 280 || in.mouseDown() != null) {
 			GameState gs = load();
 			if (gs == null) {
 				g.currentScreen = new SetupScreen(g);
@@ -82,10 +86,34 @@ public class SplashScreen implements Screen {
 		d.rect(DrawUtils.BG, 0, 0, sm.width, sm.height);
 		String text = heat > 0 ? new String(name) : GAME_NAME;
 		Pt pt = d.textSize(text, Cyberpunk.OCRA);
-		d.text(DrawUtils.TEXT_PREFIX + text, Cyberpunk.OCRA, sm.width / 2 - (int) pt.x / 2, sm.height / 2 - (int) pt.y / 2);
 		if (tick > 150) {
-			pt = d.textSize(GAME_CREDITS, Cyberpunk.OCRA);
-			d.text(DrawUtils.TEXT_PREFIX + GAME_CREDITS, Cyberpunk.OCRA, sm.width / 2 - (int) pt.x / 2, sm.height / 2 - (int) pt.y / 2 + 30);
+			int x = sm.width / 2 - 100;
+			int y = sm.height / 2 - 100;
+			int b = y + 190;
+			
+			int amt = Math.min(255, (tick - 180) * 5);
+			Clr brighter = new Clr(BG_BRIGHTER.r, BG_BRIGHTER.g, BG_BRIGHTER.b, amt);
+			amt = Math.min(255, (tick - 150) * 5);
+			Clr brighterer = new Clr(BG_BRIGHTERER.r, BG_BRIGHTERER.g, BG_BRIGHTERER.b, amt);
+			d.rect(brighter, x + 51, b - 158, 33, 158);
+			d.rect(brighter, x + 107, b - 91, 27, 3);
+			d.rect(brighter, x + 11, b - 31, 19, 3);
+			d.rect(brighter, x + 157, b - 47, 21, 3);
+			d.rect(brighterer, x, b - 2, 200, 2);
+			d.rect(brighterer, x + 3, b - 12, 20, 12);
+			d.rect(brighterer, x + 31, b - 8, 24, 8);
+			d.rect(brighterer, x + 62, b - 10, 3, 10);
+			d.rect(brighterer, x + 71, b - 9, 3, 9);
+			d.rect(brighterer, x + 81, b - 7, 33, 7);
+			d.rect(brighterer, x + 121, b - 18, 16, 18);
+			d.rect(brighterer, x + 141, b - 17, 15, 17);
+			d.rect(brighterer, x + 151, b - 5, 33, 5);
+			d.rect(brighterer, x + 194, b - 7, 3, 7);
+			
+			Pt pt2 = d.textSize(GAME_CREDITS, Cyberpunk.OCRA);
+			d.text(DrawUtils.TEXT_PREFIX + GAME_CREDITS, Cyberpunk.OCRA, sm.width / 2 - (int) pt2.x / 2, sm.height / 2 - (int) pt2.y / 2 + 30);
 		}
+		
+		d.text(DrawUtils.TEXT_PREFIX + text, Cyberpunk.OCRA, sm.width / 2 - (int) pt.x / 2, sm.height / 2 - (int) pt.y / 2);
 	}
 }
