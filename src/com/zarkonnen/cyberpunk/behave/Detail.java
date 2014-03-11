@@ -56,6 +56,16 @@ public enum Detail {
 		@Override
 		public void install(Person p, Random r) {
 		}
+	},
+	SHIFTY(" They have a shifty look to them.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	LEFT_EYED(" Their right eye is missing. The wound looks fresh.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
 	};
 
 	private Detail(String description, EnumSet<ItemType> buys, EnumSet<ItemType> sells, EnumSet<ItemType> equipment) {
