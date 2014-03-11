@@ -35,7 +35,7 @@ public class BlackmailForItem extends AbstractInteraction<Person> implements Ite
 
 	@Override
 	public String run() {
-		exhaust(3);
+		exhaust(2);
 		if (actor().getSkill(Skill.FORCE_OF_PERSONALITY) + BONUS > target().getSkill(Skill.FORCE_OF_PERSONALITY)) {
 			actor().inventory.add(item);
 			if (!item.type.data) {

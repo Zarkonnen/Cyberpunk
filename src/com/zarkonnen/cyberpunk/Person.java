@@ -176,7 +176,7 @@ public class Person implements Serializable, HasName {
 	}
 	
 	private void bigBodyTick() {
-		hunger += 5;
+		hunger += 8;
 		health = Math.min(100, health + 1);
 	}
 	

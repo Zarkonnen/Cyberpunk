@@ -28,7 +28,7 @@ public class HackIn extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
-		exhaust(4);
+		exhaust(3);
 		if (actor().getSkill(Skill.HACKING) >= target().hackInResistance) {
 			target().locked = false;
 			return "You manage to get in.";

@@ -29,7 +29,7 @@ public class Loot extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		exhaust(2);
+		exhaust(1);
 		StringList things = new StringList();
 		for (Iterator<Item> it = target().inventory.iterator(); it.hasNext();) {
 			Item item = it.next();

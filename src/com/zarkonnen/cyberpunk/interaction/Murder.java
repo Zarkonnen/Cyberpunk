@@ -26,7 +26,7 @@ public class Murder extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		exhaust(6);
+		exhaust(4);
 		target().dead = true;
 		if (decreaseRep(30) > 0) {
 			return "Well, they're dead. Unfortunately, there are witnesses.";

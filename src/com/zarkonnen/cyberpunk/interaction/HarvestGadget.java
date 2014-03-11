@@ -30,7 +30,7 @@ public class HarvestGadget extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
-		exhaust(2);
+		exhaust(1);
 		StringList found = new StringList();
 		for (Iterator<Tile.Gadget> it = target().gadgets.iterator(); it.hasNext();) {
 			Tile.Gadget gadget = it.next();

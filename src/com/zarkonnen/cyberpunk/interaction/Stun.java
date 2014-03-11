@@ -33,7 +33,7 @@ public class Stun extends AbstractInteraction<Person> implements ItemInteraction
 
 	@Override
 	public String run() {
-		exhaust(3);
+		exhaust(2);
 		actor().inventory.remove(stunner);
 		if (test(stunner.type.stun)) {
 			target().stunned = 5;

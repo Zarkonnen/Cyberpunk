@@ -40,7 +40,7 @@ public class HarvestImplants extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		exhaust(10);
+		exhaust(7);
 		StringList things = new StringList();
 		for (Iterator<Item> it = target().implants.iterator(); it.hasNext();) {
 			Item item = it.next();

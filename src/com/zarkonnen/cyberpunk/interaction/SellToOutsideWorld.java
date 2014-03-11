@@ -49,7 +49,7 @@ public class SellToOutsideWorld extends AbstractInteraction<Tile> implements Ite
 
 	@Override
 	public String run() {
-		exhaust(3);
+		exhaust(2);
 		actor().inventory.remove(item);
 		actor().money += item.type.value * MULT;
 		return "Sell: " + item.getName();

@@ -136,7 +136,7 @@ public class DoWork extends AbstractInteraction<Tile> {
 
 	@Override
 	public String run() {
-		exhaust(2);
+		exhaust(1);
 		consume();
 		Item product = produce();
 		if (product == null) {

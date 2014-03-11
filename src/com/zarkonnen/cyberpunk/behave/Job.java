@@ -581,6 +581,20 @@ public enum Job {
 			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
 		}
 	},
+	SECURITY_GUARD("security guard", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.PISTOL, ItemType.SHARP_SUIT)) {
+		@Override
+		public void install(Person p, Random r) {
+			addBasicNeeds(p);
+			addBuyFood(p);
+			p.behave(MoveToWork.class).between(6, 20);
+			p.behave(MoveToHome.class).between(0, 6);
+			p.behave(Rest.class).between(0, 6);
+			p.behave(Attack.class).targetDisliked(60);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
+			p.setApproximateSkill(Skill.FIGHTING, 10, r);
+		}
+	},
 	ART_DEALER("art dealer", EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART, ItemType.DESIGNER_CLOTHES)) {
 		@Override
 		public void install(Person p, Random r) {

@@ -31,12 +31,12 @@ public class Attack extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		exhaust(15);
+		exhaust(10);
 		int result = actor().getSkill(Skill.FIGHTING) + BONUS - target().getSkill(Skill.FIGHTING) + r().nextInt(100) - 50;
 				
 		if (result > 0) {
 			target().health -= result;
-			decreaseRep(15);
+			decreaseRep(20 * target().reputation / 100);
 			if (target().unconscious()) {
 				target().messages.add("You are attacked and knocked out by " + actor().getName() + ".");
 				return "You attack " + target().getName() + " and knock them out.";
@@ -46,7 +46,7 @@ public class Attack extends AbstractInteraction<Person> {
 			}
 		} else {
 			actor().health += result;
-			decreaseRep(10);
+			decreaseRep(15 * target().reputation / 100);
 			if (actor().unconscious()) {
 				target().messages.add(actor().getName() + " attempts to attack you, but you fend them off, knocking them out in the process.");
 				return target().getName() + " manages to get the better of you and knocks you out.";

@@ -31,7 +31,7 @@ public class Disseminate extends AbstractInteraction<Item> implements ItemIntera
 
 	@Override
 	public String run() {
-		exhaust(5);
+		exhaust(3);
 		actor().inventory.remove(target());
 		target().blackmailFor.reputation -= REP_DECREASE;
 		actor().setSkill(Skill.FORCE_OF_PERSONALITY, actor().getSkill(Skill.FORCE_OF_PERSONALITY) + 3);

@@ -33,7 +33,7 @@ public class FirstAid extends AbstractInteraction<Item> implements ItemInteracti
 
 	@Override
 	public String run() {
-		exhaust(6);
+		exhaust(4);
 		actor().inventory.remove(target());
 		if (test(VS, Skill.GRINDING)) {
 			actor().health = Math.min(100, actor().health + target().type.medicine);

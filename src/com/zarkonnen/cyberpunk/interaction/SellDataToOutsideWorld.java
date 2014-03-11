@@ -29,7 +29,7 @@ public class SellDataToOutsideWorld extends AbstractInteraction<Item> implements
 
 	@Override
 	public String run() {
-		exhaust(5);
+		exhaust(3);
 		actor().location().map.knownData.add(target());
 		actor().money += target().type.value * MULT;
 		return "Woo! Money.";

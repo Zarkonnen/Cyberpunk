@@ -31,7 +31,7 @@ public class BlackmailForMoney extends AbstractInteraction<Person> {
 
 	@Override
 	public String run() {
-		exhaust(3);
+		exhaust(2);
 		if (actor().getSkill(Skill.FORCE_OF_PERSONALITY) + BONUS > target().getSkill(Skill.FORCE_OF_PERSONALITY)) {
 			actor().money += target().money;
 			target().money = 0;
