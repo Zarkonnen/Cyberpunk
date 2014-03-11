@@ -2,6 +2,8 @@ package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.cyberpunk.behave.Job;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -94,6 +96,23 @@ public final class WorldMap implements Serializable {
 		return map[z][y][x];
 	}
 	
+	public ArrayList<Tile> tilesOfType(TileType tt) {
+		ArrayList<Tile> ts = new ArrayList<Tile>();
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			if (map[z][y][x].type == tt) {
+				ts.add(map[z][y][x]);
+			}
+		}}}
+		return ts;
+	}
+	
+	public Tile randomOfType(TileType tt) {
+		ArrayList<Tile> ts = tilesOfType(tt);
+		Collections.shuffle(ts, r);
+		if (ts.isEmpty()) { return null; }
+		return ts.get(0);
+	}
+	
 	public boolean typeAt(TileType t, int x, int y, int z) {
 		return at(x, y, z).type == t;
 	}
@@ -173,10 +192,6 @@ public final class WorldMap implements Serializable {
 		}
 		
 		people.add(new Person(at(towerX + 2, towerY + 2, zS - 1)));
-		Person pr = new Person(at(towerX + 1, towerY + 1, zS - 1));
-		Job.PROSTITUTE.install(pr);
-		people.add(pr);
-		
 		
 		// DO THIS LAST
 		calcPathsTowardsEdge();
@@ -253,5 +268,9 @@ public final class WorldMap implements Serializable {
 				map[z][y][x].towardsEdge = map[z][y][x].bestPath;
 			}}}
 		}
+	}
+
+	public void addPerson(Person p) {
+		people.add(p);
 	}
 }

@@ -379,7 +379,7 @@ public enum ItemType implements Serializable {
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(FIGHTING, 20), p(RUNNING_AWAY, 20), p(BREAKING_AND_ENTERING, 30)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(p(FIGHTING, 20), /*p(RUNNING_AWAY, 20), */p(BREAKING_AND_ENTERING, 30)))/* skillBonuses */ 
 	),
 	MULTIWAVE_EYES(
 		"Multiwave Eyes", /* name */ 
@@ -907,7 +907,7 @@ public enum ItemType implements Serializable {
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(RUNNING_AWAY, 40)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(/*p(RUNNING_AWAY, 40)*/p(FIGHTING, 20)))/* skillBonuses */ 
 	),
 	GUARD_DRONE(
 		"Guard Drone", /* name */ 
@@ -1171,7 +1171,7 @@ public enum ItemType implements Serializable {
 		0, /* drugDuration */ 
 		0, /* drugAddictionDuration */ 
 		0, /* drugAdditionExhaustionBaseModifier */ 
-		new EnumMap<Skill, Integer>(m(p(HIDING, 60)))/* skillBonuses */ 
+		new EnumMap<Skill, Integer>(m(p(FIGHTING, 10)/*, p(HIDING, 60)*/))/* skillBonuses */ 
 	),
 	BUG(
 		"Bug", /* name */ 

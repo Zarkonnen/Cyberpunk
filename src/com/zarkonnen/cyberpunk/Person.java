@@ -9,6 +9,7 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Person implements Serializable, HasName {
 	public static final int BASE_EXHAUSTION = 20;
@@ -53,6 +54,10 @@ public class Person implements Serializable, HasName {
 	
 	public void setSkill(Skill skill, int amt) {
 		skills.put(skill, amt);
+	}
+	
+	public void setApproximateSkill(Skill skill, int amt, Random r) {
+		skills.put(skill, (int) (amt * (0.5 + r.nextDouble())));
 	}
 	
 	public static class Drug {

@@ -1,7 +1,9 @@
 package com.zarkonnen.cyberpunk.behave;
 
+import com.zarkonnen.cyberpunk.Item;
 import com.zarkonnen.cyberpunk.ItemType;
 import com.zarkonnen.cyberpunk.Person;
+import com.zarkonnen.cyberpunk.Skill;
 import com.zarkonnen.cyberpunk.TileType;
 import com.zarkonnen.cyberpunk.interaction.Attack;
 import com.zarkonnen.cyberpunk.interaction.BreakIn;
@@ -31,12 +33,13 @@ import com.zarkonnen.cyberpunk.interaction.SellToPerson;
 import com.zarkonnen.cyberpunk.interaction.Unlock;
 import com.zarkonnen.cyberpunk.interaction.Wander;
 import java.util.EnumSet;
+import java.util.Random;
 import java.util.concurrent.locks.Lock;
 
 public enum Job {
 	PROSTITUTE("prostitute", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(12, 23);
 			p.behave(DoWork.class).between(12, 23);
@@ -45,11 +48,15 @@ public enum Job {
 			p.behave(MoveToHome.class).between(0, 9);
 			p.behave(MoveToWork.class).between(11, 22);
 			p.behave(Rest.class).between(0, 9);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 30, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 10, r);
 		}
 	},
 	DRUG_DEALER("dealer", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS, ItemType.EXPERIMENTAL_UPPERS, ItemType.EXPERIMENTAL_DOWNERS), EnumSet.of(ItemType.UPPERS, ItemType.DOWNERS)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(0, 10);
 			p.behave(Rest.class).between(0, 9);
@@ -59,11 +66,15 @@ public enum Job {
 			p.behave(BuySupply.class).item(ItemType.DOWNERS);
 			p.behave(BuySupply.class).item(ItemType.UPPERS);
 			p.behave(Wander.class).between(11, 22);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 20, r);
 		}
 	},
 	FOOD_MERCHANT("food merchant", EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS, ItemType.VEGETABLES), EnumSet.of(ItemType.VEGETABLES, ItemType.SNACKS)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(22, 24);
 			p.behave(MoveToHome.class).between(0, 4);
@@ -72,11 +83,14 @@ public enum Job {
 			p.behave(MoveToWork.class).between(4, 6);
 			p.behave(BuySupply.class).item(ItemType.VEGETABLES);
 			p.behave(MoveToType.class).moveTo(TileType.MARKET).between(6, 19);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 10, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	TRADER("trader", SellToOutsideWorld.SELLABLES, BuyFromOutsideWorld.BUYABLES, EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(20, 24);
 			p.behave(MoveToHome.class).between(0, 3);
@@ -88,11 +102,14 @@ public enum Job {
 			p.behave(BuyFromOutsideWorld.class).item(ItemType.MACHINE_PARTS).between(9, 10);
 			p.behave(BuyFromOutsideWorld.class);
 			p.behave(MoveToType.class).moveTo(TileType.DOCK).between(12, 19);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 10, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	HARDWARE_MERCHANT("hardware merchant", ItemType.HARDWARE, ItemType.HARDWARE, EnumSet.of(ItemType.MACHINE_PARTS)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(20, 24);
 			p.behave(MoveToHome.class).between(0, 7);
@@ -107,11 +124,15 @@ public enum Job {
 				p.behave(BuySupply.class).item(h);
 				p.behave(SellToPerson.class).item(h);
 			}
+			
+			p.setApproximateSkill(Skill.FIGHTING, 10, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
+			p.setApproximateSkill(Skill.HACKING, 20, r);
 		}
 	},
 	GRINDER("grinder", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.GRINDER_TOOLS)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -121,11 +142,14 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.HACKING, 10, r);
+			p.setApproximateSkill(Skill.GRINDING, 50, r);
 		}
 	},
 	V_FARM_WORKER("vertical farm worker", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(6, 18);
 			p.behave(DoWork.class).between(6, 18);
@@ -139,7 +163,7 @@ public enum Job {
 	},
 	V_FARM_BOSS("vertical farm boss", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -149,11 +173,13 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	SWEATSHOP_WORKER("sweatshop worker", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(6, 18);
 			p.behave(DoWork.class).between(6, 18);
@@ -167,7 +193,7 @@ public enum Job {
 	},
 	SWEATSHOP_BOSS("sweatshop boss", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -177,11 +203,13 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	PROGRAMMER("programmer", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -191,11 +219,14 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.HACKING, 30, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 10, r);
 		}
 	},
 	PROGRAMMER_BOSS("programmer boss", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -205,31 +236,36 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	VAGRANT("vagrant", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Wander.class).between(10, 20);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.SCAVENGING, 30, r);
 		}
 	},
 	KID("kid", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SNACKS)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(20, 24);
 			p.behave(MoveToHome.class).between(0, 10);
 			p.behave(Rest.class).between(20, 24);
 			p.behave(Rest.class).between(0, 10);
-			p.behave(Wander.class).between(10, 20);
+			p.behave(Wander.class).between(10, 20);			
 		}
 	},
 	MUGGER("mugger", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(3, 13);
 			p.behave(Rest.class).between(3, 13);
@@ -241,12 +277,14 @@ public enum Job {
 			p.behave(SellToBusiness.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
 			p.behave(Wander.class).between(20, 24);
 			p.behave(Wander.class).between(0, 3);
-
+			
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
 		}
 	},
 	HACKER("hacker", ItemType.HACKER_KIT, EnumSet.of(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA), EnumSet.of(ItemType.AR_GOGGLES)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(SellToPerson.class).item(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA);
 			p.behave(MoveToHome.class).between(5, 15);
@@ -261,22 +299,32 @@ public enum Job {
 			}
 			p.behave(Wander.class).between(0, 5);
 			p.behave(Wander.class).between(15, 20);
+			
+			p.setApproximateSkill(Skill.HACKING, 60, r);
+			p.setApproximateSkill(Skill.COUNTER_INTRUSION, 50, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 30, r);
+			p.setApproximateSkill(Skill.SCAVENGING, 20, r);
 		}
 	},
 	DATA_FENCE("data fence", EnumSet.of(ItemType.VALUABLE_DATA, ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SHARP_SUIT)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(SellDataToOutsideWorld.class);
 			p.behave(Buy.class).item(ItemType.BLACKMAIL_MATERIAL, ItemType.PASSWORD, ItemType.VALUABLE_DATA);
 			p.behave(MoveToHome.class).between(0, 12);
 			p.behave(Rest.class).between(0, 12);
 			p.behave(MoveToType.class).moveTo(TileType.BACK_ROOM).between(15, 22);
+			
+			p.setApproximateSkill(Skill.HACKING, 20, r);
+			p.setApproximateSkill(Skill.COUNTER_INTRUSION, 50, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 30, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 30, r);
 		}
 	},
 	THIEF("thief", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(6, 15);
 			p.behave(Rest.class).between(6, 15);
@@ -289,11 +337,16 @@ public enum Job {
 			p.behave(SellToBusiness.class).isntItem(ItemType.LOCKPICKS, ItemType.ANGLE_GRINDER, ItemType.NANO_PICKS);
 			p.behave(Wander.class).between(22, 24);
 			p.behave(Wander.class).between(0, 6);
+			
+			p.setApproximateSkill(Skill.BREAKING_AND_ENTERING, 60, r);
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 20, r);
+			p.setApproximateSkill(Skill.SCAVENGING, 50, r);
 		}
 	},
 	GANGSTER("gangster", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(ItemType.SWITCHBLADE)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToHome.class).between(2, 11);
 			p.behave(Rest.class).between(2, 11);
@@ -310,11 +363,16 @@ public enum Job {
 			p.behave(SellToPerson.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
 			p.behave(SellToBusiness.class).isntItem(ItemType.SWITCHBLADE, ItemType.PISTOL, ItemType.SHARP_SUIT, ItemType.SHIV);
 			p.behave(Wander.class).between(11, 23);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 30, r);
+			p.setApproximateSkill(Skill.FIGHTING, 50, r);
+			p.setApproximateSkill(Skill.OBSERVATION, 20, r);
+			p.setApproximateSkill(Skill.SCAVENGING, 20, r);
 		}
 	},
 	PLUTOCRAT("plutocrat", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(10, 12);
 			p.behave(DoWork.class).between(10, 12);
@@ -326,11 +384,13 @@ public enum Job {
 			p.behave(MoveToWork.class).between(9, 12);
 			p.behave(MoveToWork.class).between(14, 16);
 			p.behave(Rest.class).between(1, 8);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 40, r);
 		}
 	},
 	GENETICIST("geneticist", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -340,11 +400,14 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.GRINDING, 20, r);
+			p.setApproximateSkill(Skill.HACKING, 20, r);
 		}
 	},
 	GENETICIST_BOSS("chief geneticist", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -354,11 +417,14 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.GRINDING, 10, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	PA("personal assistant", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(9, 17);
 			p.behave(DoWork.class).between(9, 17);
@@ -368,11 +434,13 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 16);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
+			
+			p.setApproximateSkill(Skill.OBSERVATION, 10, r);
 		}
 	},
 	DRUG_COOKER("drug cooker", EnumSet.of(ItemType.CHEMICALS), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(7, 12);
 			p.behave(DoWork.class).between(7, 12);
@@ -386,11 +454,15 @@ public enum Job {
 			p.behave(MoveToWork.class).between(8, 17);
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 5);
+			
+			p.setApproximateSkill(Skill.GRINDING, 10, r);
+			p.setApproximateSkill(Skill.SCAVENGING, 20, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	},
 	GAMBLING_PARLOUR_OPERATOR("gambling parlour operator", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(Unlock.class).between(17, 23);
 			p.behave(DoWork.class).between(17, 23);
@@ -399,11 +471,14 @@ public enum Job {
 			p.behave(MoveToHome.class).between(24, 9);
 			p.behave(MoveToWork.class).between(16, 22);
 			p.behave(Rest.class).between(0, 9);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 20, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 30, r);
 		}
 	},
 	GUN_DEALER("gun dealer", EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART), EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART), EnumSet.of(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToSupplier.class).between(6, 9);
 			p.behave(BuySupply.class).item(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART).between(6, 9);
@@ -416,11 +491,14 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 6);
 			p.behave(SellToPerson.class).item(ItemType.ASSAULT_RIFLE, ItemType.PISTOL, ItemType.TRANQ_DART);
+			
+			p.setApproximateSkill(Skill.FIGHTING, 30, r);
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
 		}
 	},
 	CLOTHES_DEALER("clothes dealer", EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES), EnumSet.of(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToSupplier.class).between(6, 9);
 			p.behave(BuySupply.class).item(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES).between(6, 9);
@@ -433,11 +511,13 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
 			p.behave(SellToPerson.class).item(ItemType.DESIGNER_CLOTHES, ItemType.SHARP_SUIT, ItemType.MIRRORSHADES);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 10, r);
 		}
 	},
 	JEWELLERY_DEALER("jewellery dealer", EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY), EnumSet.of(ItemType.JEWELLERY)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToSupplier.class).between(6, 9);
 			p.behave(BuySupply.class).item(ItemType.JEWELLERY).between(6, 9);
@@ -454,7 +534,7 @@ public enum Job {
 	},
 	ART_DEALER("art dealer", EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART), EnumSet.of(ItemType.ART)) {
 		@Override
-		public void install(Person p) {
+		public void install(Person p, Random r) {
 			addBasicNeeds(p);
 			p.behave(MoveToSupplier.class).between(6, 9);
 			p.behave(BuySupply.class).item(ItemType.ART).between(6, 9);
@@ -467,6 +547,8 @@ public enum Job {
 			p.behave(Rest.class).between(22, 24);
 			p.behave(Rest.class).between(0, 7);
 			p.behave(SellToPerson.class).item(ItemType.ART);
+			
+			p.setApproximateSkill(Skill.FORCE_OF_PERSONALITY, 20, r);
 		}
 	};
 	
@@ -482,15 +564,18 @@ public enum Job {
 		this.equipment = equipment;
 	}
 	
-	public void doInstall(Person p) {
+	public void doInstall(Person p, Random r) {
 		p.description += jobName;
 		p.buyForWork = buys;
 		p.buyForSelf = buys;
 		p.sell = sells;
-		install(p);
+		install(p, r);
+		for (ItemType t : equipment) {
+			p.inventory.add(new Item(t));
+		}
 	}
 
-	public abstract void install(Person p);
+	public abstract void install(Person p, Random r);
 	
 	public static void addBasicNeeds(Person p) {
 		p.behave(HealAtClinic.class).injured(70);
