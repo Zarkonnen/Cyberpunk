@@ -57,14 +57,36 @@ public enum Detail {
 		public void install(Person p, Random r) {
 		}
 	},
-	SHIFTY(" They have a shifty look to them.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+	SHIFTY(" They have a shifty look to them.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	LEFT_EYED(" Their right eye is missing. The wound looks fresh.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+	LEFT_EYED(" Beneath their AR goggles, their right eye is missing. The wound looks fresh.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
+		}
+	},
+	RIGHT_EYED(" Their left eye is covered by a leather patch.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	LUDDITE(" They aren't wearing any AR goggles.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+		}
+	},
+	BARFLY(null, EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+			p.behave(MoveToType.class).moveTo(BAR);
+		}
+	},
+	STAY_AT_HOME(null, EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+		@Override
+		public void install(Person p, Random r) {
+			p.behave(MoveToHome.class);
 		}
 	};
 
