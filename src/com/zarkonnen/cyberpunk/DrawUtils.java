@@ -48,6 +48,7 @@ public final class DrawUtils {
 			d.hook(x, y, w, BUTTON_H, new Hook(repeat ? Hook.Type.MOUSE_1_DOWN : Hook.Type.MOUSE_1_CLICKED) {
 				@Override
 				public void run(Input in, Pt p, Type type) {
+					tooltip = null;
 					onClick.run();
 				}
 			});

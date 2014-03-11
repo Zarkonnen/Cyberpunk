@@ -1,6 +1,7 @@
 package com.zarkonnen.cyberpunk;
 
 import com.zarkonnen.cyberpunk.behave.Job;
+import com.zarkonnen.cyberpunk.behave.Spawner;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,6 +60,8 @@ public final class WorldMap implements Serializable {
 	public HashSet<Item> knownData = new HashSet<Item>();
 	public int time = 0;
 	public static final int DAY_LENGTH = 6 * 24;
+	
+	public final int towerX, towerY;
 	
 	public int timeOfDay() {
 		return time % DAY_LENGTH;
@@ -169,8 +172,8 @@ public final class WorldMap implements Serializable {
 			}
 		}}
 		
-		int towerX = 2 + r.nextInt(xS - 4 - 5);
-		int towerY = 2 + r.nextInt(yS - 4 - 5);
+		towerX = 2 + r.nextInt(xS - 4 - 5);
+		towerY = 2 + r.nextInt(yS - 4 - 5);
 		int towerTop = zS / 3;
 		
 		for (int z = towerTop; z < zS; z++) {
@@ -191,10 +194,18 @@ public final class WorldMap implements Serializable {
 			}}
 		}
 		
-		people.add(new Person(at(towerX + 2, towerY + 2, zS - 1)));
+		Spawner.installAll(this);
 		
 		// DO THIS LAST
-		calcPathsTowardsEdge();
+		calcPathsTowardsEdge();		
+	}
+	
+	public Person makePlayer(CharacterClass playerCC) {
+		Person player = new Person(at(towerX + 2, towerY + 2, map.length - 1));
+		playerCC.install(player, r);
+		people.add(player);
+		player.isPlayer = true;
+		return player;
 	}
 	
 	private void calcPathsTowardsEdge() {

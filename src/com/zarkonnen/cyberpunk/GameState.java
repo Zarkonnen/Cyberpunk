@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class GameState implements Serializable {
 	public final WorldMap map;
-	public final Person player;
+	public Person player;
 
 	public GameState(WorldMap map, Person player) {
 		this.map = map;
@@ -14,11 +14,6 @@ public class GameState implements Serializable {
 	
 	public GameState(long seed, int xS, int yS, int zS) {
 		this.map = new WorldMap(seed, xS, yS, zS);
-		this.player = this.map.people().get(0);
-		player.isPlayer = true;
-		for (Skill sk : Skill.values()) {
-			player.setSkill(sk, 40);
-		}
 	}
 
 	public void playerAction(Interaction<?> interaction) {

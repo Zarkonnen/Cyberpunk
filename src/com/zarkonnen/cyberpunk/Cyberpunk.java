@@ -25,7 +25,7 @@ public class Cyberpunk implements Game {
 	}
 	
 	private boolean modeSet = false;
-	private Screen currentScreen = new WorldScreen(new GameState(666, 20, 20, 10));
+	public Screen currentScreen = new SetupScreen(this);
 	
 	private Hooks hooks = null;
 	private int msSinceCursorMoved = 0;
