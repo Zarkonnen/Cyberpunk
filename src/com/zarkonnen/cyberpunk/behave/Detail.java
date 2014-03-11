@@ -101,7 +101,7 @@ public enum Detail {
 			p.addApproximateSkill(Skill.FORCE_OF_PERSONALITY, -20, r);
 		}
 	},
-	SHAVEN(" Their hair and eyebrows have been completely razored off.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	SHAVEN("Their hair and eyebrows have been completely razored off.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
@@ -111,49 +111,49 @@ public enum Detail {
 		public void install(Person p, Random r) {
 		}
 	},
-	SCARRED(" A gnarled trail of scar tissue crosses their face and disappears under their jacket.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	SCARRED("A gnarled trail of scar tissue crosses their face and disappears under their jacket.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	PIERCED(" You can see several piercings on their face and body.", EnumSet.of(JEWELLERY), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+	PIERCED("You can see several piercings on their face and body.", EnumSet.of(JEWELLERY), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
 		@Override
 		public void install(Person p, Random r) {
 			p.behave(Buy.class).item(JEWELLERY);
 		}
 	},
-	MODDED(" They have extensive body modifications.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	MODDED("They have extensive body modifications.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	FASHIONABLE(" They're wearing the very latest in up-to-the-nanosecond fashion.", EnumSet.of(DESIGNER_CLOTHES), EnumSet.noneOf(ItemType.class), EnumSet.of(DESIGNER_CLOTHES)) {
+	FASHIONABLE("They're wearing the very latest in up-to-the-nanosecond fashion.", EnumSet.of(DESIGNER_CLOTHES), EnumSet.noneOf(ItemType.class), EnumSet.of(DESIGNER_CLOTHES)) {
 		@Override
 		public void install(Person p, Random r) {
 			p.behave(Buy.class).item(DESIGNER_CLOTHES);
 		}
 	},
-	BLINGY(" You wonder how they can stand under the weight of all that jewellery.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+	BLINGY("You wonder how they can stand under the weight of all that jewellery.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	FILTHY(" They are covered in a greasy layer of filth.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
+	FILTHY("They are covered in a greasy layer of filth.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.of(JEWELLERY)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	SHIFTY(" They have a shifty look to them.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	SHIFTY("They have a shifty look to them.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	LEFT_EYED(" Beneath their AR goggles, their right eye is missing. The wound looks fresh.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	LEFT_EYED("Beneath their AR goggles, their right eye is missing. The wound looks fresh.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
 	},
-	RIGHT_EYED(" Their left eye is covered by a leather patch.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	RIGHT_EYED("Their left eye is covered by a leather patch.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
@@ -191,7 +191,7 @@ public enum Detail {
 			p.behave(StealFromEmployers.class);
 		}
 	},
-	LUDDITE(" They aren't wearing any AR goggles.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
+	LUDDITE("They aren't wearing any AR goggles.", EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class), EnumSet.noneOf(ItemType.class)) {
 		@Override
 		public void install(Person p, Random r) {
 		}
