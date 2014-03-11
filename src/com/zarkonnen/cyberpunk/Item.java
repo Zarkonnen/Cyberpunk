@@ -10,6 +10,7 @@ public class Item implements Serializable, HasName {
 	public Person blackmailFor;
 	public Interaction<?> recordOf;
 	public final ArrayList<Item> found = new ArrayList<Item>();
+	public int age;
 	
 	public Item(ItemType type) {
 		this.type = type;

@@ -52,6 +52,10 @@ public class WorldScreen implements Screen {
 		interactions.model = new InteractionModel();
 	}
 	
+	public String help() {
+		return "Arrow keys and ,. to move.";
+	}
+	
 	private class InventoryModel implements ButtonList.Model {
 		@Override
 		public List<Button> buttons() {
@@ -235,7 +239,7 @@ public class WorldScreen implements Screen {
 					@Override
 					public String tooltip() {
 						if (interaction == null) {
-							return it.getName();
+							return it.type.description;
 						} else {
 							return interaction.description();
 						}
@@ -416,6 +420,11 @@ public class WorldScreen implements Screen {
 
 			inventory.draw(d, 0, 0, LIST_W, sm.height);
 			interactions.draw(d, sm.width - LIST_W, 0, LIST_W, sm.height);
+			
+			Pt sz = d.textSize(help(), Cyberpunk.OCRA);
+			int w = (int) sz.x + PADDING * 2;
+			d.rect(BG, sm.width / 2 - w / 2, sm.height - 30, w, 30);
+			d.text(TEXT_PREFIX + help(), Cyberpunk.OCRA, sm.width / 2 - w / 2 + PADDING, sm.height - 30 + PADDING);
 		}
 		
 		if (!g.player.messages.isEmpty()) {

@@ -122,6 +122,19 @@ public final class WorldMap implements Serializable {
 				it.remove();
 			}
 		}
+		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
+			Tile t = map[z][y][x];
+			int sz = t.hiddenItems.size();
+			for (int i = 0; i < sz;) {
+				Item item = t.hiddenItems.get(i).item;
+				if (item.type.maxAge > 0 && item.age++ > item.type.maxAge) {
+					t.hiddenItems.remove(i);
+					sz--;
+				} else {
+					i++;
+				}
+			}
+		}}}
 	}
 	
 	public boolean test(int successChance) {

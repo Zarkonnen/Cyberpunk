@@ -98,6 +98,17 @@ public class Person implements Serializable, HasName {
 				}
 			}
 		}
+		int sz = inventory.size();
+		for (int i = 0; i < sz;) {
+			Item item = inventory.get(i);
+			if (item.type.maxAge > 0 && item.age++ > item.type.maxAge) {
+				inventory.remove(i);
+				messages.add(item.type.disintegrateMsg);
+				sz--;
+			} else {
+				i++;
+			}
+		}
 		return bodyTick();
 	}
 	

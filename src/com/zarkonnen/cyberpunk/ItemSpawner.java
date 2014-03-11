@@ -101,7 +101,11 @@ public enum ItemSpawner {
 		for (Tile t : wm.tilesOfType(tile)) {
 			if (wm.r.nextInt(100) < p) {
 				for (int i = 0; i < q; i++) {
-					t.hiddenItems.add(new Tile.HiddenItem((int) ((0.25 + wm.r.nextDouble() * 1.5) * hiding), new Item(item)));
+					Item it = new Item(item);
+					if (item.maxAge > 0) {
+						it.age = wm.r.nextInt(item.maxAge / 2);
+					}
+					t.hiddenItems.add(new Tile.HiddenItem((int) ((0.25 + wm.r.nextDouble() * 1.5) * hiding), it));
 				}
 			}
 		}

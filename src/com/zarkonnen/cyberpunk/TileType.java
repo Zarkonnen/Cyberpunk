@@ -11,7 +11,7 @@ public enum TileType implements Serializable {
 		/* locked */ 0
 	),
 	AIR(
-		/* color */ Clr.WHITE,
+		/* color */ Clr.DARK_GREY,
 		/* passable */ EnumSet.noneOf(Direction.class),
 		/* locked */ 0
 	),
@@ -93,7 +93,7 @@ public enum TileType implements Serializable {
 	CLOTHES_SHOP(
 		/* color */ new Clr(200, 100, 40),
 		/* passable */ EnumSet.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST),
-		/* locked */ 40
+		/* locked */ 50
 	),
 	ART_GALLERY(
 		/* color */ new Clr(200, 100, 40),
@@ -173,7 +173,7 @@ public enum TileType implements Serializable {
 	MACHINE_ROOM(
 		/* color */ new Clr(60, 60, 45),
 		/* passable */ EnumSet.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST),
-		/* locked */ 20
+		/* locked */ 40
 	),
 	GENETICS_LAB(
 		/* color */ new Clr(200, 255, 230),
