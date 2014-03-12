@@ -7,11 +7,11 @@ import com.zarkonnen.catengine.Frame;
 import com.zarkonnen.catengine.Game;
 import com.zarkonnen.catengine.Hooks;
 import com.zarkonnen.catengine.Input;
-import com.zarkonnen.catengine.SlickEngine;
-import com.zarkonnen.catengine.util.Clr;
+import com.zarkonnen.catengine.Java2DEngine;
 import com.zarkonnen.catengine.util.Pt;
 import com.zarkonnen.catengine.util.Rect;
 import com.zarkonnen.catengine.util.ScreenMode;
+import javax.swing.JOptionPane;
 
 public class Cyberpunk implements Game {
 	public static final String ALPHABET = " qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890-=+_!?<>,.;:\"'@£$%^&*()[]{}|\\~/±";
@@ -19,7 +19,7 @@ public class Cyberpunk implements Game {
 	public static final Fount COURIER = new Fount("Courier12", 10, 15, 7, 15, ALPHABET);
 	
 	public static void main(String[] args) {
-		SlickEngine e = new SlickEngine("Cyberpunk", "/com/zarkonnen/cyberpunk/images/", "com/zarkonnen/cyberpunk/sounds/", 60);
+		Java2DEngine e = new Java2DEngine("Cyberpunk", "/com/zarkonnen/cyberpunk/images/", "com/zarkonnen/cyberpunk/sounds/", 60);
 		e.setup(new Cyberpunk());
 		e.runUntil(Condition.ALWAYS);
 	}
@@ -34,14 +34,19 @@ public class Cyberpunk implements Game {
 	@Override
 	public void input(Input in) {
 		if (!modeSet) {
-			ScreenMode best = null;
-			for (ScreenMode m : in.modes()) {
-				if (best == null || (m.width * m.height > best.width * best.height && m.fullscreen)) {
-					best = m;
+			int result = JOptionPane.showOptionDialog(null, "Choose a screen resolution.", "Cyberpunk", 0, 0, null, new String[] { "1200x720", "Fullscreen" }, "1200x720");
+			if (result == 1) {
+				ScreenMode best = null;
+				for (ScreenMode m : in.modes()) {
+					if (best == null || (m.width * m.height > best.width * best.height && m.fullscreen)) {
+						best = m;
+					}
 				}
-			}
-			if (best != null) {
-				in.setMode(best);
+				if (best != null) {
+					in.setMode(best);
+				}
+			} else {
+				in.setMode(new ScreenMode(1200, 720, false));
 			}
 			modeSet = true;
 		}

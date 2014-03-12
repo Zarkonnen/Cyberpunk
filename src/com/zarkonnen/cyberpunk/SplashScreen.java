@@ -91,9 +91,9 @@ public class SplashScreen implements Screen {
 			int y = sm.height / 2 - 100;
 			int b = y + 190;
 			
-			int amt = Math.min(255, (tick - 180) * 5);
+			int amt = Math.max(0, Math.min(255, (tick - 180) * 5));
 			Clr brighter = new Clr(BG_BRIGHTER.r, BG_BRIGHTER.g, BG_BRIGHTER.b, amt);
-			amt = Math.min(255, (tick - 150) * 5);
+			amt = Math.max(0, Math.min(255, (tick - 150) * 5));
 			Clr brighterer = new Clr(BG_BRIGHTERER.r, BG_BRIGHTERER.g, BG_BRIGHTERER.b, amt);
 			d.rect(brighter, x + 51, b - 158, 33, 158);
 			d.rect(brighter, x + 107, b - 91, 27, 3);

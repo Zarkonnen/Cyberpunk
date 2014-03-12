@@ -1,4 +1,5 @@
 .DS_Store
+/nbbuild.xml
 /release
 /cyberpunk_save
 /java.hprof.txt
