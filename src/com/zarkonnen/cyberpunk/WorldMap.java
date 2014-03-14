@@ -77,7 +77,7 @@ public final class WorldMap implements Serializable {
 	private final LinkedList<Person> people = new LinkedList<Person>();
 	public final Random r;
 	public HashSet<Item> knownData = new HashSet<Item>();
-	public int time = 0;
+	public int time = 30;
 	public static final int DAY_LENGTH = 6 * 24;
 	
 	public final int towerX, towerY;
@@ -304,7 +304,16 @@ public final class WorldMap implements Serializable {
 	}
 	
 	public Person makePlayer(CharacterClass playerCC) {
-		Tile homeT = tilesOfType(TileType.APARTMENT).get(0);
+		Tile homeT = tilesOfType(TileType.APARTMENT).isEmpty() ? null : tilesOfType(TileType.APARTMENT).get(0);
+		if (homeT == null) {
+			if (!tilesOfType(TileType.ROOFTOP_SLUM).isEmpty()) {
+				homeT = tilesOfType(TileType.ROOFTOP_SLUM).get(0);
+			} else if (!tilesOfType(TileType.SLUM_BARGE).isEmpty()) {
+				homeT = tilesOfType(TileType.SLUM_BARGE).get(0);
+			} else {
+				homeT = tilesOfType(TileType.CORRIDOR).get(0);
+			}
+		}
 		Person player = new Person(homeT);
 		player.home = homeT;
 		playerCC.install(player, r);

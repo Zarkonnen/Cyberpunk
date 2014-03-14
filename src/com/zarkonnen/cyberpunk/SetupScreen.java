@@ -34,7 +34,7 @@ public class SetupScreen implements Screen {
 			button(d, cc.name, cc.desc, x, y, w, new Runnable() {
 				@Override
 				public void run() {
-					GameState gs = new GameState(System.currentTimeMillis(), 24, 24, 12);
+					GameState gs = new GameState(System.currentTimeMillis(), 18, 18, 8);
 					g.currentScreen = new PreSimScreen(g, gs, cc);
 				}
 			}, true, false);

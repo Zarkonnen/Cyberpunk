@@ -365,7 +365,7 @@ public class WorldScreen implements Screen {
 		msSinceScroll += in.msDelta();
 		if (msSinceScroll >= MS_PER_SCROLL) {
 			for (Pair<String, Direction> dk : DIRECTION_KEYS) {
-				if (in.keyDown(dk.a)) {
+				if (in.keyPressed(dk.a)) {
 					g.playerAction(new MoveInDirection(dk.b, g.player, g.player.location()));
 					interactions.scroll = 0;
 					msSinceScroll = 0;
@@ -434,7 +434,7 @@ public class WorldScreen implements Screen {
 	}
 	
 	private void saveMaybe() {
-		saveCounter++;
+		//saveCounter++;
 	}
 	
 	private void save() {

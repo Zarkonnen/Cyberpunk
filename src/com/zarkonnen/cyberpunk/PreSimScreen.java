@@ -11,7 +11,7 @@ public class PreSimScreen implements Screen {
 	public final CharacterClass cc;
 	public int tick;
 	
-	public static final int PRESIM_TICKS = (24 * 6 + 10 * 6);
+	public static final int PRESIM_TICKS = 8;//(24 * 6 + 10 * 6);
 
 	public PreSimScreen(Cyberpunk g, GameState gs, CharacterClass cc) {
 		this.g = g;
