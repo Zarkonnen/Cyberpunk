@@ -79,11 +79,6 @@ public class DoWork extends AbstractInteraction<Tile> {
 	public String disabledReason() {
 		if (INPUTS.containsKey(target().type)) {
 			EnumSet<ItemType> inputs = INPUTS.get(target().type);
-			for (Item it : target().inventory) {
-				if (inputs.contains(it.type)) {
-					return null;
-				}
-			}
 			for (Item it : actor().inventory) {
 				if (inputs.contains(it.type)) {
 					return null;
@@ -103,12 +98,6 @@ public class DoWork extends AbstractInteraction<Tile> {
 	private void consume() {
 		if (INPUTS.containsKey(target().type)) {
 			EnumSet<ItemType> inputs = INPUTS.get(target().type);
-			for (Iterator<Item> it = target().inventory.iterator(); it.hasNext();) {
-				if (inputs.contains(it.next().type)) {
-					it.remove();
-					return;
-				}
-			}
 			for (Iterator<Item> it = actor().inventory.iterator(); it.hasNext();) {
 				if (inputs.contains(it.next().type)) {
 					it.remove();

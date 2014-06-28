@@ -35,7 +35,6 @@ public class Tile implements Serializable, HasName {
 	public final WorldMap map;
 	public final TileType type;
 	public final int x, y, z;
-	public final ArrayList<Item> inventory = new ArrayList<Item>();
 	public final ArrayList<HiddenItem> hiddenItems = new ArrayList<HiddenItem>();
 	public final ArrayList<Gadget> gadgets = new ArrayList<Gadget>();
 	public boolean locked = false;

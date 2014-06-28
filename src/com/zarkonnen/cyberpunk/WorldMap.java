@@ -109,7 +109,7 @@ public final class WorldMap implements Serializable {
 		int q = 0;
 		for (Person p : people) { q += p.inventory.size(); }
 		for (int z = 0; z < map.length; z++) { for (int y = 0; y < map[0].length; y++) { for (int x = 0; x < map[0][0].length; x++) {
-			q += map[z][y][x].inventory.size() + map[z][y][x].gadgets.size() + map[z][y][x].hiddenItems.size();
+			q += map[z][y][x].gadgets.size() + map[z][y][x].hiddenItems.size();
 		}}}
 
 		return q;

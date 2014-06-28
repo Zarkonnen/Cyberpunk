@@ -47,7 +47,6 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 				target().money += item.type.value;
 			} else {
 				target().money += item.type.value / 8; // Sales commission, basically.
-				target().location().inventory.remove(item);
 				for (Tile.HiddenItem hi : target().location().hiddenItems) {
 					if (hi.item == item) {
 						target().location().hiddenItems.remove(hi);
@@ -75,11 +74,6 @@ public class Buy extends AbstractInteraction<Person> implements ItemInteraction 
 				}
 			}
 			if (t.workplace == t.location()) {
-				for (Item item : t.location().inventory) {
-					if (t.willSell(item)) {
-						l.add(new Buy(item, actor, t));
-					}
-				}
 				for (Tile.HiddenItem item : t.location().hiddenItems) {
 					if (t.willSell(item.item)) {
 						l.add(new Buy(item.item, actor, t));
